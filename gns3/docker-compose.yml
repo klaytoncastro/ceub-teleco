@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  gns3-server:
+    image: jsimonetti/gns3-server
+    container_name: gns3-server
+    ports:
+      - "3080:3080"  # Porta para acessar o GNS3 Server
+      - "80:80"
+      - "8000:8000"
+      - "5000-5010:5000-5010"
+    volumes:
+      - ./gns3-data:/data  # Caminho para persistir os dados
+    environment:
+      - GNS3_SERVER_HOST=0.0.0.0
+    privileged: true
+    restart: unless-stopped
