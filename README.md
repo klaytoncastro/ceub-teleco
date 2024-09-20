@@ -14,10 +14,18 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 wsl --install
 wsl --set-default-version 2
 ```
-## Passo 5: Escolha de uma Distribuição
+## Passo 3: Escolha de uma Distribuição
 
-Instale uma distribuição Linux pela Microsoft Store. Recomenda-se o Ubuntu 24.04 LTS. 
+- Instale uma distribuição Linux pela Microsoft Store. Recomenda-se o Ubuntu 24.04 LTS.
+- Reinicie o seu computador. 
 
-## Passo 6: Configuração Inicial
+## Passo 4: Configuração Inicial
 
-Inicie o WSL, configure o usuário e senha da distribuição. 
+- Inicie o WSL, configure o usuário e senha da distribuição.
+
+## Passo 5: 
+
+- Instale o Docker Desktop para Windows e realize o logout/login.
+## Conclusão
+
+Pronto! Agora o ambiente esta preparado para nossos laboratorios.
