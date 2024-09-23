@@ -25,7 +25,10 @@ wsl --set-default-version 2
 
 ## Passo 5: 
 
-- Instale o Docker Desktop para Windows e realize o logout/login.
+- Instale o [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/#:~:text=Docker%20Desktop%20for%20Windows%20%2D%20x86_64) para Windows e realize o logout/login.
+
+
+  
 ## Conclusão
 
 Pronto! Agora o ambiente esta preparado para nossos laboratorios.
