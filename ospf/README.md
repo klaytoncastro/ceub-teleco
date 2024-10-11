@@ -53,6 +53,12 @@ O OSPF, por outro lado, utiliza o estado de link como métrica, considerando a l
 - Exemplo de Configuração do RIP no MikroTik CHR:
 
 ```bash
+#Configure o IP do roteador R1
+/ip address add address=192.168.0.1/24 interface=ether1
+
+#Configure o IP do roteador R2
+/ip address add address=10.0.0.1/24 interface=ether1
+
 # Ative o RIP nas interfaces desejadas (neste caso, `ether1` e `ether2`)
 /routing rip interface add interface=ether1 receive=v2 send=v2
 /routing rip interface add interface=ether2 receive=v2 send=v2
