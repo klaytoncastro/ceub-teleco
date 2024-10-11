@@ -27,19 +27,15 @@ Aqui está um exemplo de configuração de OSPF em um roteador MikroTik CHR com 
 
 ```bash
 # Habilitar OSPF e definir uma área
-/routing ospf instance
-set [ find default=yes ] router-id=192.168.1.1
+/routing ospf instance set [ find default=yes ] router-id=192.168.1.1
 
-/routing ospf area
-add name=backbone area-id=0.0.0.0
+/routing ospf area add name=backbone area-id=0.0.0.0
 
 # Adicionar interface à área OSPF
-/routing ospf interface
-add interface=ether1 network-type=broadcast
+/routing ospf interface add interface=ether1 network-type=broadcast
 
 # Anunciar uma rede
-/routing ospf network
-add network=192.168.1.0/24 area=backbone
+/routing ospf network add network=192.168.1.0/24 area=backbone
 ```
 - OSPF Instance: Define o OSPF e o Router-ID.
 - OSPF Area: Define a área backbone (Área 0), que é essencial em uma rede OSPF.
@@ -58,7 +54,7 @@ O OSPF, por outro lado, utiliza o estado de link como métrica, considerando a l
 
 ```bash
 # Ative o RIP nas interfaces desejadas (neste caso, `ether1` e `ether2`)
-/routing rip interface add interface=ether1 receive=v2 send=v2
+    /routing rip interface add interface=ether1 receive=v2 send=v2
 /routing rip interface add interface=ether2 receive=v2 send=v2
 
 #Especifique as redes que devem ser anunciadas
