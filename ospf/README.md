@@ -54,7 +54,7 @@ O OSPF, por outro lado, utiliza o estado de link como métrica, considerando a l
 
 ```bash
 # Ative o RIP nas interfaces desejadas (neste caso, `ether1` e `ether2`)
-    /routing rip interface add interface=ether1 receive=v2 send=v2
+/routing rip interface add interface=ether1 receive=v2 send=v2
 /routing rip interface add interface=ether2 receive=v2 send=v2
 
 #Especifique as redes que devem ser anunciadas
@@ -73,6 +73,8 @@ O OSPF, por outro lado, utiliza o estado de link como métrica, considerando a l
 /system script save
 ```
 
+
+
 <!--
 RIP v1: Esta é a versão original, que suporta roteamento classful, ou seja, ele não envia informações sobre máscaras de sub-rede, o que limita sua flexibilidade em redes modernas.
 
@@ -88,4 +90,4 @@ RIPng: Versão do RIP que suporta IPv6.
 
 ## 5. Conclusão
 
-O OSPF é uma excelente escolha para redes internas grandes devido à sua rápida convergência e capacidade de escalar em redes com múltiplos roteadores. Em contraste, o RIP é mais simples, mas encontra limitações severas em termos de escalabilidade e convergência. Para redes de menor escala, o RIP ainda pode ser utilizado, mas o OSPF oferece maior controle e eficiência. Já para comunicação entre sistemas autônomos (AS) e redes externas, o BGP continua sendo a escolha preferida.
+O OSPF é uma excelente escolha para redes internas grandes devido à sua rápida convergência e capacidade de escalar em redes com múltiplos roteadores. Em contraste, o RIP é mais simples, mas encontra limitações severas em termos de escalabilidade e convergência. Para redes de menor escala, o RIP ainda pode ser utilizado, mas o OSPF oferece maior controle e eficiência. Já para comunicação entre sistemas autônomos (AS) e redes externas, o BGP continua sendo a escolha preferida Para conferir a sintaxe dos comandos, você pode acessar o link [RouterOS - CLI](https://help.mikrotik.com/docs/display/ROS/Command+Line+Interface). 
