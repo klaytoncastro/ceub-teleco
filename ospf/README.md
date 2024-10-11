@@ -50,6 +50,9 @@ O RIP é um protocolo de roteamento baseado em vetor de distância, usado princi
 
 O OSPF, por outro lado, utiliza o estado de link como métrica, considerando a largura de banda para determinar o melhor caminho. Ele é altamente escalável, com convergência rápida e sem limite de saltos, sendo ideal para grandes redes. O OSPF também é mais eficiente, já que envia atualizações apenas quando ocorrem mudanças na rede, o que reduz o tráfego em comparação com o RIP.
 
+
+<!--
+
 - Exemplo de Configuração do RIP no MikroTik CHR:
 
 ```bash
@@ -78,7 +81,7 @@ O OSPF, por outro lado, utiliza o estado de link como métrica, considerando a l
 #Salve as configurações para garantir que elas sejam mantidas após reinicializações.
 /system script save
 ```
-
+-->
 
 
 <!--
@@ -89,10 +92,105 @@ RIPng: Versão do RIP que suporta IPv6.
 -->
 
 
-## 4. Roteamento na Prática
+## 4. Prática: Configuração do roteamento dinâmico com OSPF
+
+### Adicione o roteador à sua biblioteca de dispositivos no GNS3
 
 - Para instalar o roteador Mikrotik CHR no GNS3, baixe o arquivo `chr-7.11.2.img.zip` neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing)
 - Descompacte o arquivo na pasta desejada (`unzip chr-7.11.2.img.zip`) e importe a imagem do roteador no GNS3 conforme instruções do professor. 
+
+### Topologia
+
+Crie um novo projeto e configure a seguinte topologia: 
+
+- Adicione 2 roteadores (R1 e R2); 
+- Adicione 4 VPCs (PC1, PC2, PC3 e PC4) 
+- Adicione 2 hubs e ligue 2 PCs em cada. 
+- Ligue cada um dos hubs a roteadores diferentes;
+- Ligue os roteadores entre si;
+
+### Configure o R1
+
+```bash
+/ip address add address=192.168.0.1/24 interface=ether7  # Rede de PCs
+/ip address add address=172.16.0.1/30 interface=ether1   # Interconexão com R2
+/routing ospf instance add name=default router-id=1.1.1.1
+/routing ospf area add name=backbone area-id=0.0.0.0
+/routing ospf interface-template add interfaces=ether1 area=backbone
+```
+
+### Configure o R2
+
+```bash
+/ip address add address=10.0.0.1/24 interface=ether7    # Rede de PCs
+/ip address add address=172.16.0.2/30 interface=ether1  # Interconexão com R1
+/routing ospf instance add name=default router-id=2.2.2.2
+/routing ospf area add name=backbone area-id=0.0.0.0
+/routing ospf interface-template add interfaces=ether1 area=backbone
+```
+
+### Configure o PC1
+
+```bash
+ip 192.168.0.2 255.255.255.0
+gateway 192.168.0.1
+```
+
+### Configure o PC2
+
+```bash
+ip 192.168.0.3 255.255.255.0
+gateway 192.168.0.1
+```
+
+### Configure o PC3
+
+```bash
+ip 10.0.0.2 255.255.255.0
+gateway 10.0.0.1
+```
+
+### Configure o PC4
+
+```bash
+ip 10.0.0.3 255.255.255.0
+gateway 10.0.0.1
+```
+
+
+Verificação e Teste de OSPF:
+1. Verifique os vizinhos OSPF:
+Nos dois roteadores (R1 e R2), execute o comando:
+
+bash
+Copiar código
+/routing ospf neighbor print
+Você deve ver o outro roteador listado como vizinho, indicando que OSPF está funcionando corretamente.
+
+2. Verifique as rotas OSPF:
+Nos dois roteadores, verifique se as rotas OSPF foram aprendidas:
+
+bash
+Copiar código
+/ip route print where protocol=ospf
+O R1 deve aprender a rota para a rede 10.0.0.0/24, e o R2 deve aprender a rota para 192.168.0.0/24.
+
+Teste de Conectividade:
+Agora que OSPF está configurado e os roteadores estão trocando rotas, os PCs de diferentes redes devem poder se comunicar.
+
+Teste de ping de PC3 para PC2:
+bash
+Copiar código
+ping 192.168.0.3
+Teste de ping de PC1 para PC4:
+bash
+Copiar código
+ping 10.0.0.3
+Se os pings forem bem-sucedidos, a configuração está correta e os roteadores estão permitindo a comunicação entre as redes dos PCs.
+
+
+
+
 
 ## 5. Conclusão
 
