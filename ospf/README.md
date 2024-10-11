@@ -208,4 +208,8 @@ Agora que OSPF está configurado e os roteadores estão trocando rotas, os PCs d
 
 ## 5. Conclusão
 
-O OSPF é uma excelente escolha para redes internas grandes devido à sua rápida convergência e capacidade de escalar em redes com múltiplos roteadores. Em contraste, o RIP é mais simples e adequado para redes menores, mas encontra limitações severas em termos de escalabilidade e convergência. Para redes pequenas, o RIP pode ser suficiente, mas o OSPF oferece maior controle e eficiência para redes complexas. Já para comunicação entre sistemas autônomos (AS) e redes externas, o BGP continua sendo a escolha preferida. Para conferir mais detalhes sobre os comandos utilizados, você pode acessar a documentação [CLI do RouterOS](https://help.mikrotik.com/docs/display/ROS/Command+Line+Interface). 
+O OSPF é uma excelente escolha para redes internas grandes devido à sua rápida convergência e capacidade de escalar em redes com múltiplos roteadores. Em contraste, o RIP é mais simples e adequado para redes menores, mas encontra limitações severas em termos de escalabilidade e convergência. 
+
+Para redes pequenas, o RIP pode ser suficiente, mas o OSPF oferece maior controle e eficiência para redes complexas. Já para comunicação entre sistemas autônomos (AS) e redes externas, o BGP continua sendo a escolha preferida. 
+
+Para conferir mais detalhes sobre os comandos utilizados, você pode acessar a documentação [CLI do RouterOS](https://help.mikrotik.com/docs/display/ROS/Command+Line+Interface). 
