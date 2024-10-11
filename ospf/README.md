@@ -87,7 +87,7 @@ RIPng: Versão do RIP que suporta IPv6.
 
 ## 4. Roteamento na Prática
 
-- Para instalar o roteador Mikrotik CHR no GNS3, baixe o arquivo `chr-7.11.2.img.zip` neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing
+- Para instalar o roteador Mikrotik CHR no GNS3, baixe o arquivo `chr-7.11.2.img.zip` neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing)
 - Descompacte o arquivo na pasta desejada (`unzip chr-7.11.2.img.zip`) e importe a imagem do roteador no GNS3 conforme instruções do professor. 
 
 ## 5. Conclusão
