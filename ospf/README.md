@@ -2,9 +2,11 @@
 
 ## 1. Visão Geral
 
-O **Open Shortest Path First (OSPF)**, definido pela [RFC 2328](https://www.rfc-editor.org/rfc/rfc2328), é um protocolo de roteamento dinâmico baseado em **estado de link**. Diferentemente de protocolos mais simples, como o RIP, que utiliza a contagem de saltos, o OSPF calcula as rotas com base na largura de banda e outras características dos links, permitindo maior precisão e eficiência na escolha do caminho mais curto para o tráfego.
+O **Open Shortest Path First (OSPF)**, definido pela [RFC 2328](https://www.rfc-editor.org/rfc/rfc2328), é um protocolo de roteamento dinâmico baseado no conceito de **estado de link**. Diferente de protocolos mais simples, como o RIP, que utiliza a contagem de saltos, o OSPF calcula as rotas considerando a largura de banda e outras características dos links, permitindo maior precisão e eficiência na escolha do caminho mais curto para o tráfego.
 
-Ele é amplamente utilizado em redes grandes e complexas, como redes corporativas, provedores de serviços de internet (ISPs) e datacenters, devido à sua capacidade de rápida convergência e suporte a redes de grande escala, onde a quantidade de dispositivos e a complexidade da infraestrutura tornam impraticável o uso de roteamento estático ou protocolos de roteamento dinâmico menos escaláveis, como o RIP. Além disso, o OSPF suporta redes com diferentes tecnologias e topologias, como redes Ethernet, Frame Relay e redes ponto a ponto, oferecendo flexibilidade para diferentes tipos de infraestrutura. 
+O OSPF é amplamente utilizado em redes grandes e complexas, como redes corporativas, provedores de serviços de internet (ISPs) e datacenters, devido à sua capacidade de rápida convergência e suporte para redes de grande escala. Nessas redes, a quantidade de dispositivos e a complexidade da infraestrutura tornam impraticável o uso de roteamento estático ou de protocolos dinâmicos menos escaláveis, como o RIP.
+
+Além disso, o OSPF é compatível com diferentes tipos de tecnologias e topologias, como redes Ethernet, Frame Relay e redes ponto a ponto, oferecendo flexibilidade para variadas infraestruturas.
 
 ## 2. Por que precisamos de protocolos de roteamento dinâmico? 
 
