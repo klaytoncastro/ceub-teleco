@@ -2,25 +2,29 @@
 
 ## 1. Visão Geral
 
-O **Open Shortest Path First (OSPF)**, definido pela [RFC 2328](https://www.rfc-editor.org/rfc/rfc2328), é um protocolo de roteamento dinâmico baseado no conceito de **estado de link**. Diferente de protocolos mais simples, como o RIP, que utiliza a contagem de saltos, o OSPF calcula as rotas considerando a largura de banda e outras características dos links, permitindo maior precisão e eficiência na escolha do caminho mais curto para o tráfego.
+O **Open Shortest Path First (OSPF)**, definido pela [RFC 2328](https://www.rfc-editor.org/rfc/rfc2328), é um protocolo de roteamento dinâmico baseado no conceito de **estado de link**. Diferente de protocolos mais simples, como o RIP, que utiliza a **contagem de saltos**, o OSPF calcula as rotas com outras métricas, que auxiliam a observação de fatores como largura de banda e outras características dos links, o que permite uma maior precisão e eficiência na escolha do caminho a ser considerado o mais curto para o tráfego.
 
-O OSPF é amplamente utilizado em redes grandes e complexas, como redes corporativas, provedores de serviços de internet (ISPs) e datacenters, devido à sua capacidade de rápida convergência e suporte para redes de grande escala. Nessas redes, a quantidade de dispositivos e a complexidade da infraestrutura tornam impraticável o uso de roteamento estático ou de protocolos dinâmicos menos escaláveis, como o RIP.
+Por essa razão, o OSPF é amplamente utilizado em redes grandes e complexas, que sustentam ambientes corporativos, provedores de serviços de internet (ISPs) e datacenters, devido à sua capacidade de rápida convergência e suporte a grande quantidade de dispositivos, onde a complexidade ou demanda da infraestrutura tornam impraticável o uso de roteamento estático ou de outros protocolos dinâmicos menos escaláveis, como o RIP (Routing Information Protocol).
 
-Além disso, o OSPF é compatível com diferentes tipos de tecnologias e topologias, como redes Ethernet, Frame Relay e redes ponto a ponto, oferecendo flexibilidade para variadas infraestruturas.
+Além disso, o OSPF se destaca por ser compatível com diferentes tipos de tecnologias de rede, como Ethernet, Frame Relay e topologias ponto a ponto, oferecendo flexibilidade para as mais variadas infraestruturas.
 
 ## 2. Por que precisamos de protocolos de roteamento dinâmico? 
 
 ### Roteamento Estático
 
-Antes de discutirmos em maiores detalhes o OSPF e outros protocolos dinâmicos de roteamento, é importante entender o conceito de roteamento estático, um método mais simples de definir rotas em uma rede. Nele, as rotas são configuradas manualmente pelo administrador de rede e permanecem fixas, a menos que sejam deliberadamente alteradas. Isso significa que, independentemente de alterações na topologia, como falhas ou adições de novos dispositivos, as rotas estáticas não irão se ajustar automaticamente.
+Antes de abordar o OSPF em maiores detalhes, é importante compreender os conceitos de roteamento estático, uma forma mais rudimentar de definir rotas em uma rede. Nessa abordagem, as rotas são configuradas manualmente pelo administrador de rede e permanecem fixas, a menos que sejam deliberadamente alteradas novamente. Isso significa que, independentemente de alterações na topologia, como falhas ou adições de novos dispositivos, rotas estáticas não irão se ajustar automaticamente.
 
-Ou seja, apesar de oferecer algumas vantagens, como facilidade de configuração inicial em redes menores e possibilitar o controle total ao administrador, esta abordagem possui desvantagens significativas quando se trata de escalabilidade e necessidade de manutenção, tornando-se impraticável para redes maiores ou em constante mudança, visto que cada nova rota ou alteração precisaria ser atualizada manualmente. Além disso, em caso de falha em um link, o roteamento estático não consegue redirecionar o tráfego automaticamente para um caminho alternativo. 
+Assim sendo, apesar de oferecer algumas vantagens, como facilidade de configuração inicial em redes menores e controle total do administrador, esta abordagem possui desvantagens significativas quando se trata de escalabilidade e necessidade de manutenção, tornando-se impraticável para redes maiores ou em constante mudança, visto que cada nova rota ou necessidade de alteração repercutiria em uma nova demanda de atualização manual. Além disso, em caso de falha em um link, o roteamento estático não conseguiria redirecionar o tráfego automaticamente para um caminho alternativo, trazendo prejuízos à operação da rede. 
 
 ### Routing Information Protocol (RIP)
 
-Em redes pequenas, onde as rotas são poucas e as mudanças são raras, o roteamento estático pode ser suficiente. No entanto, à medida que a rede cresce, é cada vez mais relevante a adoção de protocolos de roteamento dinâmico, pois eles automatizam o processo de descoberta e ajuste de rotas, permitindo que a rede se adapte automaticamente a mudanças, como falhas de link ou expansões de infraestrutura. Nas redes de menor escala, o Routing Information Protocol (RIP) é uma alternativa de roteamento dinâmico mais simples ao OSPF. RIP utiliza um algoritmo de vetor de distância para escolher rotas, considerando o número de saltos (hops) entre roteadores. Para isso, ele calcula rotas com base no número de saltos (máximo de 15) e envia atualizações a cada 30 segundos, o que pode sobrecarregar redes maiores. 
+Em redes pequenas, onde há poucas rotas e as mudanças são mais raras, o roteamento estático pode ser suficiente. No entanto, à medida que a rede cresce, é cada vez mais relevante a adoção de protocolos de roteamento dinâmico, pois eles automatizam o processo de descoberta e ajuste de rotas, permitindo que a rede se adapte automaticamente a mudanças, como falhas de link ou expansões de infraestrutura. 
 
-Sua simplicidade é uma vantagem para redes menores, mas a convergência lenta e o limite de saltos tornam-no inadequado para ambientes corporativos ou acadêmicos mais complexos. Por essa razão, se há tendência de crescimento da rede, tornar-se interessante utilizar o OSPF desde o princípio, visto que ele utiliza o estado de link como métrica, considerando a largura de banda para determinar o melhor caminho. Além disso, é altamente escalável, possui convergência mais rápida e sem limite de saltos, sendo ideal para redes maiores. OSPF também é mais eficiente, já que envia atualizações apenas quando ocorrem mudanças na rede, reduzindo o tráfego.
+Nesse caso, em redes de menor escala, o Routing Information Protocol (RIP) é uma alternativa mais simples ao OSPF. o RIP utiliza um algoritmo de **vetor de distância** para escolher as melhores rotas, considerando o número de saltos (hops) entre roteadores. Para isso, ele calcula os melhores caminhos com base no menor número de saltos (cujo número máximo suportado é 15) e envia atualizações aos roteadores da malha a cada 30 segundos. Este mecanisco, não raro, pode trazer algum nível de sobrecarga, especialmente em redes maiores. 
+
+Entretanto, sua simplicidade apresenta-se como uma vantagem para redes menores, apesar da convergência mais lenta e limitada em saltos, que o tornam inadequado quando se trata de ambientes corporativos ou acadêmicos mais complexos. Por essa razão, se há tendência de crescimento da rede, torna-se interessante utilizar o OSPF desde o princípio, visto que ele utiliza o estado de link como métrica, o que enriquece sobremaneira as possibilidades de configuração da topologia. 
+
+Além disso, o OSPF é altamente escalável, possui convergência mais rápida e sem limite de saltos, sendo ideal para redes maiores. Por essa razão o OSPF também é considerado mais eficiente, já que envia atualizações apenas quando ocorrem mudanças na rede, reduzindo o tráfego de gerenciamento.
 
 <!--
 - Exemplo de Configuração do RIP no MikroTik CHR:
@@ -62,15 +66,23 @@ RIPng: Versão do RIP que suporta IPv6.
 
 ## 3. Como funciona o OSPF?
 
+
+### Sistemas Autônomos
+
+
+Antes de nos aprofundarmos no OSPF, é importante entender o conceito de Sistema Autônomo (AS). Um AS é uma coleção de redes que compartilham uma política de roteamento comum, geralmente sob a administração de uma única organização, como uma empresa ou provedor de Internet. 
+
+Dentro de um AS, utilizamos protocolos de roteamento como o OSPF para garantir que os roteadores troquem informações de rota de forma eficiente. Esses protocolos são chamados de intra-AS, pois lidam com o roteamento dentro de um único sistema autônomo. Para a comunicação entre diferentes AS (inter-AS), utilizamos protocolos como o BGP (Border Gateway Protocol), que permite a troca de rotas entre diferentes sistemas autônomos e veremos em maiores detalhes posteriormete. 
+
+Dessa forma, podemos dizer que, enquanto o OSPF cuida do roteamento interno de uma organização, o BGP gerencia o tráfego que cruza as fronteiras organizacionais. O OSPF é um protocolo bastante utilizado para governar redes intra-AS, viabilizanod o roteamento dentro de uma única organização, como uma grande empresa, provedores de serviço de internet (ISP) ou campus universitários.
+
 <!-- **Área 0 (Backbone Area)** é o núcleo de uma rede OSPF e todas as outras áreas devem se conectar a ela. -->
-
-Antes de nos aprofundarmos no OSPF, é importante entender o conceito de Sistema Autônomo (AS). Um AS é uma coleção de redes que compartilham uma política de roteamento comum, geralmente sob a administração de uma única organização, como uma empresa ou provedor de Internet. Dentro de um AS, utilizamos protocolos de roteamento como o OSPF para garantir que os roteadores troquem informações de rota de forma eficiente. Esses protocolos são chamados de intra-AS, pois lidam com o roteamento dentro de um único sistema autônomo. Para a comunicação entre diferentes AS (inter-AS), utilizamos protocolos como o BGP (Border Gateway Protocol), que permite a troca de rotas entre diferentes sistemas autônomos e veremos em maiores detalhes posteriormete. 
-
-Dessa forma, podemos dizer que, enquanto o OSPF cuida do roteamento interno de uma organização, o BGP gerencia o tráfego que cruza as fronteiras organizacionais. O OSPF é um protocolo bastante utilizado para governar redes intra-AS, viabilizanod o roteamento dentro de uma única organização, como uma grande empresa, provedores de serviço de internet (ISP) ou campus universitários. Para alcançar escalabilidade e eficiência, OSPF organiza redes em áreas e considera o **estado de link**. Para definir este estado, o OSPF baseia suas decisões de roteamento no algoritmo de **Dijkstra**, com objetivo de calcular o caminho mais curto entre roteadores. Ele usa uma métrica chamada custo, que é baseada principalmente na largura de banda do link, mas pode ser ajustada manualmente. Assim, o OSPF constrói um mapa completo de todos os roteadores dentro de uma área, o que permite decisões rápidas e eficientes sobre o caminho ideal para o tráfego.
 
 ### Principais Conceitos e Componentes do OSPF
 
-O OSPF organiza redes em áreas para reduzir a carga de roteamento. A Área 0 é a espinha dorsal (backbone) da rede OSPF, e todas as outras áreas devem se conectar a ela.
+Para alcançar escalabilidade e eficiência, OSPF organiza redes em áreas e considera o **estado de link**. Para definir este estado, o OSPF baseia suas decisões de roteamento no algoritmo de **Dijkstra**, com objetivo de calcular o caminho mais curto entre roteadores. Ele usa uma métrica chamada custo, que é baseada principalmente na largura de banda do link, mas pode ser ajustada manualmente. Assim, o OSPF constrói um mapa completo de todos os roteadores dentro de uma área, o que permite decisões rápidas e eficientes sobre o caminho ideal para o tráfego.
+
+A Área 0 é a espinha dorsal (backbone) da rede OSPF, e todas as outras áreas devem se conectar a ela.
 
 - **Custo**: Métrica baseada na largura de banda de um link. Links de maior largura de banda têm menor custo, e a configuração pode ser ajustada com o comando auto-cost reference-bandwidth para influenciar os cálculos de roteamento.
 - **Link-State Advertisements (LSAs)**: Mensagens trocadas entre roteadores OSPF para informar o estado de seus links.
