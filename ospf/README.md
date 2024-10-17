@@ -128,7 +128,6 @@ Imagine que estamos em um campus que possui dois blocos de edifícios. Cada bloc
 
 - **Bloco 2 (Departamento de Tecnologia)**: Este bloco abriga o Departamento de Tecnologia, que fornece suporte para a infraestrutura de TI do campus. Todos os computadores, servidores e sistemas críticos estão conectados a este bloco. Ele é o responsável por hospedar serviços essenciais como sistemas de autenticação, servidores de arquivos e outros recursos de rede que devem estar acessíveis a todos os outros departamentos.
 
-
 O objetivo da nossa simulação é configurar a comunicação entre esses dois blocos usando o protocolo de roteamento OSPF. Os dois roteadores (R1 e R2) representam os roteadores que conectam o Bloco 1 ao Bloco 2. Os PCs conectados a cada roteador simulam os usuários e servidores de cada bloco que precisam acessar serviços e recursos de ambos os lados.
 
 Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota dinamicamente, garantindo que, mesmo em caso de mudanças na rede (como falhas ou atualizações de infraestrutura), a comunicação entre os dois blocos continue sem interrupções.
