@@ -158,8 +158,16 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /ip address add address=192.168.0.1/24 interface=ether7  # Rede de PCs
 /ip address add address=172.16.0.1/30 interface=ether1   # Interconexão com R2
 /routing ospf instance add name=default router-id=1.1.1.1
-/routing ospf area add name=backbone area-id=0.0.0.0
+/routing ospf area add name=backbone area-id=0.0.0.0 instance=default
 /routing ospf interface-template add interfaces=ether1 area=backbone
+```
+
+### Ativação da instância OSPF 
+
+```bash
+#No R1 e R2, execute:
+/routing ospf instance disable [find name=default]
+/routing ospf instance enable [find name=default]
 ```
 
 ### Configure o R1 como DHCP Server
@@ -181,8 +189,16 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /ip address add address=10.0.0.1/24 interface=ether7    # Rede de PCs
 /ip address add address=172.16.0.2/30 interface=ether1  # Interconexão com R1
 /routing ospf instance add name=default router-id=2.2.2.2
-/routing ospf area add name=backbone area-id=0.0.0.0
+/routing ospf area add name=backbone area-id=0.0.0.0 instance=default
 /routing ospf interface-template add interfaces=ether1 area=backbone
+```
+
+### Ativação da instância OSPF 
+
+```bash
+#No R1 e R2, execute:
+/routing ospf instance disable [find name=default]
+/routing ospf instance enable [find name=default]
 ```
 
 ### Configure o R2 como DHCP Server
@@ -243,17 +259,43 @@ Nos dois roteadores (R1 e R2), execute o comando:
 
 ### Verifique os vizinhos OSPF:
 
-Nos dois roteadores (R1 e R2), execute o comando:
+A partir dos roteadores (R1 e R2), execute o comando:
 
 ```bash
-/routing ospf neighbor print
+#A partir do R1 faça um ping para R2
+ping 172.16.0.2
+```
 
+```bash
+#A partir do R2 faça um ping para R1
+ping 172.16.0.1
+```
+
+```bash
 #Você deve ver o outro roteador listado como vizinho, indicando que OSPF está funcionando corretamente.
+/routing ospf neighbor print
+```
+
+### Teste de Conectividade dos PCs:
+
+Agora que OSPF está configurado e os roteadores estão trocando rotas, os PCs de diferentes redes devem poder se comunicar. 
+
+
+<!--Faça o teste de ping de PC3 para PC2. Se os pings forem bem-sucedidos, a configuração está correta e os roteadores estão permitindo a comunicação entre as redes dos PCs.-->
+
+```bash
+#Ping do PC1 (192.168.0.0/24) para o PC2 (mesma rede):
+ping 192.168.0.199
+```
+
+```bash
+#Ping do PC1 (192.168.0.0/24) para o R2 (rede distinta):
+ping 10.0.0.1
 ```
 
 ### Verifique as rotas OSPF:
 
-Nos dois roteadores, verifique se as rotas OSPF foram aprendidas:
+Novamente a partir dos roteadores, verifique se as rotas OSPF foram aprendidas:
 
 ```bash
 #O R1 deve aprender a rota para a rede 10.0.0.0/24, e o R2 deve aprender a rota para 192.168.0.0/24.
@@ -263,10 +305,6 @@ Nos dois roteadores, verifique se as rotas OSPF foram aprendidas:
 /routing ospf lsa print
 /ip route print
 ```
-
-### Teste de Conectividade:
-
-Agora que OSPF está configurado e os roteadores estão trocando rotas, os PCs de diferentes redes devem poder se comunicar. Faça o teste de ping de PC3 para PC2. Se os pings forem bem-sucedidos, a configuração está correta e os roteadores estão permitindo a comunicação entre as redes dos PCs.
 
 ## 5. Conclusão
 
