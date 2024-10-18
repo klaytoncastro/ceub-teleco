@@ -162,7 +162,20 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
-### Configure o R2
+### Configure o R1 como DHCP Server
+
+```bash
+# Adicionar um pool de endereços IP para o DHCP
+/ip pool add name=dhcp_pool_R1 ranges=192.168.0.100-192.168.0.200
+
+# Configurar o servidor DHCP na interface ether7
+/ip dhcp-server add interface=ether7 address-pool=dhcp_pool_R1 lease-time=1h name=dhcp_server_R1
+
+# Adicionar o gateway e as opções do DHCP
+/ip dhcp-server network add address=192.168.0.0/24 gateway=192.168.0.1
+```
+
+### Configure o OSPF no R2
 
 ```bash
 /ip address add address=10.0.0.1/24 interface=ether7    # Rede de PCs
@@ -172,35 +185,61 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
+### Configure o R2 como DHCP Server
+
+```bash
+# Adicionar um pool de endereços IP para o DHCP
+/ip pool add name=dhcp_pool_R2 ranges=10.0.0.100-10.0.0.200
+
+# Configurar o servidor DHCP na interface ether7
+/ip dhcp-server add interface=ether7 address-pool=dhcp_pool_R2 lease-time=1h name=dhcp_server_R2
+
+# Adicionar o gateway e as opções do DHCP
+/ip dhcp-server network add address=10.0.0.0/24 gateway=10.0.0.1
+```
+
 ### Configure o PC1
 
 ```bash
-ip 192.168.0.2 255.255.255.0
-gateway 192.168.0.1
+#ip 192.168.0.2 255.255.255.0
+#gateway 192.168.0.1
+ip dhcp
 ```
 
 ### Configure o PC2
 
 ```bash
-ip 192.168.0.3 255.255.255.0
-gateway 192.168.0.1
+#ip 192.168.0.3 255.255.255.0
+#gateway 192.168.0.1
+ip dhcp
 ```
 
 ### Configure o PC3
 
 ```bash
-ip 10.0.0.2 255.255.255.0
-gateway 10.0.0.1
+#ip 10.0.0.2 255.255.255.0
+#gateway 10.0.0.1
+ip dhcp
 ```
 
 ### Configure o PC4
 
 ```bash
-ip 10.0.0.3 255.255.255.0
-gateway 10.0.0.1
+#ip 10.0.0.3 255.255.255.0
+#gateway 10.0.0.1
+ip dhcp
 ```
 
-## 5. Verificação e Teste de OSPF:
+## 5. Verificação e Teste:
+
+
+### Verifique o fornecimento de IPs via DHCP
+
+Nos dois roteadores (R1 e R2), execute o comando:
+
+```bash
+/ip dhcp-server lease print
+```
 
 ### Verifique os vizinhos OSPF:
 
