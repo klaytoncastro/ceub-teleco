@@ -8,20 +8,21 @@ Nos sistemas Microsoft Windows, recomenda-se a utilização do WSL (Windows Subs
 
 O uso do Docker, em conjunto com o WSL, é essencial para nossos laboratórios, pois garante a replicabilidade do ambiente de desenvolvimento, independentemente do sistema operacional usado por cada estudante.
 
-**Nota**: Usuários de sistemas baseados em Linux ou macOS não precisam utilizar o WSL, pois esses sistemas já possuem suporte nativo ao Docker. Para executar containers, basta instalar o Docker diretamente, sem a necessidade de qualquer subsistema ou ferramenta adicional.
+**Nota**: Usuários de sistemas baseados em Linux ou MacOS não precisam utilizar o WSL, pois esses sistemas já possuem suporte nativo ao Docker. Para executar containers, basta instalar o Docker diretamente, sem a necessidade de qualquer subsistema ou ferramenta adicional.
 
 ## Passo 1: Verificação dos Requisitos
-Certifique-se de ter uma versão compatível do Windows 10 ou superior e o recurso de virtualização habilitado (VT-x para os processadores da família Intel e AMD-V para os processadores da família AMD). 
+
+Certifique-se de que você está utilizando o sistema operacional Windows 10 ou uma versão superior, e que o recurso de virtualização de hardware está habilitado. 
 
 ## Passo 2: Ativação do WSL
-No PowerShell ISE como administrador, execute:
+Abra o aplicativo **PowerShell ISE**, como administrador, e execute os comandos abaixo:
 
 ```bash
 # Ativa o subsistema Windows para Linux
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
 # Ativa a plataforma de máquina virtual necessária para o WSL 2
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+dism /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
 # Instala o WSL
 wsl --install
@@ -29,14 +30,33 @@ wsl --install
 # Define a versão 2 do WSL como padrão
 wsl --set-default-version 2
 ```
+
+**Nota:** Caso tenha encontrado algum erro ou qualquer dificuldade, você pode verificar na BIOS/UEFI de seu dispositivo se o recurso de virtualização está ativado (`VT-x` para processadores Intel, como `Core i3`, `i5`, `i7`, etv; e `AMD-V` para processadores `Ryzen 5`, `Ryzen 7`, etc). Se não conseguir avançar, entre em contato com o professor para obter orientação sobre a instalação.
+
 ## Passo 3: Escolha de uma Distribuição
 
-- Caso ainda não utilize uma distribuição Linux embarcada no Windows, instale uma distribuição pela Microsoft Store. Recomenda-se o Ubuntu 24.04 LTS.
-- Após a instalação, reinicie o seu computador. 
+- Caso ainda não utilize WSL com uma distribuição Linux embarcada, instale uma distribuição pelo aplicativo **Microsoft Store** ou via **linha de comando (CLI)**. Recomenda-se instalar o **Ubuntu 24.04**.
+
+- Caso prefira realizar a instalação de forma rápida via CLI, execute o comando abaixo diretamente no **PowerShell ISE**, execute o comando abaixo: 
+
+<!--
+wsl -l -o
+-->
+
+```bash
+
+wsl --install -d Ubuntu-24.04
+wsl --setdefault Ubuntu-24.04
+```
+
+- Finalizada a instalação, reinicie o seu computador. 
+
 
 ## Passo 4: Configuração Inicial
 
-- Inicie o aplicativo WSL, configure o usuário e senha da distribuição. Pronto, você já tem acesso a um kernel e terminal Linux. 
+- Inicie o aplicativo WSL e configure o usuário e a senha da distribuição. Depois disso você terá acesso a um kernel e a um terminal Linux.
+- Além do acesso via terminal, você também pode navegar nas pastas e arquivos do ambiente Linux através do Windows Explorer (ícone do pinguim), diretamente na pasta da sua distribuição.
+- Caso prefira uma interface gráfica (GUI), considere o uso do [Visual Studio Code (VS Code)](https://code.visualstudio.com/), que permite estabelecer uma sessão de terminal com seu ambiente WSL. Esta alternativa pode ser mais intuitiva e amigável para edição de arquivos, unificando sua experiência de desenvolvimento e administração. Procure o professor caso tenha dúvidas na utilização dessa ferramenta.
 
 ## Passo 5: Instalação do Docker
 
@@ -47,8 +67,32 @@ wsl --set-default-version 2
 ## Passo 6: Utilização do Ambiente
 
 - Ao longo do curso, você será guiado pelo Professor nas atividades práticas que envolverá o conteúdo das subpastas deste repositório.
-- Para começar, inicie o Docker Desktop e o aplicativo WSL. Se preferir, você pode utilizar o terminal Linux diretamente no Visual Studio Code (VS Code) para gerenciar seus containers e desenvolver seus projetos.
- 
+- Para começar, inicie o Docker Desktop e, depois disso, o aplicativo WSL ou, se preferir, o terminal Linux diretamente a partir do VS Code. 
+- Para quem está em sua primeira experiência com terminal Linux, segue um glossário com os comandos básicos: 
+
+### Comandos Básicos
+
+| Comando | Descrição                                              | Exemplo                                |
+|---------|--------------------------------------------------------|----------------------------------------|
+| `whoami`| Exibe o nome do usuário atual                           | `whoami`                               |
+| `pwd`   | Mostra o diretório atual                                | `pwd`                                  |
+| `history`| Exibe o histórico de comandos                          | `history`                              |
+| `cd`    | Navega entre diretórios                                 | `cd /home`                             |
+| `ls`    | Lista arquivos e diretórios                             | `ls -la`                               |
+| `mkdir` | Cria um novo diretório                                  | `mkdir nova_pasta`                     |
+| `cp`    | Copia arquivos ou diretórios                            | `cp arquivo.txt /caminho/destino/`     |
+| `mv`    | Move ou renomeia arquivos e diretórios                  | `mv arquivo.txt /caminho/destino/`     |
+| `rm`    | Remove arquivos ou diretórios                           | `rm arquivo.txt`                       |
+| `cat`   | Exibe o conteúdo de um arquivo                          | `cat arquivo.txt`                      |
+| `grep`  | Pesquisa por padrões em arquivos                        | `grep "termo" arquivo.txt`             |
+| `vim`   | Editor de texto no terminal                             | `vim arquivo.txt`                      |
+| `chmod` | Altera permissões de arquivos                           | `chmod 755 arquivo.txt`                |
+| `chown` | Modifica o proprietário de um arquivo ou diretório      | `chown usuario:grupo arquivo.txt`      |
+| `ps`    | Lista processos em execução                             | `ps aux`                               |
+| `ping`  | Testa a conectividade com um host                       | `ping google.com`                      |
+| `wget`  | Baixa conteúdo da web                                   | `wget http://exemplo.com/arquivo.zip`  |
+
+
 ## Conclusão
 
 Pronto! Agora seu ambiente está preparado para nossos laboratórios. A partir daqui, você poderá seguir as instruções do professor para completar os exercícios práticos. Se surgir qualquer dúvida, consulte os materiais de apoio indicados no Moodle e neste repositório. 
