@@ -44,8 +44,10 @@ wsl -l -o
 -->
 
 ```bash
-
+# Instala o Ubuntu 24.04
 wsl --install -d Ubuntu-24.04
+
+# Define o Ubuntu 24.04 como distribuição padrão ao executar o comando wsl. 
 wsl --setdefault Ubuntu-24.04
 ```
 
@@ -54,8 +56,8 @@ wsl --setdefault Ubuntu-24.04
 
 ## Passo 4: Configuração Inicial
 
-- Inicie o aplicativo WSL e configure o usuário e a senha da distribuição. Depois disso você terá acesso a um kernel e a um terminal Linux.
-- Além do acesso via terminal, você também pode navegar nas pastas e arquivos do ambiente Linux através do Windows Explorer (ícone do pinguim), diretamente na pasta da sua distribuição.
+- Inicie o aplicativo WSL e configure o usuário e a senha da distribuição. Depois disso você terá acesso a um kernel e a um terminal Linux. Você pode invocar o Powershell ou Terminal Windows e acionar o comando `wsl` para ter acesso ao ambiente. 
+- Além do acesso via CLI, você também pode navegar via nas pastas e arquivos do ambiente Linux através do Windows Explorer (ícone do pinguim), diretamente na pasta da sua distribuição.
 - Caso prefira uma interface gráfica (GUI), considere o uso do [Visual Studio Code (VS Code)](https://code.visualstudio.com/), que permite estabelecer uma sessão de terminal com seu ambiente WSL. Esta alternativa pode ser mais intuitiva e amigável para edição de arquivos, unificando sua experiência de desenvolvimento e administração. Procure o professor caso tenha dúvidas na utilização dessa ferramenta.
 
 ## Passo 5: Instalação do Docker
