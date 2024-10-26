@@ -139,8 +139,16 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
 
 ### Adicione o roteador à sua biblioteca de dispositivos no GNS3
 
-- Para instalar o roteador Mikrotik CHR no GNS3, baixe o arquivo `chr-7.11.2.img.zip` neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing)
-- Descompacte o arquivo na pasta desejada (`unzip chr-7.11.2.img.zip`) e importe a imagem do roteador no GNS3 conforme instruções do professor. 
+- Para instalar o roteador no GNS3, crie um novo projeto e clique em `New Template`. Em `Install appliance from server`, procure por **Mikrotik CHR** e clique em `Install`.
+
+- Verifique qual versão está disponível no simulador (ex.: `7.11.2` ou `7.14.3`). Dependendo da versão disponível, você precisará fornecer a imagem virtual correta do equipamento, que pode ser baixada neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing). Escolha o arquivo correspondente à versão desejada: `chr-7.11.2.img.zip` ou `chr-7.14.3.img.zip`.
+
+- Após baixar, descompacte o arquivo na pasta desejada usando a Interface Gráfica do seu Sistema Operacional (Windows, macOS, Linux) ou via Linha de Comando:
+  
+  ```bash
+  unzip chr-7.11.2.img.zip
+  ```
+- Pronto, agora você tem na biblioteca do simulador um poderoso equipamento virtualizado para modelagem de ambientes intra-AS e inter-AS, com suporte a protocolos de roteamento como RIP, OSPF, BGP e capaz de realizar funções em topologias diversas, como Redes Ethernet e MPLS.
 
 ### Topologia
 
