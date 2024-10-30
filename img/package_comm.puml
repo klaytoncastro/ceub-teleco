@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome false
+skinparam defaultFontName Arial
+skinparam backgroundColor white
+skinparam defaultFontSize 14
+skinparam ArrowColor black
+skinparam NodeBorderColor black
+skinparam NodeBackgroundColor #E1E1F2
+
+title Multiplexação Estatística com Ethernet 10 Mbps
+
+actor "Host A" as A
+actor "Host B" as B
+actor "Host C" as C
+actor "Host D" as D
+actor "Host E" as E
+
+node "Switch Multiplexador\n(1,5 Mbps)" as Switch {
+    node "Fila de Pacotes" as Fila
+}
+
+A --> Fila : "Ethernet 10 Mbps"
+B --> Fila : "Ethernet 10 Mbps"
+Fila --> Switch : "Multiplexação Estatística\n(1,5 Mbps)"
+Switch --> C : "Pacotes Multiplexados"
+Switch --> D : "Pacotes Multiplexados"
+Switch --> E : "Pacotes Multiplexados"
+
+note right of Fila
+Fila de pacotes
+esperando por um enlace de saída
+end note
+
+legend top right
+Legenda:
+Pacotes
+end legend
+@enduml

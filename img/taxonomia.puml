@@ -1,0 +1,43 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam linetype ortho
+skinparam shadowing false
+skinparam BackgroundColor white
+skinparam class {
+    BackgroundColor #E1E1F2  // Cor suave de fundo
+    BorderColor #4B236E  // Roxo escuro para bordas
+    FontColor black
+    RoundCorner 10
+}
+
+class "Redes de Telecomunicações" as Telecom {
+}
+
+class "Redes de Comutação de Circuitos" as RCC {
+}
+
+class "Redes de Comutação de Pacotes" as RCP {
+}
+
+class "FDM" as FDM {
+}
+
+class "TDM" as TDM {
+}
+
+class "Redes de CVs" as RCV {
+}
+
+class "Redes de Datagramas" as RDG {
+}
+
+Telecom -down-> RCC
+Telecom -down-> RCP
+
+RCC -down-> FDM
+RCC -down-> TDM
+
+RCP -down-> RCV
+RCP -down-> RDG
+
+@enduml

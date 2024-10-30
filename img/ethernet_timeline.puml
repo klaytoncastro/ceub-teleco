@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome false
+skinparam defaultFontName Arial
+skinparam backgroundColor white
+skinparam ArrowColor #5D2E8C  // Roxo para as setas
+skinparam defaultTextAlignment center
+
+' Aumentando o tamanho das fontes e aplicando cores
+skinparam titleFontSize 28
+skinparam defaultFontSize 18
+skinparam defaultFontColor black
+skinparam noteBackgroundColor #FF6F91  // Rosa para notas
+skinparam noteBorderColor #C56C86  // Vinho claro para bordas de notas
+skinparam timeline {
+    backgroundColor #E1E1F2  // Fundo claro com tom pastel
+    tickColor #4C5B96  // Índigo para as marcações de tempo
+    tickFontSize 16
+}
+
+title Linha do Tempo: Tecnologias Ethernet
+
+scale 2
+
+1973 --> 1995 : Ethernet (10 Mbps) <<note>>
+1995 --> 1998 : Fast Ethernet (100 Mbps) <<note>>
+1998 --> 2002 : Gigabit Ethernet (1 Gbps) <<note>>
+2002 --> 2010 : 10 Gigabit Ethernet (10 Gbps) <<note>>
+2010 --> 2017 : 40/100 Gigabit Ethernet <<note>>
+2017 --> 2024 : 400 Gigabit Ethernet <<note>>
+
+@enduml

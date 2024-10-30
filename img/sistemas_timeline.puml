@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome false
+skinparam defaultFontName Arial
+skinparam backgroundColor white
+skinparam ArrowColor #5D2E8C  // Roxo
+skinparam defaultTextAlignment center
+
+' Ajustes para aumentar a fonte e utilizar a paleta de cores
+skinparam titleFontSize 24
+skinparam defaultFontSize 16
+skinparam defaultFontColor black
+skinparam noteBackgroundColor #FF6F91  // Rosa para notas
+skinparam noteBorderColor #C56C86  // Vinho claro para bordas de notas
+
+title Linha do Tempo: Sistemas de Transmissão
+
+scale 2
+
+1960 --> 1970 : PDH (Plesiochronous Digital Hierarchy) <<note>>
+1970 --> 1980 : X.25 (Comutação de Pacotes) <<note>>
+1980 --> 1990 : SDH / SONET (Synchronous Digital Hierarchy) <<note>>
+1980 --> 1990 : Frame Relay (Comutação de Pacotes) <<note>>
+1990 --> 1996 : ATM (Asynchronous Transfer Mode) <<note>>
+1990 --> 2000 : DWDM (Dense Wavelength Division Multiplexing) <<note>>
+1996 --> 2000 : MPLS (Multiprotocol Label Switching) <<note>>
+2000 --> 2010 : MPLS-TE (Traffic Engineering) <<note>>
+
+@enduml

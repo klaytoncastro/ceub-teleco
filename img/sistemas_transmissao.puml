@@ -1,0 +1,48 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam linetype ortho
+skinparam shadowing false
+skinparam BackgroundColor white
+
+skinparam package {
+    BackgroundColor #5D2E8C  // Roxo
+    FontColor black
+    BorderColor #4B236E
+}
+
+skinparam node {
+    BackgroundColor #C56C86  // Vinho claro
+    FontColor white
+    BorderColor #8C4A56
+    RoundCorner 15
+}
+
+skinparam node {
+    BackgroundColor<<Transmissao>> #4C5B96  // Índigo
+    FontColor white
+    BorderColor #343E68
+}
+
+skinparam node {
+    BackgroundColor<<Fisica>> #FF6F91  // Rosa
+    FontColor black
+    BorderColor #CC5873
+}
+
+package "Rede do Usuário" {
+    node "Rede IP\n(Ethernet, MPLS, SD-WAN)" #C56C86
+    node "Rede ATM (legado)" #C56C86
+    node "Rede Frame Relay (legado)" #C56C86
+    node "Rede de Telefonia\n(VoIP, 4G/5G)" #C56C86
+}
+
+node "Sistema (Rede) de Transmissão\n(DWDM, SDH, MPLS-TE)" <<Transmissao>>
+node "Rede Física\n(Fibra Óptica, 5G, Rádio)" <<Fisica>>
+
+"Rede IP\n(Ethernet, MPLS, SD-WAN)" --> "Sistema (Rede) de Transmissão\n(DWDM, SDH, MPLS-TE)"
+"Rede ATM (legado)" --> "Sistema (Rede) de Transmissão\n(DWDM, SDH, MPLS-TE)"
+"Rede Frame Relay (legado)" --> "Sistema (Rede) de Transmissão\n(DWDM, SDH, MPLS-TE)"
+"Rede de Telefonia\n(VoIP, 4G/5G)" --> "Sistema (Rede) de Transmissão\n(DWDM, SDH, MPLS-TE)"
+
+"Rede Física\n(Fibra Óptica, 5G, Rádio)" --> "Sistema (Rede) de Transmissão\n(DWDM, SDH, MPLS-TE)"
+@enduml

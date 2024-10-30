@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome false
+skinparam defaultFontName Arial
+skinparam backgroundColor white
+skinparam defaultFontSize 14
+skinparam defaultFontColor black
+skinparam ArrowColor #5D2E8C  // Roxo para setas
+skinparam node {
+    BackgroundColor #FF6F91  // Rosa para os nós
+    BorderColor #8C4A56  // Vinho escuro para bordas
+    RoundCorner 15
+}
+
+title Transmissão em Rede de Comutação de Circuitos
+
+actor "Host A" as A
+actor "Host B" as B
+
+A --> [500 ms] : "Estabelecimento de Circuito"
+A -> "Estabelecimento de Circuito" : 500 ms
+
+node "Transmissão de Dados (TDM)" {
+    "Estabelecimento de Circuito" --> "Transmissão de Dados" : 640.000 bits (10 segundos)
+}
+
+"Transmissão de Dados" --> B : Final da Transmissão
+
+@enduml
