@@ -10,13 +10,13 @@ Além disso, o OSPF se destaca por ser compatível com diferentes tipos de tecno
 
 ## 2. Por que precisamos de protocolos de roteamento dinâmico? 
 
-### Roteamento Estático
+### 2.1 Roteamento Estático
 
 Antes de abordar o OSPF em maiores detalhes, é importante compreender os conceitos de roteamento estático, uma forma mais rudimentar de definir rotas em uma rede. Nessa abordagem, as rotas são configuradas manualmente pelo administrador de rede e permanecem fixas, a menos que sejam deliberadamente alteradas novamente. Isso significa que, independentemente de alterações na topologia, como falhas ou adições de novos dispositivos, rotas estáticas não irão se ajustar automaticamente.
 
 Assim sendo, apesar de oferecer algumas vantagens, como facilidade de configuração inicial em redes menores e controle total do administrador, esta abordagem possui desvantagens significativas quando se trata de escalabilidade e necessidade de manutenção, tornando-se impraticável para redes maiores ou em constante mudança, visto que cada nova rota ou necessidade de alteração repercutiria em uma nova demanda de atualização manual. Além disso, em caso de falha em um link, o roteamento estático não conseguiria redirecionar o tráfego automaticamente para um caminho alternativo, trazendo prejuízos à operação da rede. 
 
-### Routing Information Protocol (RIP)
+### 2.2 Routing Information Protocol (RIP)
 
 Em redes pequenas, onde há poucas rotas e as mudanças são mais raras, o roteamento estático pode ser suficiente. No entanto, à medida que a rede cresce, é cada vez mais relevante a adoção de protocolos de roteamento dinâmico, pois eles automatizam o processo de descoberta e ajuste de rotas, permitindo que a rede se adapte automaticamente a mudanças, como falhas de link ou expansões de infraestrutura. 
 
@@ -66,9 +66,7 @@ RIPng: Versão do RIP que suporta IPv6.
 
 ## 3. Como funciona o OSPF?
 
-
-### Sistemas Autônomos
-
+### 3.1 Ententendo os Sistemas Autônomos
 
 Antes de nos aprofundarmos no OSPF, é importante entender o conceito de Sistema Autônomo (AS). Um AS é uma coleção de redes que compartilham uma política de roteamento comum, geralmente sob a administração de uma única organização, como uma empresa ou provedor de Internet. 
 
@@ -78,7 +76,7 @@ Dessa forma, podemos dizer que, enquanto o OSPF cuida do roteamento interno de u
 
 <!-- **Área 0 (Backbone Area)** é o núcleo de uma rede OSPF e todas as outras áreas devem se conectar a ela. -->
 
-### Principais Conceitos e Componentes do OSPF
+### 3.2 Principais Conceitos e Componentes do OSPF
 
 Para alcançar escalabilidade e eficiência, OSPF organiza redes em áreas e considera o **estado de link**. Para definir este estado, o OSPF baseia suas decisões de roteamento no algoritmo de **Dijkstra**, com objetivo de calcular o caminho mais curto entre roteadores. Ele usa uma métrica chamada custo, que é baseada principalmente na largura de banda do link, mas pode ser ajustada manualmente. Assim, o OSPF constrói um mapa completo de todos os roteadores dentro de uma área, o que permite decisões rápidas e eficientes sobre o caminho ideal para o tráfego.
 
@@ -119,8 +117,7 @@ Aqui está um exemplo de configuração de OSPF em um roteador MikroTik CHR com 
 
 ## 4. Desafio Prático: estabelecer a comunicação entre dois edifícios
 
-
-### Roteamento Dinâmico com OSPF
+### 4.1 Roteamento Dinâmico com OSPF
 
 Imagine que estamos em um campus que possui dois blocos de edifícios. Cada bloco abriga diferentes departamentos ou áreas administrativas e acadêmicas, e eles estão interconectados por uma rede local, mas fisicamente separados. A comunicação entre esses dois blocos precisa ser rápida, confiável e eficiente para suportar o tráfego de dados entre os departamentos, como o compartilhamento de documentos, serviços de rede, e sistemas de gestão.
 
@@ -132,12 +129,13 @@ O objetivo da nossa simulação é configurar a comunicação entre esses dois b
 
 Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota dinamicamente, garantindo que, mesmo em caso de mudanças na rede (como falhas ou atualizações de infraestrutura), a comunicação entre os dois blocos continue sem interrupções.
 
-### Vantagens do OSPF no Campus
+### 4.2 Vantagens do OSPF no Campus
+
 - **Escalabilidade**: OSPF é ideal para esse tipo de rede, pois pode ser facilmente expandido caso o campus cresça e novos blocos sejam adicionados.
 - **Convergência Rápida**: Em caso de falhas na rede ou alterações, o OSPF recalcula rapidamente as melhores rotas para garantir que a comunicação entre os blocos continue funcionando.
 - **Otimização do Tráfego**: OSPF usa a métrica de custo, que leva em conta a largura de banda dos links, para garantir que o tráfego siga o caminho mais eficiente, proporcionando melhor desempenho na rede.
 
-### Adicione o roteador à sua biblioteca de dispositivos no GNS3
+### 4.3 Adicionando o roteador à sua biblioteca de dispositivos no GNS3
 
 - Acesse o GNS3 em seu navegador em `http://localhost:3080`. 
 
@@ -152,7 +150,7 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
   ```
 - Pronto, agora você tem na biblioteca do simulador um poderoso equipamento virtualizado para modelagem de ambientes intra-AS e inter-AS, com suporte a protocolos de roteamento como RIP, OSPF, BGP e capaz de realizar funções em topologias diversas, como Redes Ethernet e MPLS.
 
-### Topologia
+### 4.4 Topologia
 
 Crie um novo projeto no GNS3 e configure a seguinte topologia: 
 
@@ -168,7 +166,7 @@ Agora que temos os dispositivos fisicamente interligados, vamos configurar a par
 
 A opção tradicional, via interface web no simulador (acessível via clique com botão direito em cada dispositivo, opção `web console`) irá funcionar, mas você precisará digitar os comandos na íntegra. Contudo, repare que **cada dispositivo possui uma porta atribuída**. Ex: `localhost:2001`. Para **facilitar a configuração lógica**, recomendo utilizar o protocolo de acesso remoto, utilizando o comando `telnet localhost <porta>` para configurar cada dispositivo. Assim você poderá copiar os comandos abaixo e colar diretamente no terminal. 
 
-### Configure em R1 a atuação do OSPF 
+### 4.5 Configure em R1 a atuação do OSPF 
 
 ```bash
 /ip address add address=192.168.0.1/24 interface=ether7  # Rede de PCs
@@ -178,7 +176,7 @@ A opção tradicional, via interface web no simulador (acessível via clique com
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
-### Configure em R1 a atuação como DHCP Server
+### 4.6 Configure em R1 a atuação como DHCP Server
 
 ```bash
 # Adicionar um pool de endereços IP para o DHCP
@@ -191,7 +189,7 @@ A opção tradicional, via interface web no simulador (acessível via clique com
 /ip dhcp-server network add address=192.168.0.0/24 gateway=192.168.0.1
 ```
 
-### Configure em R2 a atuação do OSPF
+### 4.7 Configure em R2 a atuação do OSPF
 
 ```bash
 /ip address add address=10.0.0.1/24 interface=ether7    # Rede de PCs
@@ -201,7 +199,7 @@ A opção tradicional, via interface web no simulador (acessível via clique com
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
-### Configure em R2 a atuação como DHCP Server
+### 4.8 Configure em R2 a atuação como DHCP Server
 
 ```bash
 # Adicionar um pool de endereços IP para o DHCP
@@ -214,7 +212,7 @@ A opção tradicional, via interface web no simulador (acessível via clique com
 /ip dhcp-server network add address=10.0.0.0/24 gateway=10.0.0.1
 ```
 
-### Ativação das Instâncias OSPF e Propagação de Rotas (R1 e R2) 
+### 4.9 Ativação das Instâncias OSPF e Propagação de Rotas (R1 e R2) 
 
 Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam propagadas e recarreguem as novas configurações. Dessa forma, os roteadores irão aprender e propagar os caminhos entre as redes dos blocos 1 e 2. 
 
@@ -240,7 +238,9 @@ Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam prop
 
 Configurados R1 e R2, passemos para os VPCS, nossos dispositivos clientes. 
 
-### Configure o PC1
+### 4.10 Configure os PCs 
+
+Primeiro, o PC1: 
 
 ```bash
 ip dhcp   #Atribui o IP via DHCP
@@ -286,7 +286,7 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 
 ## 5. Verificação e Teste:
 
-### Verifique o fornecimento de IPs via DHCP
+### 5.1 Verifique o fornecimento de IPs via DHCP
 
 Nos dois roteadores (R1 e R2), execute o comando:
 
@@ -294,7 +294,7 @@ Nos dois roteadores (R1 e R2), execute o comando:
 /ip dhcp-server lease print
 ```
 
-### Verifique os vizinhos OSPF:
+### 5.2 Verifique os vizinhos OSPF:
 
 A partir dos roteadores (R1 e R2), execute o comando:
 
@@ -313,7 +313,7 @@ ping 172.16.0.1
 /routing ospf neighbor print
 ```
 
-### Teste de Conectividade dos PCs:
+### 5.3 Teste de Conectividade dos PCs:
 
 Agora que OSPF está configurado e os roteadores estão trocando rotas, os PCs de diferentes redes devem poder se comunicar. Verifique os IPs em cada PC com o comando `show` e utilize-os para fazer os testes abaixo. 
 
@@ -329,7 +329,7 @@ ping 192.168.0.199
 ping 10.0.0.199
 ```
 
-### Verifique as rotas OSPF:
+### 5.4 Verifique as rotas OSPF:
 
 Novamente a partir dos roteadores, verifique se as rotas OSPF foram aprendidas. O R1 deve aprender a rota para a rede `10.0.0.0/24`, e o R2 deve aprender a rota para `192.168.0.0/24`. 
 
@@ -343,7 +343,7 @@ Novamente a partir dos roteadores, verifique se as rotas OSPF foram aprendidas. 
 /ip route print
 ```
 
-## 5. Conclusão
+## 6. Conclusão
 
 Em resumo, o OSPF é ideal para redes que exigem alta disponibilidade, eficiência e escalabilidade, como em grandes corporações, universidades e provedores de internet (ISPs). Sua capacidade de organizar a rede em áreas, convergir rapidamente e calcular rotas com base na largura de banda o torna uma escolha preferida para ambientes complexos e dinâmicos.
 

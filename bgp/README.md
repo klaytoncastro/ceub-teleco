@@ -1,4 +1,4 @@
-# Border Gateway Protocol (BGP) e Sistemas Autônomos (AS)
+# Border Gateway Protocol (BGP)
 
 ## 1. Visão Geral
 
