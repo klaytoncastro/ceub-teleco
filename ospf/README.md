@@ -139,6 +139,8 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
 
 ### Adicione o roteador à sua biblioteca de dispositivos no GNS3
 
+- Acesse o GNS3 em seu navegador em `http://localhost:3080`. 
+
 - Para instalar o roteador no GNS3, crie um novo projeto e clique em `New Template`. Em `Install appliance from server`, procure por **Mikrotik CHR** e clique em `Install`.
 
 - Verifique qual versão está disponível no simulador (ex.: `7.11.2` ou `7.14.3`). Dependendo da versão disponível, você precisará fornecer a imagem virtual correta do equipamento, que pode ser baixada neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing). Escolha o arquivo correspondente à versão desejada: `chr-7.11.2.img.zip` ou `chr-7.14.3.img.zip`.
@@ -160,7 +162,12 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 - Ligue cada um dos hubs a roteadores diferentes;
 - Ligue os roteadores entre si;
 
-### Configure o R1
+
+Agora que temos os dispositivos fisicamente interligados, vamos configurar a parte lógica nas próximas seções. Este é o mapa esperado para a topologia: 
+
+![Conectividade entre os Blocos 1 e 2](img/topologyOSPF.png)
+
+### Configure em R1 a atuação do OSPF 
 
 ```bash
 /ip address add address=192.168.0.1/24 interface=ether7  # Rede de PCs
@@ -170,15 +177,7 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
-### Ativação da instância OSPF 
-
-```bash
-#No R1 e R2, execute:
-/routing ospf instance disable [find name=default]
-/routing ospf instance enable [find name=default]
-```
-
-### Configure o R1 como DHCP Server
+### Configure em R1 a atuação como DHCP Server
 
 ```bash
 # Adicionar um pool de endereços IP para o DHCP
@@ -191,7 +190,7 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /ip dhcp-server network add address=192.168.0.0/24 gateway=192.168.0.1
 ```
 
-### Configure o OSPF no R2
+### Configure em R2 a atuação do OSPF
 
 ```bash
 /ip address add address=10.0.0.1/24 interface=ether7    # Rede de PCs
@@ -201,7 +200,7 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
-### Configure o R2 como DHCP Server
+### Configure em R2 a atuação como DHCP Server
 
 ```bash
 # Adicionar um pool de endereços IP para o DHCP
@@ -214,9 +213,9 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /ip dhcp-server network add address=10.0.0.0/24 gateway=10.0.0.1
 ```
 
-### Ativação das Instâncias OSPF e Propagação de Rotas 
+### Ativação das Instâncias OSPF e Propagação de Rotas (R1 e R2) 
 
-Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam propagadas e recarregue as configurações para que o ambiente funcione. Dessa forma, os roteadores irão aprender e propagar os caminhos entre as redes dos blocos 1 e 2. 
+Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam propagadas e recarreguem as novas configurações. Dessa forma, os roteadores irão aprender e propagar os caminhos entre as redes dos blocos 1 e 2. 
 
 - Primeiro, em R1: 
 
@@ -237,6 +236,8 @@ Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam prop
 /routing ospf instance disable [find name=default]
 /routing ospf instance enable [find name=default]
 ```
+
+Configurados R1 e R2, passemos para os VPCS, nossos dispositivos clientes. 
 
 ### Configure o PC1
 
@@ -260,7 +261,6 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 #gateway 192.168.0.1
 -->
 
-
 ### Configure o PC3
 
 ```bash
@@ -272,7 +272,6 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 #gateway 10.0.0.1
 -->
 
-
 ### Configure o PC4
 
 ```bash
@@ -283,7 +282,6 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 #ip 10.0.0.3 255.255.255.0
 #gateway 10.0.0.1
 -->
-
 
 ## 5. Verificação e Teste:
 
@@ -310,36 +308,36 @@ ping 172.16.0.1
 ```
 
 ```bash
-#Você deve ver o outro roteador listado como vizinho, indicando que OSPF está funcionando corretamente.
+# Em cada roteador, você deve ver o outro parceiro OSPF listado como vizinho, indicando que o protocolo está atuando corretamente.
 /routing ospf neighbor print
 ```
 
 ### Teste de Conectividade dos PCs:
 
-Agora que OSPF está configurado e os roteadores estão trocando rotas, os PCs de diferentes redes devem poder se comunicar. 
-
+Agora que OSPF está configurado e os roteadores estão trocando rotas, os PCs de diferentes redes devem poder se comunicar. Verifique os IPs em cada PC com o comando `show` e utilize-os para fazer os testes abaixo. 
 
 <!--Faça o teste de ping de PC3 para PC2. Se os pings forem bem-sucedidos, a configuração está correta e os roteadores estão permitindo a comunicação entre as redes dos PCs.-->
 
 ```bash
-#Ping do PC1 (192.168.0.0/24) para o PC2 (mesma rede):
+#Exemplo de ping a partir do PC1 para o PC2 (mesma rede):
 ping 192.168.0.199
 ```
 
 ```bash
-#Ping do PC1 (192.168.0.0/24) para o R2 (rede distinta):
-ping 10.0.0.1
+#Exemplo de ping a partir do PC1 para o PC3 (rede distinta):
+ping 10.0.0.199
 ```
 
 ### Verifique as rotas OSPF:
 
-Novamente a partir dos roteadores, verifique se as rotas OSPF foram aprendidas:
+Novamente a partir dos roteadores, verifique se as rotas OSPF foram aprendidas. O R1 deve aprender a rota para a rede `10.0.0.0/24`, e o R2 deve aprender a rota para `192.168.0.0/24`. 
+
+<!--
+/ip route print where protocol=ospf
+-->
 
 ```bash
-#O R1 deve aprender a rota para a rede 10.0.0.0/24, e o R2 deve aprender a rota para 192.168.0.0/24.
-/ip route print where protocol=ospf
-
-#Verifique os LSAs e tabelas de roteamento de maneira mais detalhada
+# Verifique os LSAs e tabelas de roteamento
 /routing ospf lsa print
 /ip route print
 ```
