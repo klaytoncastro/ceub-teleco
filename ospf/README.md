@@ -162,10 +162,11 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 - Ligue cada um dos hubs a roteadores diferentes;
 - Ligue os roteadores entre si;
 
-
 Agora que temos os dispositivos fisicamente interligados, vamos configurar a parte lógica nas próximas seções. Este é o mapa esperado para a topologia: 
 
 ![Conectividade entre os Blocos 1 e 2](/img/topologyOSPF.png)
+
+A opção tradicional, via interface web no simulador (acessível via clique com botão direito em cada dispositivo, opção `web console`) irá funcionar, mas você precisará digitar os comandos na íntegra. Contudo, repare que **cada dispositivo possui uma porta atribuída**. Ex: `localhost:2001`. Para **facilitar a configuração lógica**, recomendo utilizar o protocolo de acesso remoto, utilizando o comando `telnet localhost <porta>` para configurar cada dispositivo. Assim você poderá copiar os comandos abaixo e colar diretamente no terminal. 
 
 ### Configure em R1 a atuação do OSPF 
 

@@ -9,7 +9,7 @@ services:
       - "80:80"
       - "8000:8000"
       - "5000-5010:5000-5010"
-      - "2000-2020:2000-2020"
+      - "2000-2050:2000-2050"
     volumes:
       - ./gns3-data:/data  # Caminho para persistir os dados
     environment:
