@@ -201,14 +201,6 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
-### Ativação da instância OSPF 
-
-```bash
-#No R1 e R2, execute:
-/routing ospf instance disable [find name=default]
-/routing ospf instance enable [find name=default]
-```
-
 ### Configure o R2 como DHCP Server
 
 ```bash
@@ -222,40 +214,78 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 /ip dhcp-server network add address=10.0.0.0/24 gateway=10.0.0.1
 ```
 
+### Ativação das Instâncias OSPF e Propagação de Rotas 
+
+Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam propagadas e recarregue as configurações para que o ambiente funcione. Dessa forma, os roteadores irão aprender e propagar os caminhos entre as redes dos blocos 1 e 2. 
+
+- Primeiro, em R1: 
+
+```bash
+# No R1, configure:
+/routing ospf interface-template add networks=192.168.0.0/24 area=backbone
+/routing ospf interface-template add networks=172.16.0.0/30 area=backbone
+/routing ospf instance disable [find name=default]
+/routing ospf instance enable [find name=default]
+```
+
+- Depois, em R2: 
+
+```bash
+#No R2, configure:
+/routing ospf interface-template add networks=10.0.0.0/24 area=backbone
+/routing ospf interface-template add networks=172.16.0.0/30 area=backbone
+/routing ospf instance disable [find name=default]
+/routing ospf instance enable [find name=default]
+```
+
 ### Configure o PC1
 
 ```bash
+ip dhcp   #Atribui o IP via DHCP
+show      #Mostra as configurações obtidas (IP, máscara, gateway)
+```
+<!--
 #ip 192.168.0.2 255.255.255.0
 #gateway 192.168.0.1
-ip dhcp
-```
+-->
 
 ### Configure o PC2
 
 ```bash
+ip dhcp   #Atribui o IP via DHCP
+show      #Mostra as configurações obtidas (IP, máscara, gateway)
+```
+<!--
 #ip 192.168.0.3 255.255.255.0
 #gateway 192.168.0.1
-ip dhcp
-```
+-->
+
 
 ### Configure o PC3
 
 ```bash
+ip dhcp   #Atribui o IP via DHCP
+show      #Mostra as configurações obtidas (IP, máscara, gateway)
+```
+<!--
 #ip 10.0.0.2 255.255.255.0
 #gateway 10.0.0.1
-ip dhcp
-```
+-->
+
 
 ### Configure o PC4
 
 ```bash
+ip dhcp   #Atribui o IP via DHCP
+show      #Mostra as configurações obtidas (IP, máscara, gateway)
+```
+<!--
 #ip 10.0.0.3 255.255.255.0
 #gateway 10.0.0.1
-ip dhcp
-```
+-->
+
 
 ## 5. Verificação e Teste:
-
 
 ### Verifique o fornecimento de IPs via DHCP
 
