@@ -151,8 +151,8 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
 
 - Para efetuar seu primeiro acesso, ligue o Router no botão `play` do GNS3. Você será convidado a inserir usuário e senha (`admin` com senha em branco, conforme indicado abaixo). Depois recuse a leitura do regulamento com `n`, defina e confirme uma nova senha, que deverá ser utilizada nos próximos acessos. 
 
-**Usuário**: admin
-**Senha**: 
+- **Usuário**: admin
+- **Senha**: 
 
 - Pronto, agora você tem na biblioteca do simulador um poderoso equipamento virtualizado para modelagem de ambientes intra-AS e inter-AS, com suporte a protocolos de roteamento como RIP, OSPF, BGP e capaz de realizar funções em topologias diversas, como Redes Ethernet e MPLS.
 
