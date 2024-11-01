@@ -19,6 +19,13 @@ O **BGP (Border Gateway Protocol)** é um protocolo de roteamento de grande esca
 - **Local Preference**: indica a preferência por uma determinada rota dentro de um AS.
 - **MED (Multi-Exit Discriminator)**: utilizado para influenciar o roteamento quando existem múltiplas saídas para um AS.
 
+
+
+<!--A atividade visa desenvolver habilidades práticas na implementação de roteamento dinâmico para suportar ambientes em expansão e simular cenários reais em que diferentes protocolos de roteamento trabalham em conjunto para proporcionar conectividade eficiente e escalável entre diferentes redes e áreas de uma organização.
+
+Ao final, será possível validar a conectividade entre dispositivos de diferentes blocos e sub-redes, reforçando o entendimento de conceitos de convergência, redistribuição de rotas e topologias de redes complexas.
+
+
 ### Exemplo de Configuração BGP
 
 Aqui está um exemplo simples de uma configuração de BGP em um roteador Mikrotik CHR com o sistema RouterOS:
@@ -44,8 +51,7 @@ add network=10.0.0.0/24
 - BGP Network: Anunciamos a rede 10.0.0.0/24 para o peer.
 
 - **Nota**: Certifique-se de que a interface Loopback0 ou a interface correta esteja configurada e disponível no dispositivo MikroTik.
- 
-<!--
+
 ```bash
 router bgp 65001
   neighbor 192.168.1.2 remote-as 65002
@@ -66,14 +72,9 @@ router bgp 65001
 
 ## 4. Atividade Prática
 
-O objetivo desta atividade é estabelecer a comunicação entre múltiplos segmentos de rede em uma topologia mais complexa, utilizando os protocolos de roteamento dinâmico OSPF e BGP. Você irá configurar uma rede de campus composta por dois blocos que utilizam OSPF para roteamento interno e dois novos roteadores conectados via BGP, ampliando a topologia para incluir redes externas. Essa configuração permite observar a integração entre OSPF e BGP, redistribuindo rotas entre os dois protocolos. 
+O objetivo desta atividade é estabelecer a comunicação entre múltiplos segmentos de rede em uma topologia mais complexa, integrando os protocolos de roteamento dinâmico OSPF e BGP. Você irá estender a configuração de uma rede de campus composta por dois blocos principais que utilizam OSPF para roteamento interno e, em seguida, adicionar dois novos roteadores conectados via BGP, criando assim um caminho para redes externas.
 
-<!--A atividade visa desenvolver habilidades práticas na implementação de roteamento dinâmico para suportar ambientes em expansão e simular cenários reais em que diferentes protocolos de roteamento trabalham em conjunto para proporcionar conectividade eficiente e escalável entre diferentes redes e áreas de uma organização.
-
-Ao final, será possível validar a conectividade entre dispositivos de diferentes blocos e sub-redes, reforçando o entendimento de conceitos de convergência, redistribuição de rotas e topologias de redes complexas.
--->
-
-A topologia desta atividade envolve uma rede de campus composta por vários roteadores e sub-redes conectadas para simular um ambiente de rede em larga escala. Aqui está uma descrição detalhada da configuração:
+O OSPF continuará gerenciando o roteamento interno no núcleo da rede para garantir rápida convergência e atualizações ágeis de estado de link. Ao mesmo tempo, o BGP será responsável por transportar os intervalos de IP de clientes, mantendo as rotas do núcleo isoladas das rotas dos clientes. Ou seja, teremos um ambiente híbrido, onde roteadores podem partilhar e redistribuir rotas usando OSPF e/ou BGP, simulando um ambiente real de rede em larga escala. Segue a descrição detalhada da configuração:
 
 ### Bloco 1 e Bloco 2:
 
@@ -86,7 +87,6 @@ Os blocos representam duas redes distintas, como diferentes departamentos ou pr�
 - O R3 desempenha o papel de ponto de redistribuição entre o OSPF e o BGP. Ele está conectado ao switch central e possui uma interface na mesma sub-rede de R1 (192.168.0.0/24), o que permite que ele participe da rede OSPF e aprenda as rotas de R1 e R2.
 
 - Adicionalmente, o R3 está conectado a R4 em outra interface, utilizando a sub-rede 172.20.0.0/30, onde é estabelecida a comunicação via BGP com o R4, permitindo a troca de rotas externas entre eles. R4 também está conectado a outra sub-rede (192.168.10.0/24), onde está localizado o PC5, que simula um dispositivo final em uma rede externa que deseja acessar serviços e recursos disponíveis nas redes de R1 e R2.
-
 
 ### Comunicação com novos dispositivos e redistribuição de rotas:
 
