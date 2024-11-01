@@ -81,14 +81,11 @@ Os blocos representam duas redes distintas, como diferentes departamentos ou pr�
 
 ### Conexão entre as redes roteadas por OSPF e a nova rede roteada por BGP. 
 
-- Um switch central conecta os roteadores R1, R2 e R3 por meio de suas interfaces (ether7 em R1 e R3). Esse switch permite que R3 troque rotas e informações diretamente com R1 e R2, aprendendo e propagando rotas da rede OSPF para outras partes da topologia.
+- Um switch central conecta os roteadores R1, R2 e R3 por meio de suas interfaces (ether7 em R1 e R3). Esse switch permite que R3 troque rotas diretamente com R1 e R2, aprendendo e propagando rotas da rede via OSPF para outras partes da topologia.
 
-- O R3 desempenha um papel de ponto de redistribuição entre o OSPF e o BGP.
-Ele está conectado ao switch central e possui uma interface ether7 na mesma sub-rede de R1 (192.168.0.0/24), o que permite que ele participe da rede OSPF e aprenda as rotas de R1 e R2.
+- O R3 desempenha o papel de ponto de redistribuição entre o OSPF e o BGP. Ele está conectado ao switch central e possui uma interface na mesma sub-rede de R1 (192.168.0.0/24), o que permite que ele participe da rede OSPF e aprenda as rotas de R1 e R2.
 
-- Adicionalmente, o R3 está conectado a R4 via a interface ether1, utilizando a sub-rede 172.20.0.0/30, onde é estabelecida a comunicação BGP com o R4.
-
-- O R4 conecta-se ao R3 via BGP na interface ether1, participando da troca de rotas externas com R3. R4 também está conectado a uma nova sub-rede (192.168.10.0/24) na interface ether7, onde está localizado o PC5. Esse PC representa um dispositivo final em uma rede externa que deseja acessar serviços e recursos disponíveis nas redes de R1 e R2.
+- Adicionalmente, o R3 está conectado a R4 em outra interface, utilizando a sub-rede 172.20.0.0/30, onde é estabelecida a comunicação via BGP com o R4, permitindo a troca de rotas externas entre eles. R4 também está conectado a outra sub-rede (192.168.10.0/24), onde está localizado o PC5, que simula um dispositivo final em uma rede externa que deseja acessar serviços e recursos disponíveis nas redes de R1 e R2.
 
 
 ### Comunicação com novos dispositivos e redistribuição de rotas:
@@ -131,12 +128,43 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 ip 192.168.10.2/24
 gateway 192.168.10.1
 ```
+
+<!--
+
+R3: 
+
+[admin@MikroTik] > /ip address add address=192.168.0.2/24 interface=ether7
+[admin@MikroTik] > /ip address add address=172.20.0.1/30 interface=ether1
+[admin@MikroTik] > /routing ospf instance set [find default=yes] router-id=3.3.3.3
+[admin@MikroTik] > /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
+[admin@MikroTik] > /routing ospf instance add name=default router-id=3.3.3.3
+[admin@MikroTik] > /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
+[admin@MikroTik] > /routing ospf interface-template add interfaces=ether7 area=backbone
+[admin@MikroTik] /routing/bgp> /routing/bgp/connection add name=peer_to_R4 remote.address=172.20.0.2 remote.as=65002 local.role=ebgp
+[admin@MikroTik] /routing/bgp/template> /routing/bgp/template set 0 output.filter=bgp-out
+[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection enable peer_to_R3
+[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection disable peer_to_R4
+[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection enable peer_to_R4
+[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection/print
+
+
+R4:
+
+[admin@MikroTik] > /ip address add address=172.20.0.2/30 interface=ether1
+[admin@MikroTik] > /ip address add address=192.168.10.1/24 interface=ether7
+[admin@MikroTik] > /routing/bgp/connection add name=peer_to_R3 remote.address=172.20.0.1 remote.as=65001 local.role=ebgp
+[admin@MikroTik] > /routing/bgp/connection disable peer_to_R3
+[admin@MikroTik] > /routing/bgp/connection enable peer_to_R3
+[admin@MikroTik] > /routing/bgp/connection/print
+
+-->
+
 ### Verificação de Conectividade
 
 Essas configurações permitirão a comunicação entre todas as redes e dispositivos na topologia, com o R3 redistribuindo rotas entre OSPF e BGP para que todas as sub-redes estejam acessíveis mutuamente. Após configurar as redes, primeiramente verifique a conectividade e os anúncios de rota. Efetue o ping entre os PCs:
 
-- Do PC5, pingue PC1 (192.168.0.x) e PC3 (10.0.0.x).
-- Do PC1 e PC3, pingue o PC5 (192.168.10.2).
+- Do PC5, realize o ping para PC1 (192.168.0.x) e PC3 (10.0.0.x).
+- Do PC1 e PC3, realize o pingue para o PC5 (192.168.10.2).
 - Em R1, R2, R3 e R4, verifique se todas as rotas foram aprendidas adequadamente via OSPF ou BGP:
 
 ```bash
