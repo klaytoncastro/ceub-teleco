@@ -165,7 +165,7 @@ Crie um novo projeto no GNS3 e configure a seguinte topologia:
 
 Agora que temos os dispositivos fisicamente interligados, vamos configurar a parte lógica nas próximas seções. Este é o mapa esperado para a topologia: 
 
-![Conectividade entre os Blocos 1 e 2](img/topologyOSPF.png)
+![Conectividade entre os Blocos 1 e 2](/img/topologyOSPF.png)
 
 ### Configure em R1 a atuação do OSPF 
 
