@@ -148,7 +148,14 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
   ```bash
   unzip chr-7.11.2.img.zip
   ```
+
+- Para efetuar seu primeiro acesso, ligue o Router no botão `play` do GNS3. Você será convidado a inserir usuário e senha (`admin` com senha em branco, conforme indicado abaixo). Depois recuse a leitura do regulamento com `n`, defina e confirme uma nova senha, que deverá ser utilizada nos próximos acessos. 
+
+**Usuário**: admin
+**Senha**: 
+
 - Pronto, agora você tem na biblioteca do simulador um poderoso equipamento virtualizado para modelagem de ambientes intra-AS e inter-AS, com suporte a protocolos de roteamento como RIP, OSPF, BGP e capaz de realizar funções em topologias diversas, como Redes Ethernet e MPLS.
+
 
 ### 4.4 Topologia
 
@@ -345,8 +352,8 @@ Novamente a partir dos roteadores, verifique se as rotas OSPF foram aprendidas. 
 
 ## 6. Conclusão
 
-Em resumo, o OSPF é ideal para redes que exigem alta disponibilidade, eficiência e escalabilidade, como em grandes corporações, universidades e provedores de internet (ISPs). Sua capacidade de organizar a rede em áreas, convergir rapidamente e calcular rotas com base na largura de banda o torna uma escolha preferida para ambientes complexos e dinâmicos.
-
-Enquanto o RIP pode ser suficiente para redes menores devido à sua simplicidade, ele apresenta limitações em termos de escalabilidade e convergência. O OSPF, por outro lado, oferece maior controle, eficiência e flexibilidade em redes maiores. Já para comunicação entre diferentes sistemas autônomos (inter-AS), o BGP é a opção recomendada.
-
-Para conferir mais detalhes sobre os comandos utilizados na nossa sessão de prática, você pode acessar a documentação [CLI do RouterOS](https://help.mikrotik.com/docs/display/ROS/Command+Line+Interface). 
+Enquanto o RIP pode ser suficiente para redes menores devido à sua simplicidade, ele apresenta algumas limitações em termos de eficiência e escalabilidade. 
+Por outro lado, o OSPF é o protocolo ideal para ambientes de alta disponibilidade e tolerância à falha, uma vez que ele tem a capacidade de organizar a rede em áreas, convergir mais rapidamente que o RIP e calcular rotas com base no custo, que pode ser modelado de acordo com métricas como a largura de banda, dentre outros fatores.  
+Isso o torna uma escolha preferida para organizações públicas e privadas de médio e grande porte, incluindo instituições governamentais e acadêmicas, provedores de serviço de Internet (ISPs), dentre outras organizações que necessitem de recursos de rede mais sofisticados e demandam maior controle e flexibilidade. 
+Já para comunicação entre diferentes sistemas autônomos (inter-AS), o BGP é a opção recomendada, sendo o padrão estabelecido na hierarquia da Internet. O dispositivo que utilizamos como roteador em nosso simulador, o 
+MikroTik CHR (Cloud Hosted Router), também oferece suporte para o BGP, que trataremos em nosso próximo laboratório. Para obter maiores detalhes sobre os comandos utilizados em nossa sessão de prática no GNS3 como o MikroTik CHR, você pode acessar a documentação da CLI (Command-Line Interface) do [RouterOS](https://help.mikrotik.com/docs/display/ROS/Command+Line+Interface). 
