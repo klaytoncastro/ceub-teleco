@@ -98,9 +98,9 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 /ip address add address=172.20.0.1/30 interface=ether1     # Conexão BGP com R4
 
 # Configuração do OSPF no R3
-/routing ospf instance set [find default=yes] router-id=3.3.3.3
+/routing ospf instance add name=default router-id=3.3.3.3
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
-/routing ospf interface-template add interfaces=ether7 area=backbone
+/routing ospf interface-template add interfaces=ether1 area=backbone
 
 # Redistribuir rotas BGP no OSPF
 /routing ospf redistribute add protocol=bgp
