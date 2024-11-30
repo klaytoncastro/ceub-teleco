@@ -66,9 +66,9 @@ RIPng: Versão do RIP que suporta IPv6.
 
 ## 3. Como funciona o OSPF?
 
-### 3.1 Ententendo os Sistemas Autônomos
+### Ententendo os Sistemas Autônomos
 
-Antes de nos aprofundarmos no OSPF, é importante entender o conceito de Sistema Autônomo (AS). Um AS é uma coleção de redes que compartilham uma política de roteamento comum, geralmente sob a administração de uma única organização, como uma empresa ou provedor de Internet. 
+Antes de nos aprofundarmos no BGP, é importante entender o conceito de Sistema Autônomo (AS). Um AS é uma coleção de redes que compartilham uma política de roteamento comum, geralmente sob a administração de uma única organização, como uma empresa ou provedor de Internet. 
 
 Dentro de um AS, utilizamos protocolos de roteamento como o OSPF para garantir que os roteadores troquem informações de rota de forma eficiente. Esses protocolos são chamados de intra-AS, pois lidam com o roteamento dentro de um único sistema autônomo. Para a comunicação entre diferentes AS (inter-AS), utilizamos protocolos como o BGP (Border Gateway Protocol), que permite a troca de rotas entre diferentes sistemas autônomos e veremos em maiores detalhes posteriormete. 
 
@@ -141,7 +141,7 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
 
 - Para instalar o roteador no GNS3, crie um novo projeto e clique em `New Template`. Em `Install appliance from server`, procure por **Mikrotik CHR** e clique em `Install`.
 
-- Verifique qual versão está disponível no simulador (ex.: `7.11.2` ou `7.14.3`). Dependendo da versão disponível, você precisará fornecer a imagem virtual correta do equipamento, que pode ser baixada neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing). Escolha o arquivo correspondente à versão desejada: `chr-7.11.2.img.zip` ou `chr-7.14.3.img.zip`.
+- Verifique qual versão está disponível no simulador (ex.: `7.11.2` ou `7.14.3`). Dependendo da versão disponível, você precisará fornecer a imagem virtual correta do equipamento, que pode ser baixada neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing). Escolha o arquivo correspondente à versão desejada: `chr-7.11.2.img.zip` ou `chr-7.14.3.img.zip`. Alternativamente vc pode rodar o comando `docker compose pull` a partir da raiz do repositório (ex: `/opt/ceub-teleco`) e atualizar sua imagem do ambiente, podendo usar a versão mais atualizada do router. 
 
 - Após baixar, descompacte o arquivo na pasta desejada usando a Interface Gráfica do seu Sistema Operacional (Windows, macOS, Linux) ou via Linha de Comando:
   

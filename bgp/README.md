@@ -19,8 +19,6 @@ O **BGP (Border Gateway Protocol)** é um protocolo de roteamento de grande esca
 - **Local Preference**: indica a preferência por uma determinada rota dentro de um AS.
 - **MED (Multi-Exit Discriminator)**: utilizado para influenciar o roteamento quando existem múltiplas saídas para um AS.
 
-
-
 <!--A atividade visa desenvolver habilidades práticas na implementação de roteamento dinâmico para suportar ambientes em expansão e simular cenários reais em que diferentes protocolos de roteamento trabalham em conjunto para proporcionar conectividade eficiente e escalável entre diferentes redes e áreas de uma organização.
 
 Ao final, será possível validar a conectividade entre dispositivos de diferentes blocos e sub-redes, reforçando o entendimento de conceitos de convergência, redistribuição de rotas e topologias de redes complexas.
@@ -74,7 +72,13 @@ router bgp 65001
 
 O objetivo desta atividade é estabelecer a comunicação entre múltiplos segmentos de rede em uma topologia mais complexa, integrando os protocolos de roteamento dinâmico OSPF e BGP. Você irá estender a configuração de uma rede de campus composta por dois blocos principais que utilizam OSPF para roteamento interno e, em seguida, adicionar dois novos roteadores conectados via BGP, criando assim um caminho para redes externas.
 
-O OSPF continuará gerenciando o roteamento interno no núcleo da rede para garantir rápida convergência e atualizações ágeis de estado de link. Ao mesmo tempo, o BGP será responsável por transportar os intervalos de IP de clientes, mantendo as rotas do núcleo isoladas das rotas dos clientes. Ou seja, teremos um ambiente híbrido, onde roteadores podem partilhar e redistribuir rotas usando OSPF e/ou BGP, simulando um ambiente real de rede em larga escala. Segue a descrição detalhada da configuração:
+O OSPF continuará gerenciando o roteamento interno no núcleo da rede para garantir rápida convergência e atualizações ágeis de estado de link. Ao mesmo tempo, o BGP será responsável por transportar os intervalos de IP de clientes, mantendo as rotas do núcleo isoladas das rotas dos clientes. Ou seja, teremos um ambiente híbrido, onde roteadores podem partilhar e redistribuir rotas usando OSPF e/ou BGP, simulando um ambiente real de rede em larga escala. 
+
+Este é o mapa esperado para a topologia: 
+
+![Conectividade entre a rede de acesso (Campus) ao Datacenter e à Internet](/img/topologyBGP.png)
+
+Nas próximas seções vamos configurar a parte lógica. Segue a descrição detalhada da configuração:
 
 ### Bloco 1 e Bloco 2:
 
