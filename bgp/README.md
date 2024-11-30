@@ -4,7 +4,7 @@
 
 O **Border Gateway Protocol (BGP)**, definido pela [RFC 4271](https://www.rfc-editor.org/rfc/rfc4271) é o principal protocolo adotado na Internet para gerenciar como os pacotes de dados são roteados por diferentes redes ou **Sistemas Autônomos (AS)**. Um AS é um grupo de endereços IP sob controle de uma única entidade, como um provedor de serviços de internet (ISP), uma grande empresa ou uma universidade, uma espécie de coleção de redes IP que compartilham uma política de roteamento comum e que são controladas por uma única organização ou entidade. 
 
-Cada AS é identificado por um número único, chamado **Número de Sistema Autônomo (ASN)**. Um bom site para fazer consultas sobre os AS é o [bph.he.net](https://bph.he.net). Enquanto protocolos de roteamento como o **OSPF (Open Shortest Path First)** e **RIP (Routing Information Protocol)** funcionam dentro de um único AS, o BGP é usado para roteamento entre diferentes AS, tornando-o essencial para a infraestrutura global da Internet.
+Cada AS é identificado por um número único, chamado **Número de Sistema Autônomo (ASN)**. Um bom site para fazer consultas sobre os AS é o [bph.he.net](https://bgp.he.net). Enquanto protocolos de roteamento como o **OSPF (Open Shortest Path First)** e **RIP (Routing Information Protocol)** funcionam dentro de um único AS, o BGP é usado para roteamento entre diferentes AS, tornando-o essencial para a infraestrutura global da Internet.
 
 Imagine que um grande provedor de serviços de internet (ISP) controle várias redes internas. Essas redes formam um AS e têm suas próprias políticas de roteamento, como preferir certos caminhos ou evitar certas rotas por motivos econômicos ou de desempenho. Quando o tráfego sai desse AS para a internet global, ele usa o BGP para se comunicar com outros AS, como o de outro ISP.
 
@@ -102,9 +102,9 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 /ip address add address=172.20.0.1/30 interface=ether1     # Conexão BGP com R4
 
 # Configuração do OSPF no R3
-/routing ospf instance set [find default=yes] router-id=3.3.3.3
+/routing ospf instance add name=default router-id=3.3.3.3
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
-/routing ospf interface-template add interfaces=ether7 area=backbone
+/routing ospf interface-template add interfaces=ether1 area=backbone
 
 # Redistribuir rotas BGP no OSPF
 /routing ospf redistribute add protocol=bgp
