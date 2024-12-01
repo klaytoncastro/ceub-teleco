@@ -70,8 +70,8 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 /routing ospf instance enable [find name=default]
 
 # Configuração do BGP no R3
-/routing bgp instance add name=default as=65001 router-id=3.3.3.3
-/routing bgp peer add name=peer_to_R4 remote-address=172.20.0.2 remote-as=65002
+/routing/bgp/template set default as=65001 router-id=3.3.3.3
+/routing/bgp/connection add name=peer_to_R4 remote.address=172.20.0.2 remote.as=65002 local.role=ebgp
 
 # Redistribuir rotas BGP no OSPF
 /routing ospf instance set [find name=default] redistribute=bgp
@@ -84,8 +84,9 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 /ip address add address=192.168.10.1/24 interface=ether7   # Rede de PC5
 
 # Configuração do BGP no R4
-/routing bgp instance add name=default as=65002 router-id=4.4.4.4
-/routing bgp peer add name=peer_to_R3 remote-address=172.20.0.1 remote-as=65001
+
+/routing/bgp/template set default as=65002 router-id=4.4.4.4
+/routing/bgp/connection add name=peer_to_R3 remote.address=172.20.0.1 remote.as=65001 local.role=ebgp
 
 # Redistribuir a rede do PC5 (diretamente conectado) no BGP
 /routing bgp connection set [find name=peer_to_R3] output.redistribute=connected
