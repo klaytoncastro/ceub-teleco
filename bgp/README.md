@@ -19,45 +19,6 @@ O **BGP (Border Gateway Protocol)** é um protocolo de roteamento de grande esca
 - **Local Preference**: indica a preferência por uma determinada rota dentro de um AS.
 - **MED (Multi-Exit Discriminator)**: utilizado para influenciar o roteamento quando existem múltiplas saídas para um AS.
 
-<!--A atividade visa desenvolver habilidades práticas na implementação de roteamento dinâmico para suportar ambientes em expansão e simular cenários reais em que diferentes protocolos de roteamento trabalham em conjunto para proporcionar conectividade eficiente e escalável entre diferentes redes e áreas de uma organização.
-
-Ao final, será possível validar a conectividade entre dispositivos de diferentes blocos e sub-redes, reforçando o entendimento de conceitos de convergência, redistribuição de rotas e topologias de redes complexas.
-
-
-### Exemplo de Configuração BGP
-
-Aqui está um exemplo simples de uma configuração de BGP em um roteador Mikrotik CHR com o sistema RouterOS:
-
-1. Habilite o BGP: No MikroTik RouterOS, você deve configurar o BGP através de comandos no terminal. 
-
-```bash
-# Adicionar uma instância BGP com ASN 65001
-/routing bgp instance
-add name=default as=65001 router-id=192.168.1.1
-
-# Adicionar o vizinho BGP (AS 65002)
-/routing bgp peer
-add name=peer1 remote-address=192.168.1.2 remote-as=65002 update-source=lo0
-
-# Anunciar a rede 10.0.0.0/24
-/routing bgp network
-add network=10.0.0.0/24
-```
-
-- BGP Instance: Definimos o ASN local (65001) e o router-id para o roteador.
-- BGP Peer: Criamos o peer BGP que se conecta ao vizinho 192.168.1.2 no ASN 65002. O update-source aqui se refere à interface que será usada para a troca de atualizações de roteamento (neste caso, lo0 é a interface loopback).
-- BGP Network: Anunciamos a rede 10.0.0.0/24 para o peer.
-
-- **Nota**: Certifique-se de que a interface Loopback0 ou a interface correta esteja configurada e disponível no dispositivo MikroTik.
-
-```bash
-router bgp 65001
-  neighbor 192.168.1.2 remote-as 65002
-  network 10.0.0.0 mask 255.255.255.0
-  neighbor 192.168.1.2 update-source Loopback0
-```
--->
-
 ## 3. Comparação com outros protocolos de roteamento
 
 | Característica         | RIP                                          | OSPF                                      | BGP                                                      |
@@ -70,11 +31,11 @@ router bgp 65001
 
 ## 4. Atividade Prática
 
-O objetivo desta atividade é estabelecer a comunicação entre múltiplos segmentos de rede em uma topologia mais complexa, integrando os protocolos de roteamento dinâmico OSPF e BGP. Você irá estender a configuração de uma rede de campus composta por dois blocos principais que utilizam OSPF para roteamento interno e, em seguida, adicionar dois novos roteadores conectados via BGP, criando assim um caminho para redes externas.
+O objetivo desta atividade é estabelecer a comunicação entre múltiplos segmentos de rede em uma topologia mais complexa, integrando os protocolos de roteamento dinâmico OSPF e BGP. Nesta prática, você estenderá a configuração de uma rede de campus composta por dois blocos principais que utilizam OSPF para roteamento interno e adicionará dois novos roteadores conectados via BGP, criando um caminho para redes externas.
 
-O OSPF continuará gerenciando o roteamento interno no núcleo da rede para garantir rápida convergência e atualizações ágeis de estado de link. Ao mesmo tempo, o BGP será responsável por transportar os intervalos de IP de clientes, mantendo as rotas do núcleo isoladas das rotas dos clientes. Ou seja, teremos um ambiente híbrido, onde roteadores podem partilhar e redistribuir rotas usando OSPF e/ou BGP, simulando um ambiente real de rede em larga escala. 
+O R3 atuará como ponto de redistribuição entre OSPF e BGP, aprendendo as rotas internas da rede (OSPF) e propagando-as externamente via BGP. O R4 representará a rede da operadora e estará conectado a um site externo (PC5). Essa configuração simula um ambiente real de integração de redes LAN e WAN, mantendo a separação entre os dois domínios.
 
-Este é o mapa esperado para a topologia: 
+Ou seja, OSPF continuará gerenciando o roteamento interno no núcleo da rede para garantir rápida convergência e atualizações ágeis de estado de link, como fizemos em nosso laboratório anterior. Ao mesmo tempo, o BGP será responsável por transportar os intervalos de IP de clientes, mantendo as rotas do núcleo isoladas das rotas dos clientes. Assim, teremos configurado um ambiente híbrido, onde roteadores podem partilhar e redistribuir rotas usando OSPF e/ou BGP, simulando um ambiente real de rede em larga escala. Este é o mapa esperado para a topologia: 
 
 ![Conectividade entre a rede de acesso (Campus) ao Datacenter e à Internet](/img/topologyBGP.png)
 
@@ -98,24 +59,25 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 
 ```bash
 # Endereços IP no R3
-/ip address add address=192.168.0.2/24 interface=ether7    # Conexão com R1 na mesma sub-rede para troca de rotas OSPF
+/ip address add address=192.168.0.3/24 interface=ether7    # Conexão com R1 na mesma sub-rede para troca de rotas OSPF
 /ip address add address=172.20.0.1/30 interface=ether1     # Conexão BGP com R4
 
 # Configuração do OSPF no R3
 /routing ospf instance add name=default router-id=3.3.3.3
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
-/routing ospf interface-template add interfaces=ether1 area=backbone
-
-# Redistribuir rotas BGP no OSPF
-/routing ospf redistribute add protocol=bgp
+/routing ospf interface-template add interfaces=ether7 area=backbone
+/routing ospf instance disable [find name=default]
+/routing ospf instance enable [find name=default]
 
 # Configuração do BGP no R3
 /routing bgp instance add name=default as=65001 router-id=3.3.3.3
 /routing bgp peer add name=peer_to_R4 remote-address=172.20.0.2 remote-as=65002
 
-# Redistribuir redes OSPF no BGP
-/routing bgp network add network=192.168.0.0/24
-/routing bgp network add network=10.0.0.0/24
+# Redistribuir rotas BGP no OSPF
+/routing ospf instance set [find name=default] redistribute=bgp
+
+# Redistribuir redes conectadas e OSPF no BGP
+/routing bgp connection set [find name=peer_to_R4] output.redistribute=connected,ospf
 
 # Configuração do R4 (BGP)
 /ip address add address=172.20.0.2/30 interface=ether1     # Conexão BGP com R3
@@ -125,50 +87,19 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 /routing bgp instance add name=default as=65002 router-id=4.4.4.4
 /routing bgp peer add name=peer_to_R3 remote-address=172.20.0.1 remote-as=65001
 
-# Anunciar a rede do PC5 no BGP
-/routing bgp network add network=192.168.10.0/24
+# Redistribuir a rede do PC5 (diretamente conectado) no BGP
+/routing bgp connection set [find name=peer_to_R3] output.redistribute=connected
 
 # Configuração do PC5
-ip 192.168.10.2/24
-gateway 192.168.10.1
+ip 192.168.10.2/24 gateway 192.168.10.1
 ```
-
-<!--
-
-R3: 
-
-[admin@MikroTik] > /ip address add address=192.168.0.2/24 interface=ether7
-[admin@MikroTik] > /ip address add address=172.20.0.1/30 interface=ether1
-[admin@MikroTik] > /routing ospf instance set [find default=yes] router-id=3.3.3.3
-[admin@MikroTik] > /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
-[admin@MikroTik] > /routing ospf instance add name=default router-id=3.3.3.3
-[admin@MikroTik] > /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
-[admin@MikroTik] > /routing ospf interface-template add interfaces=ether7 area=backbone
-[admin@MikroTik] /routing/bgp> /routing/bgp/connection add name=peer_to_R4 remote.address=172.20.0.2 remote.as=65002 local.role=ebgp
-[admin@MikroTik] /routing/bgp/template> /routing/bgp/template set 0 output.filter=bgp-out
-[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection enable peer_to_R3
-[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection disable peer_to_R4
-[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection enable peer_to_R4
-[admin@MikroTik] /routing/bgp/template> /routing/bgp/connection/print
-
-
-R4:
-
-[admin@MikroTik] > /ip address add address=172.20.0.2/30 interface=ether1
-[admin@MikroTik] > /ip address add address=192.168.10.1/24 interface=ether7
-[admin@MikroTik] > /routing/bgp/connection add name=peer_to_R3 remote.address=172.20.0.1 remote.as=65001 local.role=ebgp
-[admin@MikroTik] > /routing/bgp/connection disable peer_to_R3
-[admin@MikroTik] > /routing/bgp/connection enable peer_to_R3
-[admin@MikroTik] > /routing/bgp/connection/print
-
--->
 
 ### Verificação de Conectividade
 
 Essas configurações permitirão a comunicação entre todas as redes e dispositivos na topologia, com o R3 redistribuindo rotas entre OSPF e BGP para que todas as sub-redes estejam acessíveis mutuamente. Após configurar as redes, primeiramente verifique a conectividade e os anúncios de rota. Efetue o ping entre os PCs:
 
 - Do PC5, realize o ping para PC1 (192.168.0.x) e PC3 (10.0.0.x).
-- Do PC1 e PC3, realize o pingue para o PC5 (192.168.10.2).
+- Do PC1 e PC3, realize o ping para o PC5 (192.168.10.2).
 - Em R1, R2, R3 e R4, verifique se todas as rotas foram aprendidas adequadamente via OSPF ou BGP:
 
 ```bash
@@ -184,4 +115,6 @@ Essas configurações permitirão a comunicação entre todas as redes e disposi
 
 ## 5. Conclusão
 
-O BGP desempenha um papel crucial no gerenciamento do tráfego de dados entre redes independentes, garantindo uma internet interconectada e funcional. Através de atributos e políticas flexíveis, ele permite que cada AS decida o melhor caminho para o tráfego, de forma eficiente e escalável. Como resultado, o BGP, apesar de sua convergência mais lenta, é a escolha natural para garantir a escalabilidade e resiliência da infraestrutura global de rede.
+O BGP desempenha um papel crucial no gerenciamento do tráfego de dados entre redes independentes, garantindo uma internet interconectada e funcional. Através de atributos e políticas flexíveis, ele permite que cada AS decida o melhor caminho para o tráfego, de forma eficiente e escalável. Como resultado, o BGP, apesar de sua convergência mais lenta se comparado ao OSPF ou RIP, é a escolha natural para garantir a escalabilidade e resiliência da infraestrutura global de rede.
+
+Nesse sentido, a atividade prática visa desenvolver habilidades na implementação de roteamento dinâmico para suportar ambientes em expansão e simular cenários reais em que diferentes protocolos de roteamento trabalham em conjunto para proporcionar conectividade eficiente e escalável entre diferentes redes e áreas de uma organização. Ao validar a conectividade entre dispositivos de diferentes blocos e sub-redes, reforça-se o entendimento de conceitos de convergência, redistribuição de rotas e topologias de redes complexas, habilidades cruciais para um engenheiro de redes no mercado. 
