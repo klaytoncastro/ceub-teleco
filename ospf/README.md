@@ -177,7 +177,7 @@ A opção tradicional, via interface web no simulador (acessível via clique com
 
 ```bash
 /ip address add address=192.168.0.1/24 interface=ether7  # Rede de PCs
-/ip address add address=172.16.0.1/30 interface=ether1   # Interconexão com R2
+/ip address add address=172.16.0.1/29 interface=ether1   # Interconexão com R2
 /routing ospf instance add name=default router-id=1.1.1.1
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
 /routing ospf interface-template add interfaces=ether1 area=backbone
@@ -200,7 +200,7 @@ A opção tradicional, via interface web no simulador (acessível via clique com
 
 ```bash
 /ip address add address=10.0.0.1/24 interface=ether7    # Rede de PCs
-/ip address add address=172.16.0.2/30 interface=ether1  # Interconexão com R1
+/ip address add address=172.16.0.2/29 interface=ether1  # Interconexão com R1
 /routing ospf instance add name=default router-id=2.2.2.2
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
 /routing ospf interface-template add interfaces=ether1 area=backbone
@@ -228,7 +228,7 @@ Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam prop
 ```bash
 # No R1, configure:
 /routing ospf interface-template add networks=192.168.0.0/24 area=backbone
-/routing ospf interface-template add networks=172.16.0.0/30 area=backbone
+/routing ospf interface-template add networks=172.16.0.0/29 area=backbone
 /routing ospf instance disable [find name=default]
 /routing ospf instance enable [find name=default]
 ```
@@ -238,7 +238,7 @@ Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam prop
 ```bash
 #No R2, configure:
 /routing ospf interface-template add networks=10.0.0.0/24 area=backbone
-/routing ospf interface-template add networks=172.16.0.0/30 area=backbone
+/routing ospf interface-template add networks=172.16.0.0/29 area=backbone
 /routing ospf instance disable [find name=default]
 /routing ospf instance enable [find name=default]
 ```
