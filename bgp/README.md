@@ -59,7 +59,7 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 
 ```bash
 # Endereços IP no R3
-/ip address add address=192.168.0.3/24 interface=ether7    # Conexão com R1 na mesma sub-rede para troca de rotas OSPF
+/ip address add address=172.16.0.3/29 interface=ether7    # Conexão com R1 na mesma sub-rede para troca de rotas OSPF
 /ip address add address=172.20.0.1/30 interface=ether1     # Conexão BGP com R4
 
 # Configuração do OSPF no R3
