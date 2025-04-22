@@ -57,40 +57,49 @@ Os blocos representam duas redes distintas, como diferentes departamentos ou pr�
 
 O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantindo que as redes dos blocos (Bloco 1 e Bloco 2) sejam acessíveis para o R4 e o PC5. Com essa configuração, o PC5 pode se comunicar com os demais PCs e vice-versa, simulando uma rede escalável e integrada com múltiplos segmentos e protocolos de roteamento. O R3 vai atuar como ponto de interconexão entre as redes OSPF e BGP, então precisamos de uma configuração que redistribua rotas entre os dois protocolos. No R4, configuramos o BGP para anunciar a rede diretamente conectada onde está o PC5 e para estabelecer uma sessão BGP com o R3. Configure o PC5 para obter um endereço IP compatível e garantir a comunicação com R4.
 
+### Segue a configuração proposta para o roteador R3:
+
 ```bash
-# Endereços IP no R3
+# Endereços IP em R3
 /ip address add address=172.16.0.3/29 interface=ether7    # Conexão com R1 na mesma sub-rede para troca de rotas OSPF
 /ip address add address=172.20.0.1/30 interface=ether1     # Conexão BGP com R4
 
-# Configuração do OSPF no R3
+# Configuração do OSPF em R3
 /routing ospf instance add name=default router-id=3.3.3.3
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
 /routing ospf interface-template add interfaces=ether7 area=backbone
 /routing ospf instance disable [find name=default]
 /routing ospf instance enable [find name=default]
 
-# Configuração do BGP no R3
+# Configuração do BGP em R3
 /routing/bgp/template set default as=65001 router-id=3.3.3.3
 /routing/bgp/connection add name=peer_to_R4 remote.address=172.20.0.2 remote.as=65002 local.role=ebgp
 
-# Redistribuir rotas BGP no OSPF
+# Redistribuir rotas BGP para o OSPF em R3
 /routing ospf instance set [find name=default] redistribute=bgp
 
-# Redistribuir redes conectadas e OSPF no BGP
+# Redistribuir redes conectadas OSPF para o BGP em R3
 /routing bgp connection set [find name=peer_to_R4] output.redistribute=connected,ospf
+```
 
-# Configuração do R4 (BGP)
+### Segue a configuração proposta para o roteador R4:
+
+```bash
+# Configuração do Endereçamento IP em R4
 /ip address add address=172.20.0.2/30 interface=ether1     # Conexão BGP com R3
 /ip address add address=192.168.10.1/24 interface=ether7   # Rede de PC5
 
-# Configuração do BGP no R4
-
+# Configuração do BGP em R4
 /routing/bgp/template set default as=65002 router-id=4.4.4.4
 /routing/bgp/connection add name=peer_to_R3 remote.address=172.20.0.1 remote.as=65001 local.role=ebgp
 
-# Redistribuir a rede do PC5 (diretamente conectado) no BGP
+# Redistribuir a rede do PC5 (diretamente conectado) via BGP
 /routing bgp connection set [find name=peer_to_R3] output.redistribute=connected
+```
 
+### Por fim, segue a configuração proposta para o roteador PC5, que simula um site da web:
+
+```bash
 # Configuração do PC5
 ip 192.168.10.2/24 gateway 192.168.10.1
 ```

@@ -154,7 +154,7 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
 - **Usuário**: admin
 - **Senha**: 
 
-- Pronto, agora você tem na biblioteca do simulador um poderoso equipamento virtualizado para modelagem de ambientes intra-AS e inter-AS, com suporte a protocolos de roteamento como RIP, OSPF, BGP e capaz de realizar funções em topologias diversas, como Redes Ethernet e MPLS.
+- Pronto, agora a biblioteca do simulador GNS3 conta com um equipamento virtual configurável, com suporte a protocolos como RIP, OSPF, BGP e capacidade para simular topologias com redes Ethernet e MPLS, tanto intra-AS quanto inter-AS.
 
 
 ### 4.4 Topologia
