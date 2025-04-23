@@ -4,7 +4,7 @@
 
 O **Border Gateway Protocol (BGP)**, definido pela [RFC 4271](https://www.rfc-editor.org/rfc/rfc4271) é o principal protocolo adotado na Internet para gerenciar como os pacotes de dados são roteados por diferentes redes ou **Sistemas Autônomos (AS)**. Um AS é um grupo de endereços IP sob controle de uma única entidade, como um provedor de serviços de internet (ISP), uma grande empresa ou uma universidade, uma espécie de coleção de redes IP que compartilham uma política de roteamento comum e que são controladas por uma única organização ou entidade. 
 
-Cada AS é identificado por um número único, chamado **Número de Sistema Autônomo (ASN)**. Um bom site para fazer consultas sobre os AS é o [bph.he.net](https://bgp.he.net). Enquanto protocolos de roteamento como o **OSPF (Open Shortest Path First)** e **RIP (Routing Information Protocol)** funcionam dentro de um único AS, o BGP é usado para roteamento entre diferentes AS, tornando-o essencial para a infraestrutura global da Internet.
+Cada AS é identificado por um número único, chamado **Número de Sistema Autônomo (ASN)**. Um bom site para fazer consultas sobre os AS é o [bgp.he.net](https://bgp.he.net). Enquanto protocolos de roteamento como o **OSPF (Open Shortest Path First)** e **RIP (Routing Information Protocol)** funcionam dentro de um único AS, o BGP é usado para roteamento entre diferentes AS, tornando-o essencial para a infraestrutura global da Internet.
 
 Imagine que um grande provedor de serviços de internet (ISP) controle várias redes internas. Essas redes formam um AS e têm suas próprias políticas de roteamento, como preferir certos caminhos ou evitar certas rotas por motivos econômicos ou de desempenho. Quando o tráfego sai desse AS para a internet global, ele usa o BGP para se comunicar com outros AS, como o de outro ISP.
 
@@ -60,71 +60,113 @@ O R3 redistribui as rotas aprendidas pelo OSPF para o BGP e vice-versa, garantin
 ### Segue a configuração proposta para o roteador R3:
 
 ```bash
-# Endereços IP em R3
-/ip address add address=172.16.0.3/29 interface=ether7    # Conexão com R1 na mesma sub-rede para troca de rotas OSPF
-/ip address add address=172.20.0.1/30 interface=ether1     # Conexão BGP com R4
+# Definindo a interface conectada à rede gerenciada por OSPF, na mesma sub-rede de R1 e R2
+/ip address add address=172.16.0.3/29 interface=ether7
 
-# Configuração do OSPF em R3
+# Definindo a interface de comunicação ponto a ponto com R4, formando a rede gerenciada por BGP
+/ip address add address=172.20.0.1/30 interface=ether1
+
+# Inicializando o OSPF em R3 com o Router-ID 3.3.3.3
 /routing ospf instance add name=default router-id=3.3.3.3
+
+# Criando a área backbone (área 0) e associando à instância padrão
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
+
+# Associando a interface ether7 à área backbone para troca de LSAs com R1 e R2
 /routing ospf interface-template add interfaces=ether7 area=backbone
+
+# Reiniciando a instância OSPF para aplicar as novas configurações
 /routing ospf instance disable [find name=default]
 /routing ospf instance enable [find name=default]
 
-# Configuração do BGP em R3
+# Definindo o ASN e Router-ID de R3 para a instância BGP
 /routing/bgp/template set default as=65001 router-id=3.3.3.3
+
+# Estabelecendo a conexão eBGP com o peer R4 (ASN 65002) via rede 172.20.0.0/30
 /routing/bgp/connection add name=peer_to_R4 remote.address=172.20.0.2 remote.as=65002 local.role=ebgp
 
-# Redistribuir rotas BGP para o OSPF em R3
+# Redistribuindo rotas aprendidas via BGP para a instância OSPF (para que R1 e R2 possam alcançar redes externas)
 /routing ospf instance set [find name=default] redistribute=bgp
 
-# Redistribuir redes conectadas OSPF para o BGP em R3
+# Redistribuindo rotas conectadas e aprendidas via OSPF para o peer BGP (permitindo que R4 alcance as redes internas)
 /routing bgp connection set [find name=peer_to_R4] output.redistribute=connected,ospf
 ```
 
 ### Segue a configuração proposta para o roteador R4:
 
 ```bash
-# Configuração do Endereçamento IP em R4
-/ip address add address=172.20.0.2/30 interface=ether1     # Conexão BGP com R3
-/ip address add address=192.168.10.1/24 interface=ether7   # Rede de PC5
+# Definindo a interface ponto a ponto para conexão BGP com R3
+/ip address add address=172.20.0.2/30 interface=ether1
 
-# Configuração do BGP em R4
+# Definindo a interface conectada à rede local onde está o PC5
+/ip address add address=192.168.10.1/24 interface=ether7   
+
+# Definindo o ASN e o Router-ID de R4 para a instância BGP
 /routing/bgp/template set default as=65002 router-id=4.4.4.4
+
+# Estabelecendo a sessão eBGP com o peer R3 (ASN 65001) via rede 172.20.0.0/30
 /routing/bgp/connection add name=peer_to_R3 remote.address=172.20.0.1 remote.as=65001 local.role=ebgp
 
-# Redistribuir a rede do PC5 (diretamente conectado) via BGP
+# Redistribuindo a rede diretamente conectada (192.168.10.0/24) via BGP para que R3 e os demais dispositivos possam alcançá-la
 /routing bgp connection set [find name=peer_to_R3] output.redistribute=connected
 ```
 
 ### Por fim, segue a configuração proposta para o roteador PC5, que simula um site da web:
 
 ```bash
-# Configuração do PC5
+# Atribuindo IP fixo e gateway padrão no PC5
 ip 192.168.10.2/24 gateway 192.168.10.1
 ```
 
+### Convergência de Protocolos
+
+Protocolos de roteamento como OSPF e BGP levam alguns instantes para estabelecer vizinhanças e propagar rotas. Esse comportamento é esperado e reflete o funcionamento real desses protocolos em ambientes de produção.
+
+Nos laboratórios simulados, como no GNS3, isso significa que a conectividade nem sempre será imediata após aplicar as configurações. É necessário dar tempo para que as rotas sejam anunciadas, processadas e refletidas na tabela de roteamento.
+
+Você pode utilizar os comandos abaixo para acompanhar o progresso da convergência:
+
+```bash
+# Execute em R1, R2, R3 e R4 – Exibe a tabela de rotas atual
+/ip route print                        
+
+# Execute em R1, R2 e R3 – Verifica os vizinhos OSPF estabelecidos
+/routing ospf neighbor print           
+
+# Execute em R3 e R4 – Mostra o status das sessões BGP (estabelecida ou não)
+/routing bgp peer print                
+
+# Execute em R3 e R4 – Exibe os prefixos atualmente anunciados via BGP
+/routing bgp advertisements print      
+```
+
+Para confirmar que tudo está funcionando como esperado, aguarde de 1 a 3 minutos após configurar os roteadores e execute os comandos acima. Isso garante que as rotas estejam devidamente estabelecidas e que os protocolos tenham formado as vizinhanças esperadas. Depois, siga com os testes de conectividade entre os PCs. 
+
 ### Verificação de Conectividade
 
-Essas configurações permitirão a comunicação entre todas as redes e dispositivos na topologia, com o R3 redistribuindo rotas entre OSPF e BGP para que todas as sub-redes estejam acessíveis mutuamente. Após configurar as redes, primeiramente verifique a conectividade e os anúncios de rota. Efetue o ping entre os PCs:
+As configurações estão validadas e devem permitir a comunicação entre todas as redes e dispositivos na topologia, com o R3 redistribuindo rotas entre OSPF e BGP para que todas as sub-redes estejam acessíveis e mutuamente alcançadas. Após configurar o ambiente, primeiramente verifique a conectividade e os anúncios de rota, e depois efetue o ping entre os PCs. 
 
 - Do PC5, realize o ping para PC1 (192.168.0.x) e PC3 (10.0.0.x).
 - Do PC1 e PC3, realize o ping para o PC5 (192.168.10.2).
 - Em R1, R2, R3 e R4, verifique se todas as rotas foram aprendidas adequadamente via OSPF ou BGP:
 
 ```bash
+# Exibindo a tabela de roteamento atual
 /ip route print
 ```
 
 - Em R3 e R4, confirme que a sessão BGP está estabelecida e as rotas estão sendo trocadas:
 
 ```bash
+# Verificando o status das sessões BGP estabelecidas (estado, uptime, ASN remoto)
 /routing bgp peer print
+
+# Listando os prefixos anunciados via BGP para os peers configurados
 /routing bgp advertisements print
 ```
 
 ## 5. Conclusão
 
-O BGP desempenha um papel crucial no gerenciamento do tráfego de dados entre redes independentes, garantindo uma internet interconectada e funcional. Através de atributos e políticas flexíveis, ele permite que cada AS decida o melhor caminho para o tráfego, de forma eficiente e escalável. Como resultado, o BGP, apesar de sua convergência mais lenta se comparado ao OSPF ou RIP, é a escolha natural para garantir a escalabilidade e resiliência da infraestrutura global de rede.
+O BGP desempenha um papel fundamental no gerenciamento do tráfego entre redes independentes, estabelecendo as bases para a Internet — uma infraestrutura global composta por redes interconectadas, escalável e de operação descentralizada. Por meio de atributos e políticas flexíveis, cada AS pode definir os melhores caminhos para o tráfego com base em critérios próprios, promovendo eficiência e controle. Embora apresente convergência mais lenta em comparação com protocolos como OSPF ou RIP, o BGP é a escolha natural para garantir resiliência e expansão sustentável na infraestrutura global de rede.
 
-Nesse sentido, a atividade prática visa desenvolver habilidades na implementação de roteamento dinâmico para suportar ambientes em expansão e simular cenários reais em que diferentes protocolos de roteamento trabalham em conjunto para proporcionar conectividade eficiente e escalável entre diferentes redes e áreas de uma organização. Ao validar a conectividade entre dispositivos de diferentes blocos e sub-redes, reforça-se o entendimento de conceitos de convergência, redistribuição de rotas e topologias de redes complexas, habilidades cruciais para um engenheiro de redes no mercado. 
+Nesta atividade prática, implementamos roteamento dinâmico para simular ambientes em expansão, integrando diferentes protocolos com o objetivo de garantir conectividade eficiente e escalável entre redes e áreas organizacionais. A validação da comunicação entre dispositivos de diferentes blocos e sub-redes reforçou o entendimento de conceitos como convergência, redistribuição de rotas e topologias complexas — aspectos fundamentais para a atuação prática em engenharia de redes.

@@ -20,7 +20,7 @@ Assim sendo, apesar de oferecer algumas vantagens, como facilidade de configura�
 
 Em redes pequenas, onde há poucas rotas e as mudanças são mais raras, o roteamento estático pode ser suficiente. No entanto, à medida que a rede cresce, é cada vez mais relevante a adoção de protocolos de roteamento dinâmico, pois eles automatizam o processo de descoberta e ajuste de rotas, permitindo que a rede se adapte automaticamente a mudanças, como falhas de link ou expansões de infraestrutura. 
 
-Nesse caso, em redes de menor escala, o Routing Information Protocol (RIP) é uma alternativa mais simples ao OSPF. o RIP utiliza um algoritmo de **vetor de distância** para escolher as melhores rotas, considerando o número de saltos (hops) entre roteadores. Para isso, ele calcula os melhores caminhos com base no menor número de saltos (cujo número máximo suportado é 15) e envia atualizações aos roteadores da malha a cada 30 segundos. Este mecanisco, não raro, pode trazer algum nível de sobrecarga, especialmente em redes maiores. 
+Nesse caso, em redes de menor escala, o Routing Information Protocol (RIP) é uma alternativa mais simples ao OSPF. o RIP utiliza um algoritmo de **vetor de distância** para escolher as melhores rotas, considerando o número de saltos (hops) entre roteadores. Para isso, ele calcula os melhores caminhos com base no menor número de saltos (cujo número máximo suportado é 15) e envia atualizações aos roteadores da malha a cada 30 segundos. Este mecanismo, não raro, pode trazer algum nível de sobrecarga, especialmente em redes maiores. 
 
 Entretanto, sua simplicidade apresenta-se como uma vantagem para redes menores, apesar da convergência mais lenta e limitada em saltos, que o tornam inadequado quando se trata de ambientes corporativos ou acadêmicos mais complexos. Por essa razão, se há tendência de crescimento da rede, torna-se interessante utilizar o OSPF desde o princípio, visto que ele utiliza o estado de link como métrica, o que enriquece sobremaneira as possibilidades de configuração da topologia. 
 
@@ -68,11 +68,11 @@ RIPng: Versão do RIP que suporta IPv6.
 
 ### Ententendo os Sistemas Autônomos
 
-Antes de nos aprofundarmos no BGP, é importante entender o conceito de Sistema Autônomo (AS). Um AS é uma coleção de redes que compartilham uma política de roteamento comum, geralmente sob a administração de uma única organização, como uma empresa ou provedor de Internet. 
+Como fundamento para compreender os protocolos avançados de roteamento, é essencial estabelecer o conceito de Sistema Autônomo (AS). Um AS é uma coleção de redes que compartilham uma política de roteamento comum, geralmente sob a administração de uma única organização, como uma empresa, um órgão público ou um provedor de Internet (ISP).
 
-Dentro de um AS, utilizamos protocolos de roteamento como o OSPF para garantir que os roteadores troquem informações de rota de forma eficiente. Esses protocolos são chamados de intra-AS, pois lidam com o roteamento dentro de um único sistema autônomo. Para a comunicação entre diferentes AS (inter-AS), utilizamos protocolos como o BGP (Border Gateway Protocol), que permite a troca de rotas entre diferentes sistemas autônomos e veremos em maiores detalhes posteriormete. 
+Dentro de um AS, utilizamos protocolos de roteamento como o OSPF para garantir que os roteadores troquem informações de forma eficiente. Esses protocolos são chamados de intra-AS, pois operam exclusivamente dentro de um único sistema autônomo. Já para a comunicação entre diferentes AS (inter-AS), utilizamos protocolos como o BGP (Border Gateway Protocol), que permite a troca de rotas entre sistemas distintos — tema que será aprofundado mais adiante.
 
-Dessa forma, podemos dizer que, enquanto o OSPF cuida do roteamento interno de uma organização, o BGP gerencia o tráfego que cruza as fronteiras organizacionais. O OSPF é um protocolo bastante utilizado para governar redes intra-AS, viabilizanod o roteamento dentro de uma única organização, como uma grande empresa, provedores de serviço de internet (ISP) ou campus universitários.
+Dessa forma, podemos dizer que, enquanto o OSPF cuida do roteamento interno de uma organização, o BGP gerencia o tráfego que atravessa as fronteiras entre organizações. O OSPF é amplamente utilizado em redes intra-AS, viabilizando o roteamento dentro de uma única estrutura administrativa, como um ISP, uma grande empresa, uma instituição acadêmica ou órgãos públicos de maior porte.
 
 <!-- **Área 0 (Backbone Area)** é o núcleo de uma rede OSPF e todas as outras áreas devem se conectar a ela. -->
 
@@ -143,7 +143,7 @@ Ao utilizar OSPF, os roteadores são capazes de trocar informações de rota din
 
 - Verifique qual versão está disponível no simulador (ex.: `7.11.2` ou `7.14.3`). Dependendo da versão disponível, você precisará fornecer a imagem virtual correta do equipamento, que pode ser baixada neste [link](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing). Escolha o arquivo correspondente à versão desejada: `chr-7.11.2.img.zip` ou `chr-7.14.3.img.zip`. Alternativamente vc pode rodar o comando `docker compose pull` a partir da raiz do repositório (ex: `/opt/ceub-teleco`) e atualizar sua imagem do ambiente, podendo usar a versão mais atualizada do router. 
 
-- Após baixar, descompacte o arquivo na pasta desejada usando a Interface Gráfica do seu Sistema Operacional (Windows, macOS, Linux) ou via Linha de Comando:
+- Após baixar, descompacte o arquivo na pasta desejada usando a Interface Gráfica do seu Sistema Operacional (Windows, macOS, Linux) ou via Linha de Comando, por exemplo:
   
   ```bash
   unzip chr-7.11.2.img.zip
@@ -176,46 +176,60 @@ A opção tradicional, via interface web no simulador (acessível via clique com
 ### 4.5 Configure em R1 a atuação do OSPF 
 
 ```bash
-/ip address add address=192.168.0.1/24 interface=ether7  # Rede de PCs
-/ip address add address=172.16.0.1/29 interface=ether1   # Interconexão com R2
+# Definindo a interface para comunicação com a rede de PCs
+/ip address add address=192.168.0.1/24 interface=ether7  
+# Definindo a interface de interconexão ponto a ponto com R2
+/ip address add address=172.16.0.1/29 interface=ether1   
+# Configuração da instância OSPF padrão e ID do Router
 /routing ospf instance add name=default router-id=1.1.1.1
+# Criando a área de roteamento OSPF de backbone
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
+# Vinculando a interface ether1 à área backbone para participar da troca de LSAs
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
 ### 4.6 Configure em R1 a atuação como DHCP Server
 
 ```bash
-# Adicionar um pool de endereços IP para o DHCP
+# Adicionando um pool de endereços IP para o DHCP
 /ip pool add name=dhcp_pool_R1 ranges=192.168.0.100-192.168.0.200
 
-# Configurar o servidor DHCP na interface ether7
+# Configurando o servidor DHCP na interface ether7
 /ip dhcp-server add interface=ether7 address-pool=dhcp_pool_R1 lease-time=1h name=dhcp_server_R1
 
-# Adicionar o gateway e as opções do DHCP
+# Adicionando o gateway e as opções do DHCP
 /ip dhcp-server network add address=192.168.0.0/24 gateway=192.168.0.1
 ```
 
 ### 4.7 Configure em R2 a atuação do OSPF
 
 ```bash
-/ip address add address=10.0.0.1/24 interface=ether7    # Rede de PCs
-/ip address add address=172.16.0.2/29 interface=ether1  # Interconexão com R1
+# Definindo a interface para comunicação com a rede de PCs
+/ip address add address=10.0.0.1/24 interface=ether7    
+
+# Definindo a interface de interconexão ponto a ponto com R1
+/ip address add address=172.16.0.2/29 interface=ether1  
+
+# Configuração da instância OSPF padrão e ID do Router
 /routing ospf instance add name=default router-id=2.2.2.2
+
+# Criando a área de roteamento OSPF de backbone
 /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
+
+# Vinculando a interface ether1 à área backbone para participar da troca de LSAs
 /routing ospf interface-template add interfaces=ether1 area=backbone
 ```
 
 ### 4.8 Configure em R2 a atuação como DHCP Server
 
 ```bash
-# Adicionar um pool de endereços IP para o DHCP
+# Adicionando um pool de endereços IP para o DHCP
 /ip pool add name=dhcp_pool_R2 ranges=10.0.0.100-10.0.0.200
 
-# Configurar o servidor DHCP na interface ether7
+# Configurando o servidor DHCP na interface ether7
 /ip dhcp-server add interface=ether7 address-pool=dhcp_pool_R2 lease-time=1h name=dhcp_server_R2
 
-# Adicionar o gateway e as opções do DHCP
+# Adicionando o gateway e as opções do DHCP
 /ip dhcp-server network add address=10.0.0.0/24 gateway=10.0.0.1
 ```
 
@@ -226,9 +240,12 @@ Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam prop
 - Primeiro, em R1: 
 
 ```bash
-# No R1, configure:
+# Anunciando a rede local dos PCs (192.168.0.0/24) na área backbone via OSPF
 /routing ospf interface-template add networks=192.168.0.0/24 area=backbone
+# Anunciando a rede de interconexão ponto a ponto com o R2 (172.16.0.0/29) na área backbone
 /routing ospf interface-template add networks=172.16.0.0/29 area=backbone
+
+# Reiniciando a instância OSPF para aplicar as novas configurações
 /routing ospf instance disable [find name=default]
 /routing ospf instance enable [find name=default]
 ```
@@ -236,9 +253,11 @@ Agora adicione as redes locais de cada roteador ao OSPF para que elas sejam prop
 - Depois, em R2: 
 
 ```bash
-#No R2, configure:
+# Anunciando a rede local do R2 (10.0.0.0/24) na área backbone do OSPF
 /routing ospf interface-template add networks=10.0.0.0/24 area=backbone
+# Anunciando a rede de interconexão com o R1 (172.16.0.0/29) na área backbone
 /routing ospf interface-template add networks=172.16.0.0/29 area=backbone
+# Reiniciando a instância OSPF para aplicar as configurações atualizadas
 /routing ospf instance disable [find name=default]
 /routing ospf instance enable [find name=default]
 ```
@@ -250,8 +269,10 @@ Configurados R1 e R2, passemos para os VPCS, nossos dispositivos clientes.
 Primeiro, o PC1: 
 
 ```bash
-ip dhcp   #Atribui o IP via DHCP
-show      #Mostra as configurações obtidas (IP, máscara, gateway)
+#Atribuindo o IP via DHCP
+ip dhcp   
+#Mostrando as configurações obtidas (IP, máscara, gateway)
+show      
 ```
 <!--
 #ip 192.168.0.2 255.255.255.0
@@ -261,8 +282,10 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 ### Configure o PC2
 
 ```bash
-ip dhcp   #Atribui o IP via DHCP
-show      #Mostra as configurações obtidas (IP, máscara, gateway)
+#Atribuindo o IP via DHCP
+ip dhcp   
+#Mostrando as configurações obtidas (IP, máscara, gateway)
+show      
 ```
 <!--
 #ip 192.168.0.3 255.255.255.0
@@ -272,8 +295,10 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 ### Configure o PC3
 
 ```bash
-ip dhcp   #Atribui o IP via DHCP
-show      #Mostra as configurações obtidas (IP, máscara, gateway)
+#Atribuindo o IP via DHCP
+ip dhcp   
+#Mostrando as configurações obtidas (IP, máscara, gateway)
+show      
 ```
 <!--
 #ip 10.0.0.2 255.255.255.0
@@ -283,8 +308,10 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 ### Configure o PC4
 
 ```bash
-ip dhcp   #Atribui o IP via DHCP
-show      #Mostra as configurações obtidas (IP, máscara, gateway)
+#Atribuindo o IP via DHCP
+ip dhcp   
+#Mostrando as configurações obtidas (IP, máscara, gateway)
+show      
 ```
 <!--
 #ip 10.0.0.3 255.255.255.0
@@ -298,6 +325,7 @@ show      #Mostra as configurações obtidas (IP, máscara, gateway)
 Nos dois roteadores (R1 e R2), execute o comando:
 
 ```bash
+# Listando os dispositivos que receberam IP via DHCP e suas informações de lease
 /ip dhcp-server lease print
 ```
 
@@ -345,15 +373,19 @@ Novamente a partir dos roteadores, verifique se as rotas OSPF foram aprendidas. 
 -->
 
 ```bash
-# Verifique os LSAs e tabelas de roteamento
+# Verificando os LSAs e mostrando a tabela de roteamento
 /routing ospf lsa print
 /ip route print
 ```
 
 ## 6. Conclusão
 
-Enquanto o RIP pode ser suficiente para redes menores devido à sua simplicidade, ele apresenta algumas limitações em termos de eficiência e escalabilidade. 
-Por outro lado, o OSPF é o protocolo ideal para ambientes de alta disponibilidade e tolerância à falha, uma vez que ele tem a capacidade de organizar a rede em áreas, convergir mais rapidamente que o RIP e calcular rotas com base no custo, que pode ser modelado de acordo com métricas como a largura de banda, dentre outros fatores.  
-Isso o torna uma escolha preferida para organizações públicas e privadas de médio e grande porte, incluindo instituições governamentais e acadêmicas, provedores de serviço de Internet (ISPs), dentre outras organizações que necessitem de recursos de rede mais sofisticados e demandam maior controle e flexibilidade. 
-Já para comunicação entre diferentes sistemas autônomos (inter-AS), o BGP é a opção *de-facto* utilizada, sendo o padrão estabelecido na hierarquia da Internet. O dispositivo que utilizamos como roteador em nosso simulador, o MikroTik CHR (Cloud Hosted Router), também oferece suporte para o BGP, que trataremos em nosso próximo laboratório. 
-Para obter maiores detalhes sobre os comandos utilizados em nossa sessão de prática, você pode acessar a documentação da CLI (Command-Line Interface) do [RouterOS](https://help.mikrotik.com/docs/display/ROS/Command+Line+Interface). 
+Embora o RIP ainda seja viável em redes pequenas pela sua simplicidade, ele apresenta limitações em termos de eficiência, velocidade de convergência e escalabilidade.
+
+O OSPF, por sua vez, é mais indicado para ambientes que exigem alta disponibilidade e tolerância a falhas. Ele permite organizar a rede em áreas, converge de forma mais rápida e calcula rotas com base em métricas ajustáveis, como a largura de banda dos links, oferecendo um controle mais refinado sobre o tráfego.
+
+Por essas razões, o OSPF é amplamente adotado por organizações públicas e privadas de médio e grande porte — como instituições acadêmicas, órgãos governamentais e provedores de Internet — que demandam redes mais robustas, escaláveis e flexíveis.
+
+Por sua vez, para a comunicação entre diferentes sistemas autônomos (inter-AS), o protocolo padrão utilizado na estrutura da Internet global é o BGP (Border Gateway Protocol). O roteador empregado em nosso ambiente simulado, o MikroTik CHR (Cloud Hosted Router), também oferece suporte ao BGP, cuja integração será o foco de nosso próximo laboratório.
+
+Para mais detalhes sobre os comandos apresentados nesta prática, consulte a documentação oficial da CLI do [RouterOS](https://help.mikrotik.com/docs/display/ROS/Command+Line+Interface). 
