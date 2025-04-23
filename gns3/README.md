@@ -37,5 +37,22 @@ O GNS3 pode ser utilizado para uma ampla gama de simulações e experimentos de 
 
 ## Requisitos
 
-- Docker instalado (para rodar o servidor GNS3 e outras aplicações, como SMTP, IMAP, DNS, DHCP, Web Server, DBMS, etc).
-- Familiaridade com **conceitos de redes de computadores**, como **roteamento**, **switching**, **serviços de rede** e **protocolos de rede**.
+- Docker instalado (para rodar o ambiente servidor do GNS3 e outras aplicações, como SMTP, IMAP, DNS, DHCP, Web Server, DBMS, etc).
+- Familiaridade com **conceitos de redes de computadores**, como **roteamento**, **switching**, **serviços** e **protocolos de rede**.
+
+## Importação do MikroTik CHR
+
+Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf/) e [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp/), será necessário utilizar um roteador que suporte ambos os protocolos. Por essa razão, indicamos o MikroTik CHR (Cloud Hosted Router). O processo de importação deste equipamento virtualizado no GNS3 pode ser feito da seguinte forma: 
+
+1. Acesse o painel do GNS3 via navegador (`http://localhost:3080`).
+2. Faça login com usuário `admin` e senha `admin`, caso solicitado. 
+3. Crie um novo projeto clicando em `Add blank project` e nomeando como `BGP`, `OSPF`, conforme a implementação ou outro nome que preferir.
+4. Vá ao menu lateral e clique em `New template`.
+5. Escolha a opção `Install from controller`. <!--`Import an appliance file`-->
+6. Baixe a imagem `chr-7.16.img.zip` [aqui]().
+7. Descompacte o arquivo `.zip` baixado e obtenha o arquivo `chr-7.16.img`.
+8. Clique em "Import" e selecione a imagem .img descompactada.
+9. Após a confirmação `Image successfully imported`, clique em `Create` ao lado da versão 7.16.
+10. Nomeie o template como `Router` e confirme.
+
+Com o MikroTik CHR importado corretamente, você poderá utilizá-lo como roteador principal para os laboratórios de roteamento dinâmico, simulando ambientes realistas com OSPF e BGP. Caso tenha dúvidas durante o processo de importação ou queira verificar o mapeamento entre os dispositivos e suas portas Telnet, consulte a aba Map Topology no GNS3.
