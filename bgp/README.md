@@ -150,6 +150,8 @@ As configurações estão validadas e devem permitir a comunicação entre todas
 - Do PC1 e PC3, realize o ping para o PC5 (192.168.10.2).
 - Em R1, R2, R3 e R4, verifique se todas as rotas foram aprendidas adequadamente via OSPF ou BGP:
 
+<!--
+
 ```bash
 # Exibindo a tabela de roteamento atual
 /ip route print
@@ -164,6 +166,8 @@ As configurações estão validadas e devem permitir a comunicação entre todas
 # Listando os prefixos anunciados via BGP para os peers configurados
 /routing bgp advertisements print
 ```
+
+-->
 
 ## 5. Conclusão
 
