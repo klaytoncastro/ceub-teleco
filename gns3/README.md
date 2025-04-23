@@ -46,17 +46,58 @@ O GNS3 pode ser utilizado para uma ampla gama de simulações e experimentos de 
 
 ## Importação do MikroTik CHR
 
-Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf/) e [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp/), será necessário utilizar um roteador que suporte ambos os protocolos. Por essa razão, indicamos o MikroTik CHR (Cloud Hosted Router). O processo de importação deste equipamento virtualizado no GNS3 pode ser feito da seguinte forma: 
+Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf/) e [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp/), utilizaremos o MikroTik CHR (Cloud Hosted Router) — um roteador virtual compatível com múltiplos protocolos de roteamento e serviços para redes de computadores. O processo de importação deste equipamento para o ambiente do simulador GNS3 está ilustrado abaixo:
 
-1. Baixe a imagem `chr-7.16.img.zip` [aqui](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing).
-2. Descompacte o arquivo `.zip` baixado e obtenha o arquivo `chr-7.16.img`.
-3. Acesse o painel do GNS3 via navegador (`http://localhost:3080`).
-4. Faça login com usuário `admin` e senha `admin`, caso solicitado. 
-5. Crie um novo projeto clicando em `Add blank project` e nomeando como `BGP`, `OSPF`, conforme a implementação ou outro nome que preferir.
-6. Vá ao menu lateral e clique em `New template`.
-7. Escolha a opção `Install from controller`. <!--`Import an appliance file`-->
-8. Clique em "Import" e selecione a imagem `.img`, **já descompactada**.
-9. Após a confirmação `Image successfully imported`, clique em `Create` ao lado da versão 7.16.
-10. Nomeie o template como `Router` e confirme.
+### 1. Baixe a imagem `.img`
 
-Agora, com o MikroTik CHR importado corretamente, você poderá utilizá-lo como roteador principal para os laboratórios de roteamento dinâmico, simulando ambientes realistas com OSPF e BGP. Caso tenha dúvidas durante o processo de importação ou queira verificar o mapeamento entre os dispositivos e suas portas Telnet, consulte a aba Map Topology no GNS3.
+[Download do arquivo `chr-7.16.img.zip`](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing)
+
+![Download](./img/001-Download.png)
+
+### 2. Ignore o alerta de segurança do navegador, se aparecer
+
+![Ignore Alert](./img/002-Ignore_Alert.png)
+
+### 3. Descompacte o arquivo `.zip`
+
+![Unzip](./img/003-Unzip.png)
+
+### 4. Acesse o GNS3 no navegador
+
+![Login](./img/004-Login.png)
+
+### 5. Crie um novo projeto
+
+![Add Project](./img/005-Add_Project.png)
+
+### 6. Crie um novo template
+
+![New Template](./img/006-New_Template.png)
+
+### 7. Escolha a opção *Install from controller*
+
+![Import Appliance](./img/007-Import_Appliance.png)
+
+### 8. Filtre e selecione *MikroTik CHR*
+
+![Filter CHR](./img/008-Filter_CHR.png)
+
+### 9. Selecione o arquivo `.img` descompactado
+
+![Select CHR](./img/009-Select_CHR.png)
+
+### 10. Aguarde e confirme a mensagem de sucesso
+
+![Import Success](./img/010-Import_Success_Create.png)
+
+### 11. Nomeie o template como `Router` e finalize
+
+![Router Template](./img/011-Router.png)
+
+### 12. Confirme que o roteador está disponível na biblioteca
+
+![Router Available](./img/012-Router_Available.png)
+
+### 13. Consulte os mapeamentos de portas e para gerenciar os dispositivos via protocolo `telnet`
+
+![Telnet Hosts](./img/013-Telnet_Hosts.png)
