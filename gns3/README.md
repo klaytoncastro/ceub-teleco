@@ -150,12 +150,7 @@ Substitua `XXXX` pela porta correspondente ao dispositivo, conforme exibido na a
 
 ## Conclusão
 
-Com o MikroTik CHR corretamente importado, seu ambiente está pronto para as simulações de rede. A seguir, inicie pelos laboratórios de roteamento dinâmico:
-
-- [Lab 01: OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf)
-- [Lab 02: BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
-
-Caso enfrente dificuldades, entre em contato com o [Professor](mailto:klayton.castro@ceub.edu.br).
+Com o MikroTik CHR corretamente importado, seu ambiente está pronto para as simulações de rede. Caso enfrente dificuldades, entre em contato com o [Professor](mailto:klayton.castro@ceub.edu.br).
 
 <!--
 
@@ -167,5 +162,11 @@ Após a importação do roteador, inicie os laboratórios:
 - Lab 02: [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
 
 Esses laboratórios utilizam o roteador MikroTik CHR configurado no GNS3 para simular ambientes reais com protocolos de roteamento dinâmico, como OSPF e BGP.
+
+A seguir, inicie pelos laboratórios de roteamento dinâmico:
+
+- [Lab 01: OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf)
+- [Lab 02: BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
+
 
 -->
