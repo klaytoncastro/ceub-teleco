@@ -1,24 +1,24 @@
 # Telecomunicações
 
-Esta disciplina aborda fundamentos das telecomunicações com foco em redes digitais, roteamento dinâmico e simulação realista de infraestruturas de comunicação, utilizando arquiteturas e ferramentas amplamente adotadas na prática profissional.
+Esta disciplina apresenta os fundamentos em telecomunicações, e este repositório é voltado à prática em redes digitais, simulação de topologias, roteamento avançado, com uso de tecnologias amplamente adotadas na academia e na indústria. Abaixo, apresentamos as instruções de instalação e configuração do ambiente.
 
-Nos laboratórios, são utilizados simuladores e ambientes virtualizados para configurar roteadores, analisar protocolos e compreender o funcionamento de redes reais. Para isso, será usado o Docker em conjunto com o WSL (Windows Subsystem for Linux), permitindo a configuração de cenários de rede em qualquer computador, de forma padronizada e prática.
+## Ambiente de Laboratório
 
-Este guia mostra como instalar e configurar o ambiente necessário para os laboratórios da disciplina. 
+Durante os laboratórios, utilizaremos ferramentas de simulação e ambientes virtualizados para configurar dispositivos de rede, analisar protocolos e compreender seu funcionamento de forma realista. 
 
-## Visão Geral das Ferramentas
+Para isso, será utilizado o Docker para configurar o simulador GNS3 e outras ferramentas, permitindo a criação de cenários de rede replicáveis a partir de qualquer computador, de forma padronizada e prática.
 
-O Docker é uma plataforma de virtualização leve que permite empacotar aplicações e todas as suas dependências (bibliotecas, configurações e código) em ambientes isolados, chamados containers. Esses containers são altamente portáveis e podem ser executados em qualquer sistema operacional compatível. Essa solução é amplamente adotada no mercado para criar ambientes replicáveis e consistentes, eliminando a necessidade de configurar e instalar manualmente cada aplicação em diferentes máquinas.
+O Docker é uma plataforma de virtualização leve que permite empacotar aplicações e todas as suas dependências (bibliotecas, configurações e código) em ambientes isolados, chamados containers. Esses containers são altamente portáveis e podem ser executados em qualquer sistema operacional compatível. Essa solução é amplamente usada no mercado para criar ambientes consistentes de maneira automática, eliminando a necessidade de configurar cada aplicação ou serviço manualmente em diferentes máquinas.
 
-Nos sistemas Microsoft Windows, recomenda-se a utilização do WSL (Windows Subsystem for Linux) para a instalação do Docker. O WSL é um recurso nativo do Windows que permite a execução de distribuições Linux sem a necessidade de emulação ou virtualização completa, como o Microsoft Hyper-V ou Oracle VirtualBox. Projetado para facilitar o desenvolvimento de software no Windows, o WSL oferece uma integração simplificada entre os dois sistemas operacionais, tornando o uso do Docker mais eficiente e acessível.
-
-O uso do Docker, em conjunto com o WSL, é essencial para nossos laboratórios, pois garante a replicabilidade do ambiente de desenvolvimento, independentemente do sistema operacional usado por cada estudante.
+Nos sistemas Microsoft Windows, recomenda-se a utilização do WSL (Windows Subsystem for Linux) para a instalação do Docker. O WSL é um recurso nativo do Windows que permite a execução de distribuições Linux sem emulação ou virtualização completa, como o Hyper-V ou VirtualBox. Projetado para facilitar o desenvolvimento de software no Windows, o WSL oferece uma integração eficiente entre os dois sistemas operacionais.
 
 **Nota**: Usuários de sistemas baseados em Linux ou MacOS não precisam utilizar o WSL, pois esses sistemas já possuem suporte nativo ao Docker. Para executar containers, basta instalar o Docker diretamente, sem a necessidade de qualquer subsistema ou ferramenta adicional.
 
 ## Passo 1: Verificação dos Requisitos
 
 Certifique-se de que você está utilizando o sistema operacional Windows 10 ou uma versão superior, e que o recurso de virtualização de hardware está habilitado. 
+
+**Nota:** Você pode verificar na BIOS/UEFI de seu dispositivo se o recurso de virtualização de hardware está ativado (`VT-x` para processadores Intel, como `Core i3`, `i5`, `i7`, etv; e `AMD-V` para processadores `Ryzen 5`, `Ryzen 7`, etc). 
 
 ## Passo 2: Ativação do WSL
 Abra o aplicativo **PowerShell ISE**, como administrador, e execute os comandos abaixo:
@@ -36,8 +36,6 @@ wsl --install
 # Define a versão 2 do WSL como padrão
 wsl --set-default-version 2
 ```
-
-**Nota:** Caso tenha encontrado algum erro ou qualquer dificuldade, você pode verificar na BIOS/UEFI de seu dispositivo se o recurso de virtualização está ativado (`VT-x` para processadores Intel, como `Core i3`, `i5`, `i7`, etv; e `AMD-V` para processadores `Ryzen 5`, `Ryzen 7`, etc). Se não conseguir avançar, entre em contato com o professor para obter orientação sobre a instalação.
 
 ## Passo 3: Escolha de uma Distribuição
 
@@ -59,6 +57,7 @@ wsl --setdefault Ubuntu-24.04
 
 - Finalizada a instalação, reinicie o seu computador. 
 
+**Nota:** Se não conseguir avançar, entre em contato com o professor para obter orientação sobre a instalação.
 
 ## Passo 4: Configuração Inicial
 
