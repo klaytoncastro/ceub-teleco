@@ -141,8 +141,6 @@ Após a importação do roteador, inicie os laboratórios:
 
 Esses laboratórios utilizam o roteador MikroTik CHR configurado no GNS3 para simular ambientes reais com protocolos de roteamento dinâmico, como OSPF e BGP.
 
-Se surgirem dúvidas durante qualquer uma dessas etapas, procure o professor ou consulte os materiais auxiliares neste repositório.
-
 ---
 
 ## Conclusão
