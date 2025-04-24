@@ -61,7 +61,7 @@ wsl --setdefault Ubuntu-24.04
 
 - Inicie o aplicativo WSL e configure o usuário e a senha da distribuição. Depois disso você terá acesso a um kernel e a um terminal Linux. Você pode invocar o Powershell ou Terminal Windows e acionar o comando `wsl` para ter acesso ao ambiente. 
 - Além do acesso via CLI, você também pode navegar via nas pastas e arquivos do ambiente Linux através do Windows Explorer (ícone do pinguim), diretamente na pasta da sua distribuição.
-- Caso prefira uma interface gráfica (GUI), considere o uso do [Visual Studio Code (VS Code)](https://code.visualstudio.com/), que permite estabelecer uma sessão de terminal com seu ambiente WSL. Esta alternativa pode ser mais intuitiva e amigável para edição de arquivos, unificando sua experiência de desenvolvimento e administração. Procure o professor caso tenha dúvidas na utilização dessa ferramenta.
+- Caso prefira uma interface gráfica (GUI), considere o uso do [Visual Studio Code (VS Code)](https://code.visualstudio.com/), que permite estabelecer uma sessão de terminal com seu ambiente WSL. Esta alternativa pode ser mais intuitiva e amigável para edição de arquivos, unificando sua experiência de desenvolvimento e administração. 
 
 ## Passo 5: Instalação do Docker
 
@@ -80,29 +80,29 @@ Por outro lado, também utilizaremos a interface gráfica. O principal exemplo �
 
 Para quem está tendo seu primeiro contato com terminal, abaixo segue um glossário com os principais comandos que usaremos nas atividades:
 
-| Comando | Descrição                                              | Exemplo                                |
-|---------|--------------------------------------------------------|----------------------------------------|
-| `whoami`| Exibe o nome do usuário atual                           | `whoami`                               |
-| `pwd`   | Mostra o diretório atual                                | `pwd`                                  |
-| `history`| Exibe o histórico de comandos                          | `history`                              |
-| `cd`    | Navega entre diretórios                                 | `cd /home`                             |
-| `ls`    | Lista arquivos e diretórios                             | `ls -la`                               |
-| `mkdir` | Cria um novo diretório                                  | `mkdir nova_pasta`                     |
-| `cp`    | Copia arquivos ou diretórios                            | `cp arquivo.txt /caminho/destino/`     |
-| `mv`    | Move ou renomeia arquivos e diretórios                  | `mv arquivo.txt /caminho/destino/`     |
-| `rm`    | Remove arquivos ou diretórios                           | `rm arquivo.txt`                       |
-| `cat`   | Exibe o conteúdo de um arquivo                          | `cat arquivo.txt`                      |
-| `grep`  | Pesquisa por padrões em arquivos                        | `grep "termo" arquivo.txt`             |
-| `vim`   | Editor de texto no terminal                             | `vim arquivo.txt`                      |
-| `chmod` | Altera permissões de arquivos                           | `chmod 755 arquivo.txt`                |
-| `chown` | Modifica o proprietário de um arquivo ou diretório      | `chown usuario:grupo arquivo.txt`      |
-| `ps`    | Lista processos em execução                             | `ps aux`                               |
-| `ping`  | Testa a conectividade com um host                       | `ping google.com`                      |
-| `wget`  | Baixa conteúdo da web                                   | `wget http://exemplo.com/arquivo.zip`  |
+| Comando  | Descrição                                               | Exemplo                                |
+|----------|---------------------------------------------------------|----------------------------------------|
+| `whoami` | Exibe o nome do usuário atual                           | `whoami`                               |
+| `pwd`    | Mostra o diretório atual                                | `pwd`                                  |
+| `history`| Exibe o histórico de comandos                           | `history`                              |
+| `cd`     | Navega entre diretórios                                 | `cd /home`                             |
+| `ls`     | Lista arquivos e diretórios                             | `ls -la`                               |
+| `mkdir`  | Cria um novo diretório                                  | `mkdir nova_pasta`                     |
+| `cp`     | Copia arquivos ou diretórios                            | `cp arquivo.txt /caminho/destino/`     |
+| `mv`     | Move ou renomeia arquivos e diretórios                  | `mv arquivo.txt /caminho/destino/`     |
+| `rm`     | Remove arquivos ou diretórios                           | `rm arquivo.txt`                       |
+| `cat`    | Exibe o conteúdo de um arquivo                          | `cat arquivo.txt`                      |
+| `grep`   | Pesquisa por padrões em arquivos                        | `grep "termo" arquivo.txt`             |
+| `vim`    | Editor de texto no terminal                             | `vim arquivo.txt`                      |
+| `chmod`  | Altera permissões de arquivos                           | `chmod 755 arquivo.txt`                |
+| `chown`  | Modifica o proprietário de um arquivo ou diretório      | `chown usuario:grupo arquivo.txt`      |
+| `ps`     | Lista processos em execução                             | `ps aux`                               |
+| `ping`   | Testa a conectividade com um host                       | `ping google.com`                      |
+| `wget`   | Baixa conteúdo da web                                   | `wget http://exemplo.com/arquivo.zip`  |
 
 ### Inicialização 
 
-Sempre que for utilizar o ambiente, você pode inicializá-lo da seguinte forma: 
+Sempre que for utilizar o ambiente, você poderá inicializá-lo da seguinte forma: 
 
 - Inicie o Docker Desktop.
 - Em seguida, abra o WSL ou, se preferir, utilize o terminal integrado no VS Code.
@@ -112,7 +112,7 @@ Sempre que for utilizar o ambiente, você pode inicializá-lo da seguinte forma:
 
 ## Projetos Práticos
 
-Os projetos práticos seguem uma sequência progressiva. Cada etapa depende da anterior, começando pela instalação do ambiente e avançando gradualmente para os laboratórios.
+Os projetos práticos seguem uma sequência progressiva. Cada etapa depende de conceitos estabelecidos na etapa anterior, começando pela instalação do ambiente e avançando gradualmente para os desafios propostos nos laboratórios.
 
 | #  | Laboratório                             | Tipo de Aplicação       | Descrição                                                                |
 |----|-----------------------------------------|-------------------------|--------------------------------------------------------------------------|
@@ -124,9 +124,9 @@ Os projetos práticos seguem uma sequência progressiva. Cada etapa depende da a
 
 ## Conclusão
 
-Se surgir qualquer dúvida, consulte os materiais de apoio indicados no Moodle e neste repositório. 
+Com o ambiente devidamente configurado, você está pronto para iniciar os laboratórios da disciplina. Siga a sequência proposta, execute os comandos com atenção e explore os cenários simulados para consolidar os conceitos apresentados em aula.
 
-**Nota:** Se não conseguir avançar, entre em contato com o professor para obter orientação sobre a instalação.
+Em caso de dúvidas, consulte os materiais complementares disponibilizados neste repositório e no Moodle. Caso necessário, entre em contato com o professor para orientação específica.
 
 <!--
 Pronto! Agora seu ambiente está preparado para iniciar nossos laboratórios. A partir daqui, você poderá seguir as instruções do professor para completar os exercícios práticos. 
