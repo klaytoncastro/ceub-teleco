@@ -78,7 +78,7 @@ Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tre
 
 <img src="/img/006-New_Template.png" alt="Novo Template" style="max-width: 500px;">
 
-7. **Escolha a opção `Install from controller`**.
+7. **Escolha a opção `Install new appliance from the GNS controller`**.
 
 <img src="/img/007-Import_Appliance.png" alt="Instalar do Controller" style="max-width: 500px;">
 
