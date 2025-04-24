@@ -70,13 +70,11 @@ wsl --setdefault Ubuntu-24.04
 
 ## Passo 6: Utilização do Ambiente
 
-Ao longo do curso, você será guiado nas atividades práticas organizadas nas subpastas deste repositório. Essas atividades envolvem tanto o uso do terminal (CLI) quanto interfaces gráficas via navegador, conforme o objetivo de cada etapa.
+Ao longo do curso, você será guiado nas atividades práticas organizadas nas subpastas deste repositório. Essas atividades envolvem tanto o uso do terminal (CLI) quanto interface gráfica via navegador (Web GUI), conforme o objetivo de cada etapa.
 
-Grande parte das configurações será feita no terminal Linux — uma interface de texto que permite executar comandos de forma direta, automatizável e precisa. Embora possa parecer menos intuitivo no início, o terminal é a principal ferramenta utilizada por profissionais de infraestrutura e redes em ambientes reais. Dominar seu uso é um diferencial técnico e uma exigência de mercado.
+A maior parte das configurações será feita no terminal Linux — uma interface de texto que permite executar comandos de forma direta e automatizável. Embora possa parecer menos intuitivo no início, o terminal é a principal ferramenta utilizada por profissionais de infraestrutura e redes em ambientes reais. Dominar seu uso é mais do que um diferencial técnico — é uma exigência de mercado.
 
-Por outro lado, também utilizaremos interfaces gráficas. O principal exemplo é o GNS3, uma ferramenta clássica e amplamente adotada por empresas, provedores e plataformas de certificação como Cisco e Juniper. Suas topologias serão montadas de forma visual, diretamente no navegador, facilitando a compreensão dos cenários e a interação com os dispositivos virtuais.
-
-Ou seja, o terminal será utilizado para a execução de comandos e automações essenciais, enquanto a orquestração das topologias de rede será feita com o GNS3, acessado via navegador.
+Por outro lado, também utilizaremos a interface gráfica. O principal exemplo é o GNS3, uma ferramenta clássica na academia e amplamente adotada por empresas, provedores de serviço e plataformas de certificação como Cisco e Juniper. Suas topologias serão montadas de forma visual, diretamente no navegador, facilitando a compreensão dos cenários e a interação com os dispositivos virtuais.
 
 ### Comandos Básicos
 
@@ -104,13 +102,13 @@ Para quem está tendo seu primeiro contato com terminal, abaixo segue um glossá
 
 ### Inicialização 
 
+Sempre que for utilizar o ambiente, você pode inicializá-lo da seguinte forma: 
+
 - Inicie o Docker Desktop.
 - Em seguida, abra o WSL ou, se preferir, utilize o terminal integrado no VS Code.
 - Para acessar o GNS3, abra o navegador e vá até: `http://localhost:3080` — após o ambiente estar ativo.
 
-**Importante**: O acesso ao GNS3 só estará funcional após a conclusão do [Laboratório 02](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3), quando o ambiente do simulador será devidamente configurado. Siga a ordem proposta na [tabela de projetos práticos](https://github.com/klaytoncastro/ceub-teleco?tab=readme-ov-file#projetos-pr%C3%A1ticos) para garantir o funcionamento correto do ambiente.
-
----
+**Importante**: O acesso ao GNS3 só estará funcional após a conclusão do [Laboratório 02](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3), quando o ambiente do simulador será devidamente configurado. Siga a ordem proposta na tabela de [Projetos Práticos](https://github.com/klaytoncastro/ceub-teleco?tab=readme-ov-file#projetos-pr%C3%A1ticos) para garantir o correto funcionamento do ambiente.
 
 ## Projetos Práticos
 
@@ -126,6 +124,10 @@ Durante este módulo do curso, os projetos práticos serão realizados em etapas
 
 ## Conclusão
 
-Pronto! Agora seu ambiente está preparado para iniciar nossos laboratórios. A partir daqui, você poderá seguir as instruções do professor para completar os exercícios práticos. Se surgir qualquer dúvida, consulte os materiais de apoio indicados no Moodle e neste repositório. 
+Se surgir qualquer dúvida, consulte os materiais de apoio indicados no Moodle e neste repositório. 
 
 **Nota:** Se não conseguir avançar, entre em contato com o professor para obter orientação sobre a instalação.
+
+<!--
+Pronto! Agora seu ambiente está preparado para iniciar nossos laboratórios. A partir daqui, você poderá seguir as instruções do professor para completar os exercícios práticos. 
+-->
