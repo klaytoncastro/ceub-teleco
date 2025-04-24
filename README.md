@@ -1,6 +1,12 @@
-# Instalação e Configuração do Ambiente de Laboratório
+# Telecomunicações
 
-## Introdução
+Esta disciplina aborda fundamentos das telecomunicações com foco em redes digitais, roteamento dinâmico e simulação realista de infraestruturas de comunicação, utilizando arquiteturas e ferramentas amplamente adotadas na prática profissional.
+
+Nos laboratórios, são utilizados simuladores e ambientes virtualizados para configurar roteadores, analisar protocolos e compreender o funcionamento de redes reais. Para isso, será usado o Docker em conjunto com o WSL (Windows Subsystem for Linux), permitindo a configuração de cenários de rede em qualquer computador, de forma padronizada e prática.
+
+Este guia mostra como instalar e configurar o ambiente necessário para os laboratórios da disciplina. 
+
+## Visão Geral das Ferramentas
 
 O Docker é uma plataforma de virtualização leve que permite empacotar aplicações e todas as suas dependências (bibliotecas, configurações e código) em ambientes isolados, chamados containers. Esses containers são altamente portáveis e podem ser executados em qualquer sistema operacional compatível. Essa solução é amplamente adotada no mercado para criar ambientes replicáveis e consistentes, eliminando a necessidade de configurar e instalar manualmente cada aplicação em diferentes máquinas.
 
