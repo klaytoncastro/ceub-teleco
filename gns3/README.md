@@ -54,57 +54,57 @@ Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tre
 
 > [Download do `chr-7.16.img.zip`](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing)
 
-<img src="/img/001-Download.png" alt="Baixar Imagem">
+<img src="/img/001-Download.png" alt="Baixar Imagem" style="max-width: 600px;">
 
 2. **Ignore o alerta de segurança do navegador**, se for exibido.
 
-<img src="/img/002-Ignore_Alert.png" alt="Ignorar Alerta">
+<img src="/img/002-Ignore_Alert.png" alt="Ignorar Alerta" style="max-width: 600px;">
 
 3. **Descompacte o arquivo `.zip`** para obter o `.img`.
 
-<img src="/img/003-Unzip.png" alt="Descompactar Arquivo">
+<img src="/img/003-Unzip.png" alt="Descompactar Arquivo" style="max-width: 600px;">
 
 4. **Acesse o GNS3 no navegador**:  
    > http://localhost:3080  
    Faça login com `admin` / `admin`, se solicitado.
 
-<img src="/img/004-Login.png" alt="Acesso GNS3">
+<img src="/img/004-Login.png" alt="Acesso GNS3" style="max-width: 600px;">
 
 5. **Crie um novo projeto** no GNS3.
 
-<img src="/img/005-Add_Project.png" alt="Novo Projeto">
+<img src="/img/005-Add_Project.png" alt="Novo Projeto" style="max-width: 600px;">
 
 6. **Clique em `New Template` no menu lateral**.
 
-<img src="/img/006-New_Template.png" alt="Novo Template">
+<img src="/img/006-New_Template.png" alt="Novo Template" style="max-width: 600px;">
 
 7. **Escolha a opção `Install from controller`**.
 
-<img src="/img/007-Import_Appliance.png" alt="Instalar do Controller">
+<img src="/img/007-Import_Appliance.png" alt="Instalar do Controller" style="max-width: 600px;">
 
 8. **Filtre e selecione `MikroTik CHR`**.
 
-<img src="/img/008-Filter_CHR.png" alt="Filtrar CHR">
+<img src="/img/008-Filter_CHR.png" alt="Filtrar CHR" style="max-width: 600px;">
 
 9. **Selecione o arquivo `.img` que foi descompactado**.
 
-<img src="/img/009-Select_CHR.png" alt="Selecionar CHR">
+<img src="/img/009-Select_CHR.png" alt="Selecionar CHR" style="max-width: 600px;">
 
 10. **Aguarde a importação e clique em `Create` quando solicitado**.
 
-<img src="/img/010-Import_Success_Create.png" alt="Importação Bem-sucedida">
+<img src="/img/010-Import_Success_Create.png" alt="Importação Bem-sucedida" style="max-width: 600px;">
 
 11. **Nomeie o template como `Router` e confirme**.
 
-<img src="/img/011-Router.png" alt="Nomear Template">
+<img src="/img/011-Router.png" alt="Nomear Template" style="max-width: 600px;">
 
 12. **Confirme que o roteador aparece na biblioteca de dispositivos**.
 
-<img src="/img/012-Router_Available.png" alt="Roteador Disponível">
+<img src="/img/012-Router_Available.png" alt="Roteador Disponível" style="max-width: 600px;">
 
 13. **Consulte os mapeamentos de portas para acesso via Telnet**, se desejar configurar via terminal:
 
-<img src="/img/013-Telnet_Hosts.png" alt="Hosts Telnet">
+<img src="/img/013-Telnet_Hosts.png" alt="Hosts Telnet" style="max-width: 600px;">
 
 ---
 
@@ -118,7 +118,5 @@ Os dispositivos gerenciáveis no GNS3, como os **VPCS (Virtual PCs)** e **rotead
 telnet localhost XXXX
 ```
 
-Caso enfrente dificuldades, volte às imagens ou consulte a aba **Map Topology** no GNS3 para entender a ligação entre os dispositivos e as portas disponíveis, ou entre em contato com o [Professor](klayton.castro@ceub.edu.br) para maiores informações. 
-
-Substitua `XXXX` pela porta correspondente ao dispositivo, conforme exibido na aba Map Topology do GNS3. Esse método facilita a configuração manual, permitindo colar comandos diretamente no terminal de cada equipamento.
+Substitua `XXXX` pela porta correspondente ao dispositivo, conforme exibido na aba **Map Topology** do GNS3. Esse método facilita a configuração manual, permitindo colar comandos diretamente no terminal de cada equipamento. Caso enfrente dificuldades, entre em contato com o [Professor](klayton.castro@ceub.edu.br) para maiores informações. 
 
