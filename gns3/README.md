@@ -12,13 +12,9 @@ O **GNS3 (Graphical Network Simulator 3)** é uma ferramenta robusta para simula
 
 O GNS3 surgiu em 2008 como uma evolução de ferramentas de simulação de redes mais simples, como o **Dynamips**, com o objetivo de oferecer uma interface gráfica amigável para a configuração de redes simuladas. Inicialmente, o foco estava na emulação de roteadores Cisco, utilizando o **IOS (Internetwork Operating System)**, mas a ferramenta expandiu rapidamente para suportar uma ampla variedade de dispositivos e fabricantes. O GNS3 é mantido por uma comunidade ativa de desenvolvedores e entusiastas de redes ao redor do mundo, que contribuem com atualizações regulares, tutoriais, fóruns de discussão e projetos colaborativos, ajudando novos usuários a dominar a plataforma.
 
-## Objetivo
+## O que você aprenderá?  
 
-Este repositório fornece as bases para a configuração e uso do **GNS3** em simulações de rede. Utilizaremos o GNS3 para criar redes simuladas, **configurar protocolos de roteamento** e **testar topologias de rede**, compreendendo o funcionamento e as interações entre dispositivos. Além disso, exploraremos a configuração de **serviços essenciais de rede**, como **DNS** e **DHCP**, aprofundando o entendimento sobre como as redes se mantêm e se configuram automaticamente.
-
-## O que você aprenderá
-
-Com este projeto, você será capaz de:
+Este repositório fornece as bases para a configuração e uso do **GNS3** em simulações de rede. Utilizaremos o GNS3 para criar redes simuladas, **configurar protocolos de roteamento** e **testar topologias de rede**, compreendendo o funcionamento e as interações entre dispositivos. Além disso, exploraremos a configuração de **serviços essenciais de rede**, como **DNS** e **DHCP**, aprofundando o entendimento sobre como as redes se mantêm e se configuram automaticamente. Com este projeto, você será capaz de:
 
 - Simular e configurar **roteadores**, **switches** e **serviços de rede** como **SMTP**, **IMAP**, **DNS** e **DHCP** de forma virtual.
 - Compreender e aplicar protocolos de roteamento como **OSPF**, **RIP**, **EIGRP** e **BGP**.
@@ -39,10 +35,57 @@ O GNS3 pode ser utilizado para uma ampla gama de simulações e experimentos de 
 - **Serviços de Rede**: Simular e testar a implementação de **DNS**, **DHCP**, **FTP**, **HTTP** e outros serviços de rede.
 - **Automatização e Infraestrutura**: Explorar como redes modernas automatizam a configuração de dispositivos com **DHCP**, e como serviços como **DNS** são essenciais para a comunicação em redes complexas.
 
-## Requisitos
+## Instruções para Clonar o Repositório, Subir o Simulador e Executar os Labs
+
+### Verifique os Pré-Requisitos
 
 - Docker instalado (para rodar o ambiente servidor do GNS3 e outras aplicações, como SMTP, IMAP, DNS, DHCP, Web Server, DBMS, etc).
 - Familiaridade com **conceitos de redes de computadores**, como **roteamento**, **switching**, **serviços** e **protocolos de rede**.
+
+Com o **WSL** e o **Docker Desktop** instalados, siga os passos abaixo para configurar o ambiente completo:
+
+### 1. Clone o repositório
+
+Abra o terminal do WSL e execute:
+
+```bash
+cd /opt
+git clone https://github.com/klaytoncastro/ceub-teleco
+```
+
+### 2. Suba o simulador do GNS3
+
+Acesse a pasta do projeto e suba os containers:
+
+```bash
+cd ceub-teleco/gns3
+docker compose up -d
+```
+
+### 3. Acesse o GNS3 via navegador
+
+Após iniciar os containers, abra o navegador e acesse:
+
+```
+http://localhost:3080
+```
+
+### 4. Importe o roteador MikroTik CHR
+
+Siga o passo a passo detalhado na documentação:
+
+[GNS3](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3)
+
+### 5. Execute os laboratórios
+
+Após a importação do roteador, inicie os laboratórios:
+
+- Lab 01: [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf)
+- Lab 02: [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
+
+Esses laboratórios utilizam o roteador MikroTik CHR configurado no GNS3 para simular ambientes reais com protocolos de roteamento dinâmico, como OSPF e BGP.
+
+---
 
 ## Importação do MikroTik CHR no GNS3
 
@@ -118,5 +161,9 @@ Substitua `XXXX` pela porta correspondente ao dispositivo, conforme exibido na a
 
 ## Conclusão
 
-Pronto! Com a importação concluída, o MikroTik CHR estará disponível na sua biblioteca do GNS3 e pronto para ser usado nos laboratórios. Caso enfrente dificuldades, entre em contato com o [Professor](klayton.castro@ceub.edu.br) para maiores informações. 
+Com o MikroTik CHR corretamente importado, seu ambiente está pronto para as simulações de rede. A seguir, inicie pelos laboratórios de roteamento dinâmico:
 
+- [Lab 01: OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf)
+- [Lab 02: BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
+
+Caso enfrente dificuldades, entre em contato com o [Professor](mailto:klayton.castro@ceub.edu.br).
