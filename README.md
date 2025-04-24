@@ -96,53 +96,6 @@ wsl --setdefault Ubuntu-24.04
 
 ---
 
-## Instruções para Clonar o Repositório, Subir o Simulador e Executar os Labs
-
-Com o **WSL** e o **Docker Desktop** instalados, siga os passos abaixo para configurar o ambiente completo:
-
-### 1. Clone o repositório
-
-Abra o terminal do WSL e execute:
-
-```bash
-cd /opt
-git clone https://github.com/klaytoncastro/ceub-teleco
-```
-
-### 2. Suba o simulador do GNS3
-
-Acesse a pasta do projeto e suba os containers:
-
-```bash
-cd ceub-teleco/gns3
-docker compose up -d
-```
-
-### 3. Acesse o GNS3 via navegador
-
-Após iniciar os containers, abra o navegador e acesse:
-
-```
-http://localhost:3080
-```
-
-### 4. Importe o roteador MikroTik CHR
-
-Siga o passo a passo detalhado na documentação:
-
-[GNS3](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3)
-
-### 5. Execute os laboratórios
-
-Após a importação do roteador, inicie os laboratórios:
-
-- Lab 01: [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf)
-- Lab 02: [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
-
-Esses laboratórios utilizam o roteador MikroTik CHR configurado no GNS3 para simular ambientes reais com protocolos de roteamento dinâmico, como OSPF e BGP.
-
----
-
 ## Conclusão
 
-Pronto! Agora seu ambiente está preparado para nossos laboratórios. A partir daqui, você poderá seguir as instruções do professor para completar os exercícios práticos. Se surgir qualquer dúvida, consulte os materiais de apoio indicados no Moodle e neste repositório. 
+Pronto! Agora seu ambiente está preparado para iniciar nossos laboratórios. A partir daqui, você poderá seguir as instruções do professor para completar os exercícios práticos. Se surgir qualquer dúvida, consulte os materiais de apoio indicados no Moodle e neste repositório. 
