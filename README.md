@@ -100,12 +100,13 @@ wsl --setdefault Ubuntu-24.04
 
 Durante este módulo do curso, os projetos práticos serão realizados em etapas progressivas. Cada etapa depende da anterior, seguindo a ordem de instalação e configuração do ambiente, e posterior desenvolvimento dos laboratórios:
 
-| #  | Laboratório                             | Tipo de Aplicação       | Descrição                                                              |
-|----|-----------------------------------------|-------------------------|------------------------------------------------------------------------|
-| 01 | [Instalação do Ambiente](/README.md)    | **WSL + Docker**        | Instalação do Windows Subsystem for Linux e Docker para containers.    |
-| 02 | [Introdução ao Simulador GNS3](/gns3/)  | **Simulador de Redes**  | Clonagem do repositório e configuração do ambiente GNS3 via Docker.    |
-| 03 | [Roteamento Dinâmico com OSPF](/ospf/)  | **Protocolo Intra-AS**  | Comunicação entre blocos de rede usando OSPF.                          |
-| 04 | [Integração com BGP](/bgp/)             | **Protocolo Inter-AS**  | Integração com redes externas via BGP, redistribuindo rotas do OSPF.   |
+| #  | Laboratório                             | Tipo de Aplicação       | Descrição                                                                |
+|----|-----------------------------------------|-------------------------|--------------------------------------------------------------------------|
+| 01 | [Instalação do Ambiente](/README.md)    | **WSL + Docker**        | Instalação do Windows Subsystem for Linux e Docker para containers.      |
+| 02 | [Introdução ao Simulador GNS3](/gns3/)  | **Simulador de Redes**  | Clonagem do repositório e configuração do ambiente GNS3 via Docker.      |
+| 03 | [Roteamento Dinâmico com OSPF](/ospf/)  | **Protocolo Intra-AS**  | Comunicação entre redes usando OSPF para estabelecer roteamento dinâmico.|
+| 04 | [Integração com BGP](/bgp/)             | **Protocolo Inter-AS**  | Integração com redes externas via BGP, redistribuindo rotas do OSPF.     |
+
 
 ## Conclusão
 
