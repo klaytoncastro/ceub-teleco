@@ -150,7 +150,7 @@ Esse método facilita a configuração, permitindo copiar e colar comandos diret
 
 ## Conclusão
 
-Com o MikroTik CHR corretamente importado, seu ambiente está pronto para as simulações de rede. Caso enfrente dificuldades, entre em contato com o [Professor](mailto:klayton.castro@ceub.edu.br).
+Com o MikroTik CHR corretamente importado, seu ambiente está pronto para iniciarmos as simulações incluindo roteamento avançado. Caso enfrente dificuldades, entre em contato com o [Professor](mailto:klayton.castro@ceub.edu.br).
 
 <!--
 
