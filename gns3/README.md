@@ -76,17 +76,6 @@ Siga o passo a passo detalhado na documentação:
 
 [GNS3](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3)
 
-### 5. Execute os laboratórios
-
-Após a importação do roteador, inicie os laboratórios:
-
-- Lab 01: [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf)
-- Lab 02: [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
-
-Esses laboratórios utilizam o roteador MikroTik CHR configurado no GNS3 para simular ambientes reais com protocolos de roteamento dinâmico, como OSPF e BGP.
-
----
-
 ## Importação do MikroTik CHR no GNS3
 
 Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf/) e [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp/), utilizaremos o **MikroTik CHR (Cloud Hosted Router)** — um roteador virtual compatível com múltiplos protocolos de roteamento e serviços de rede.
@@ -167,3 +156,16 @@ Com o MikroTik CHR corretamente importado, seu ambiente está pronto para as sim
 - [Lab 02: BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
 
 Caso enfrente dificuldades, entre em contato com o [Professor](mailto:klayton.castro@ceub.edu.br).
+
+<!--
+
+### 5. Execute os laboratórios
+
+Após a importação do roteador, inicie os laboratórios:
+
+- Lab 01: [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf)
+- Lab 02: [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp)
+
+Esses laboratórios utilizam o roteador MikroTik CHR configurado no GNS3 para simular ambientes reais com protocolos de roteamento dinâmico, como OSPF e BGP.
+
+-->
