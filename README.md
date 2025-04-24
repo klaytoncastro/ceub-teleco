@@ -108,11 +108,11 @@ Sempre que for utilizar o ambiente, você pode inicializá-lo da seguinte forma:
 - Em seguida, abra o WSL ou, se preferir, utilize o terminal integrado no VS Code.
 - Para acessar o GNS3, abra o navegador e vá até: `http://localhost:3080` — após o ambiente estar ativo.
 
-**Importante**: O acesso ao GNS3 só estará funcional após a conclusão do [Laboratório 02](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3), quando o ambiente do simulador será devidamente configurado. Siga a ordem proposta na tabela de [Projetos Práticos](https://github.com/klaytoncastro/ceub-teleco?tab=readme-ov-file#projetos-pr%C3%A1ticos) para garantir o correto funcionamento do ambiente.
+**Importante**: Siga a ordem proposta na tabela de [Projetos Práticos](https://github.com/klaytoncastro/ceub-teleco?tab=readme-ov-file#projetos-pr%C3%A1ticos) para garantir o correto funcionamento do ambiente. O acesso ao GNS3 só estará funcional após a conclusão do [Laboratório 02](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3), quando o ambiente do simulador será devidamente configurado. 
 
 ## Projetos Práticos
 
-Durante este módulo do curso, os projetos práticos serão realizados em etapas progressivas. Cada etapa depende da anterior, seguindo a ordem de instalação e configuração do ambiente, e posterior desenvolvimento dos laboratórios:
+Os projetos práticos seguem uma sequência progressiva. Cada etapa depende da anterior, começando pela instalação do ambiente e avançando gradualmente para os laboratórios.
 
 | #  | Laboratório                             | Tipo de Aplicação       | Descrição                                                                |
 |----|-----------------------------------------|-------------------------|--------------------------------------------------------------------------|
