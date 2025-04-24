@@ -134,11 +134,11 @@ Aguarde a importação e clique em `Create` quando solicitado.
 
 <img src="/img/012-Router_Available.png" alt="Roteador Disponível" style="max-width: 500px;">
 
-12. **Consulte os mapeamentos de portas para acesso via Telnet**, para configurar cada dispositivo de sua topologia via terminal:
+12. Monte sua topologia e **consulte os mapeamentos de portas** para configurar cada dispositivo via terminal. 
 
 <img src="/img/013-Telnet_Hosts.png" alt="Hosts Telnet" style="max-width: 500px;">
 
-Os dispositivos gerenciáveis no GNS3 listados em **Map Topology**, tais como os **VPCS (Virtual PCs)** e **roteadores MikroTik CHR**, podem ser acessados diretamente pelo terminal usando o comando:
+Os dispositivos gerenciáveis no GNS3 listados em **Map Topology**, tais como os **VPCS (Virtual PCs)** e **roteadores MikroTik CHR**, podem ser acessados usando o comando:
 
 ```bash
 telnet localhost XXXX
