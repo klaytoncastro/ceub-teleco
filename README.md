@@ -57,8 +57,6 @@ wsl --setdefault Ubuntu-24.04
 
 - Finalizada a instalação, reinicie o seu computador. 
 
-**Nota:** Se não conseguir avançar, entre em contato com o professor para obter orientação sobre a instalação.
-
 ## Passo 4: Configuração Inicial
 
 - Inicie o aplicativo WSL e configure o usuário e a senha da distribuição. Depois disso você terá acesso a um kernel e a um terminal Linux. Você pode invocar o Powershell ou Terminal Windows e acionar o comando `wsl` para ter acesso ao ambiente. 
@@ -70,14 +68,19 @@ wsl --setdefault Ubuntu-24.04
 - O Docker Desktop for Windows fornece uma interface gráfica e integra o Docker ao sistema, facilitando a execução e o gerenciamento de containers diretamente no Windows.
 - Baixe e instale o [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/#:~:text=Docker%20Desktop%20for%20Windows%20%2D%20x86_64). Após a instalação, o Windows pode solicitar que você faça o logout e o login novamente para aplicar as alterações. 
 
-
 ## Passo 6: Utilização do Ambiente
 
-- Ao longo do curso, você será guiado pelo Professor nas atividades práticas que envolverá o conteúdo das subpastas deste repositório.
-- Para começar, inicie o Docker Desktop e, depois disso, o aplicativo WSL ou, se preferir, o terminal Linux diretamente a partir do VS Code. 
-- Para quem está em sua primeira experiência com terminal Linux, segue um glossário com os comandos básicos: 
+Ao longo do curso, você será guiado nas atividades práticas organizadas nas subpastas deste repositório. Essas atividades envolvem tanto o uso do terminal (CLI) quanto interfaces gráficas via navegador, conforme o objetivo de cada etapa.
+
+Grande parte das configurações será feita no terminal Linux — uma interface de texto que permite executar comandos de forma direta, automatizável e precisa. Embora possa parecer menos intuitivo no início, o terminal é a principal ferramenta utilizada por profissionais de infraestrutura e redes em ambientes reais. Dominar seu uso é um diferencial técnico e uma exigência de mercado.
+
+Por outro lado, também utilizaremos interfaces gráficas. O principal exemplo é o GNS3, uma ferramenta clássica e amplamente adotada por empresas, provedores e plataformas de certificação como Cisco e Juniper. Suas topologias serão montadas de forma visual, diretamente no navegador, facilitando a compreensão dos cenários e a interação com os dispositivos virtuais.
+
+Ou seja, o terminal será utilizado para a execução de comandos e automações essenciais, enquanto a orquestração das topologias de rede será feita com o GNS3, acessado via navegador.
 
 ### Comandos Básicos
+
+Para quem está tendo seu primeiro contato com terminal, abaixo segue um glossário com os principais comandos que usaremos nas atividades:
 
 | Comando | Descrição                                              | Exemplo                                |
 |---------|--------------------------------------------------------|----------------------------------------|
@@ -99,6 +102,14 @@ wsl --setdefault Ubuntu-24.04
 | `ping`  | Testa a conectividade com um host                       | `ping google.com`                      |
 | `wget`  | Baixa conteúdo da web                                   | `wget http://exemplo.com/arquivo.zip`  |
 
+### Inicialização 
+
+- Inicie o Docker Desktop.
+- Em seguida, abra o WSL ou, se preferir, utilize o terminal integrado no VS Code.
+- Para acessar o GNS3, abra o navegador e vá até: `http://localhost:3080` — após o ambiente estar ativo.
+
+**Importante**: O acesso ao GNS3 só estará funcional após a conclusão do [Laboratório 02](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3), quando o ambiente do simulador será devidamente configurado. Siga a ordem proposta na [tabela de projetos práticos](https://github.com/klaytoncastro/ceub-teleco?tab=readme-ov-file#projetos-pr%C3%A1ticos) para garantir o funcionamento correto do ambiente.
+
 ---
 
 ## Projetos Práticos
@@ -116,3 +127,5 @@ Durante este módulo do curso, os projetos práticos serão realizados em etapas
 ## Conclusão
 
 Pronto! Agora seu ambiente está preparado para iniciar nossos laboratórios. A partir daqui, você poderá seguir as instruções do professor para completar os exercícios práticos. Se surgir qualquer dúvida, consulte os materiais de apoio indicados no Moodle e neste repositório. 
+
+**Nota:** Se não conseguir avançar, entre em contato com o professor para obter orientação sobre a instalação.
