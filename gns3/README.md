@@ -35,16 +35,16 @@ O GNS3 pode ser utilizado para uma ampla gama de simulações e experimentos de 
 - **Serviços de Rede**: Simular e testar a implementação de **DNS**, **DHCP**, **FTP**, **HTTP** e outros serviços de rede.
 - **Automatização e Infraestrutura**: Explorar como redes modernas automatizam a configuração de dispositivos com **DHCP**, e como serviços como **DNS** são essenciais para a comunicação em redes complexas.
 
-## Instruções para Clonar o Repositório, Subir o Simulador e Executar os Labs
+## Instruções para Instalação e Configuração do Ambiente para Simulação
 
-### Verifique os Pré-Requisitos
+### 1. Pré-Requisitos
 
-- Docker instalado (para rodar o ambiente servidor do GNS3 e outras aplicações, como SMTP, IMAP, DNS, DHCP, Web Server, DBMS, etc).
+- Docker instalado (para rodar o ambiente servidor do GNS3 e outras aplicações)
 - Familiaridade com **conceitos de redes de computadores**, como **roteamento**, **switching**, **serviços** e **protocolos de rede**.
 
 Com o **WSL** e o **Docker Desktop** instalados, siga os passos abaixo para configurar o ambiente completo:
 
-### 1. Clone o repositório
+### 2. Clone o repositório
 
 Abra o terminal do WSL e execute:
 
@@ -53,7 +53,7 @@ cd /opt
 git clone https://github.com/klaytoncastro/ceub-teleco
 ```
 
-### 2. Suba o simulador do GNS3
+### 3. Suba o simulador GNS3
 
 Acesse a pasta do projeto e suba os containers:
 
@@ -62,7 +62,7 @@ cd ceub-teleco/gns3
 docker compose up -d
 ```
 
-### 3. Acesse o GNS3 via navegador
+### 4. Acesse o GNS3 via navegador
 
 Após iniciar os containers, abra o navegador e acesse:
 
@@ -70,55 +70,63 @@ Após iniciar os containers, abra o navegador e acesse:
 http://localhost:3080
 ```
 
+### 5. Importação do Roteador
+
+Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf/) e [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp/), utilizaremos o **MikroTik CHR (Cloud Hosted Router)** — um roteador virtual compatível com múltiplos protocolos de roteamento e serviços de rede.
+
+<!--
+
+, como SMTP, IMAP, DNS, DHCP, Web Server, DBMS, etc).
+
+Clonar o Repositório, Subir o Simulador e Executar os Labs
+
 ### 4. Importe o roteador MikroTik CHR
 
 Siga o passo a passo detalhado na documentação:
 
 [GNS3](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3)
 
-## Importação do MikroTik CHR no GNS3
+-->
 
-Para os laboratórios de [OSPF](https://github.com/klaytoncastro/ceub-teleco/tree/main/ospf/) e [BGP](https://github.com/klaytoncastro/ceub-teleco/tree/main/bgp/), utilizaremos o **MikroTik CHR (Cloud Hosted Router)** — um roteador virtual compatível com múltiplos protocolos de roteamento e serviços de rede.
+### 6. Passo a Passo: Importar o Roteador MikroTik CHR no GNS3
 
-### Passo a Passo: Importar o Roteador MikroTik CHR no GNS3
-
-1. **Baixe o arquivo de imagem `.img` compactado**:
+6.1. **Baixe o arquivo de imagem `.img` compactado**:
 
 > [Download do `chr-7.16.img.zip`](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing)
 
 <img src="/img/001-Download.png" alt="Baixar Imagem" style="max-width: 500px;">
 
-2. **Ignore o alerta de segurança do navegador**. Se for exibido, clique em **"Fazer o download mesmo assim"**.
+6.2. **Ignore o alerta de segurança do navegador**. Se for exibido, clique em **"Fazer o download mesmo assim"**.
 
 <img src="/img/002-Ignore_Alert.png" alt="Ignorar Alerta" style="max-width: 400px;">
 
-3. **Descompacte o arquivo `.zip`** para obter o `.img`.
+6.3. **Descompacte o arquivo `.zip`** para obter o `.img`.
 
 <img src="/img/003-Unzip.png" alt="Descompactar Arquivo" style="max-width: 500px;">
 
-4. **Acesse a URL do GNS3 no navegador**:  
+6.4. **Acesse a URL do GNS3 no navegador**:  
    > http://localhost:3080  
    Faça login com **usuário** `admin` e **senha** `admin`, se solicitado.
 
 <img src="/img/004-Login.png" alt="Acesso ao GNS3" style="max-width: 500px;">
 
-5. **Crie um novo projeto** no GNS3.
+6.5. **Crie um novo projeto** no GNS3.
 
 <img src="/img/005-Add_Project.png" alt="Novo Projeto" style="max-width: 500px;">
 
-6. **Clique em `New Template` no menu lateral**.
+6.6. **Clique em `New Template` no menu lateral**.
 
 <img src="/img/006-New_Template.png" alt="Novo Template" style="max-width: 500px;">
 
-7. **Escolha a opção `Install new appliance from the GNS controller`**.
+6.7. **Escolha a opção `Install new appliance from the GNS controller`**.
 
 <img src="/img/007-Import_Appliance.png" alt="Instalar do Controller" style="max-width: 500px;">
 
-8. **Filtre** os dispositivos compatíveis com a expressão **"CHR"** e selecione o `MikroTik CHR`.
+6.8. **Filtre** os dispositivos compatíveis com a expressão **"CHR"** e selecione o `MikroTik CHR`.
 
 <img src="/img/008-Filter_CHR.png" alt="Filtrar CHR" style="max-width: 500px;">
 
-9. **Clique em Import** na versão `chr-7.16.img`. Lembre-se de **selecionar o arquivo `.img` que foi descompactado**. 
+6.9. **Clique em Import** na versão `chr-7.16.img`. Lembre-se de **selecionar o arquivo `.img` que foi descompactado**. 
 
 <img src="/img/009-Select_CHR.png" alt="Selecionar CHR" style="max-width: 500px;">
 
@@ -126,15 +134,15 @@ Aguarde a importação e clique em `Create` quando solicitado.
 
 <img src="/img/010-Import_Success_Create.png" alt="Importação Bem-sucedida" style="max-width: 500px;">
 
-10. **Nomeie o template como `Router` e confirme**.
+6.10. **Nomeie o template como `Router` e confirme**.
 
 <img src="/img/011-Router.png" alt="Nomear Template" style="max-width: 500px;">
 
-11. **Confirme que o roteador aparece na biblioteca de dispositivos**.
+6.11. **Confirme que o roteador aparece na biblioteca de dispositivos**.
 
 <img src="/img/012-Router_Available.png" alt="Roteador Disponível" style="max-width: 500px;">
 
-12. Monte sua topologia e **consulte os mapeamentos de portas** para configurar cada dispositivo via terminal. 
+6.12. Monte sua topologia e **consulte os mapeamentos de portas** para configurar cada dispositivo via terminal. 
 
 <img src="/img/013-Telnet_Hosts.png" alt="Hosts Telnet" style="max-width: 500px;">
 
@@ -144,7 +152,7 @@ Os dispositivos gerenciáveis no GNS3 listados em **Map Topology**, tais como os
 telnet localhost XXXX
 ```
 
-Esse método facilita a configuração, permitindo copiar e colar comandos diretamente no terminal de cada equipamento. Substitua `XXXX` pela porta correspondente ao dispositivo, conforme exibido na aba **Map Topology** do GNS3. Por exemplo, para acessar o PC1, use o comando: `telnet localhost 2013`
+Este método facilita a configuração, permitindo copiar e colar comandos diretamente no terminal de cada equipamento. Substitua `XXXX` pela porta correspondente ao dispositivo, conforme exibido na aba **Map Topology** do GNS3. Por exemplo, para acessar o PC1, use o comando: `telnet localhost 2013`
 
 ---
 
