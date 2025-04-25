@@ -72,7 +72,7 @@ http://localhost:3080
 
 ### 5. Importação do Roteador
 
-Para que os laboratórios funcionem corretamente, é necessário importar para o GNS3 o roteador virtual **MikroTik CHR (Cloud Hosted Router)** — dispositvo compatível com múltiplos protocolos e serviços de rede.
+Para realizar as simulações em nosso ambiente de laboratório, é necessário importar para o GNS3 o roteador virtual **MikroTik CHR (Cloud Hosted Router)** — dispositvo compatível com múltiplos protocolos e serviços de rede.
 
 5.1. **Baixe o arquivo de imagem `.img` compactado**:
 
