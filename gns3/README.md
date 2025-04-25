@@ -130,7 +130,7 @@ Aguarde a importação e clique em `Create` quando solicitado.
 
 <img src="/img/013-Telnet_Hosts.png" alt="Hosts Telnet" style="max-width: 500px;">
 
-Os dispositivos gerenciáveis no GNS3 listados em **Map Topology** — como os **VPCS** (Virtual PCs) e os **roteadores** MikroTik CHR — podem ser acessados via terminal interno do navegador ou, alternativamente, via protocolo de gerenciamento **Telnet**, por meio do comando abaixo:
+Os dispositivos gerenciáveis no GNS3 estarão listados em **Map Topology** — como os **VPCS** (Virtual PCs) e os **roteadores** MikroTik CHR — que podem ser acessados via terminal interno do GNS3 no próprio navegador ou, alternativamente, via protocolo de gerenciamento **Telnet**, por meio do comando abaixo:
 
 ```bash
 telnet localhost XXXX
