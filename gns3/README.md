@@ -74,59 +74,43 @@ http://localhost:3080
 
 Para que os laboratórios funcionem corretamente, é necessário importar para o GNS3 o roteador virtual **MikroTik CHR (Cloud Hosted Router)** — dispositvo compatível com múltiplos protocolos e serviços de rede.
 
-<!--
-
-, como SMTP, IMAP, DNS, DHCP, Web Server, DBMS, etc).
-
-Clonar o Repositório, Subir o Simulador e Executar os Labs
-
-### 4. Importe o roteador MikroTik CHR
-
-Siga o passo a passo detalhado na documentação:
-
-[GNS3](https://github.com/klaytoncastro/ceub-teleco/tree/main/gns3)
-
--->
-
-### 6. Passo a Passo: Importar o Roteador MikroTik CHR no GNS3
-
-6.1. **Baixe o arquivo de imagem `.img` compactado**:
+5.1. **Baixe o arquivo de imagem `.img` compactado**:
 
 > [Download do `chr-7.16.img.zip`](https://drive.google.com/drive/folders/1d7FwTLtnRSnjJ5k-YRZlORNlY3c1ygQZ?usp=sharing)
 
 <img src="/img/001-Download.png" alt="Baixar Imagem" style="max-width: 500px;">
 
-6.2. **Ignore o alerta de segurança do navegador**. Se for exibido, clique em **"Fazer o download mesmo assim"**.
+5.2. **Ignore o alerta de segurança do navegador**. Se for exibido, clique em **"Fazer o download mesmo assim"**.
 
 <img src="/img/002-Ignore_Alert.png" alt="Ignorar Alerta" style="max-width: 400px;">
 
-6.3. **Descompacte o arquivo `.zip`** para obter o `.img`.
+5.3. **Descompacte o arquivo `.zip`** para obter o `.img`.
 
 <img src="/img/003-Unzip.png" alt="Descompactar Arquivo" style="max-width: 500px;">
 
-6.4. **Acesse a URL do GNS3 no navegador**:  
+5.4. **Acesse a URL do GNS3 no navegador**:  
    > http://localhost:3080  
    Faça login com **usuário** `admin` e **senha** `admin`, se solicitado.
 
 <img src="/img/004-Login.png" alt="Acesso ao GNS3" style="max-width: 500px;">
 
-6.5. **Crie um novo projeto** no GNS3.
+5.5. **Crie um novo projeto** no GNS3.
 
 <img src="/img/005-Add_Project.png" alt="Novo Projeto" style="max-width: 500px;">
 
-6.6. **Clique em `New Template` no menu lateral**.
+5.6. **Clique em `New Template` no menu lateral**.
 
 <img src="/img/006-New_Template.png" alt="Novo Template" style="max-width: 500px;">
 
-6.7. **Escolha a opção `Install new appliance from the GNS controller`**.
+5.7. **Escolha a opção `Install new appliance from the GNS controller`**.
 
 <img src="/img/007-Import_Appliance.png" alt="Instalar do Controller" style="max-width: 500px;">
 
-6.8. **Filtre** os dispositivos compatíveis com a expressão **"CHR"** e selecione o `MikroTik CHR`.
+5.8. **Filtre** os dispositivos compatíveis com a expressão **"CHR"** e selecione o `MikroTik CHR`.
 
 <img src="/img/008-Filter_CHR.png" alt="Filtrar CHR" style="max-width: 500px;">
 
-6.9. **Clique em Import** na versão `chr-7.16.img`. Lembre-se de **selecionar o arquivo `.img` que foi descompactado**. 
+5.9. **Clique em Import** na versão `chr-7.16.img`. Lembre-se de **selecionar o arquivo `.img` que foi descompactado**. 
 
 <img src="/img/009-Select_CHR.png" alt="Selecionar CHR" style="max-width: 500px;">
 
@@ -134,15 +118,15 @@ Aguarde a importação e clique em `Create` quando solicitado.
 
 <img src="/img/010-Import_Success_Create.png" alt="Importação Bem-sucedida" style="max-width: 500px;">
 
-6.10. **Nomeie o template como `Router` e confirme**.
+5.10. **Nomeie o template como `Router` e confirme**.
 
 <img src="/img/011-Router.png" alt="Nomear Template" style="max-width: 500px;">
 
-6.11. **Confirme que o roteador aparece na biblioteca de dispositivos**.
+5.11. **Confirme que o roteador aparece na biblioteca de dispositivos**.
 
 <img src="/img/012-Router_Available.png" alt="Roteador Disponível" style="max-width: 500px;">
 
-6.12. Monte sua topologia e **consulte os mapeamentos de portas** para configurar cada dispositivo via terminal. 
+5.12. Monte sua topologia e **consulte os mapeamentos de portas** para configurar cada dispositivo via terminal. 
 
 <img src="/img/013-Telnet_Hosts.png" alt="Hosts Telnet" style="max-width: 500px;">
 
