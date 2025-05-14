@@ -2,11 +2,63 @@
 
 ## 1. Visão Geral
 
-O **Multiprotocol Label Switching (MPLS)** é uma tecnologia de comutação que permite endereçar dados com base em rótulos (labels) ao invés cabeçalhos IP, células ou circuitos. Assim sendo, o MPLS não é um protocolo de roteamento autônomo, mas convencionalmente atua entre as camadas 2 e 3 do modelo OSI (Layer 2.5). Ou seja, apesar de não substituir integralmente o roteamento IP (Layer 3), ele otimiza o tráfego, agilizando o processo de encaminhamento com a aplicação de rótulos para estabelecer caminhos de comutação (Label Switched Paths - LSPs), definidos a partir das rotas descobertas pelos protocolos de roteamento como OSPF e BGP. Isso permite maior eficiência e flexibilidade em redes de ampla escala e serviços variados em operação. 
+O **Multiprotocol Label Switching (MPLS)** é uma tecnologia de comutação de pacotes que utiliza rótulos (*labels*) para otimizar o encaminhamento de dados, complementando (mas não substituindo) o roteamento IP tradicional. Por convenção, podemos dizer que ele atua na chamada **Camada 2.5** do modelo OSI, intermediando serviços de Camada 2 e 3 (L2 e L3) ao fornecer: 
 
-Assim sendo, a implementação de MPLS é capaz de compatibilizar a transmissão de serviços de voz, vídeo e dados, operando sobre diferentes tecnologias de encapsulamento e endereçamento, uma vez que não está vinculado a um protocolo de camada de rede específico, podendo transportar IPv4 e IPv6 (pacotes IP tradicionais), Ethernet (frames L2, como em redes Metro Ethernet), Células ATM e Pacotes Frame Relay (tecnologias de redes legadas, com roteadores capazes de fazer a adaptação), assim como outros protocolos. Como MPLS pode encapsular praticamente qualquer payload, é usado até em redes ópticas – MPLS-TP. Essa versatilidade é extremamente útil em ambientes de redes corporativas, operadoras de telecomunicações e datacenters. 
+- **Abstração de protocolos**: Opera sobre IPv4, IPv6, Ethernet, ATM, Frame Relay e até redes ópticas (MPLS-TP).
+- **Eficiência**: Encaminhamento mais rápido via rótulos pré-definidos (*Label Switched Paths - LSPs*).
+- **Flexibilidade**: Suporta serviços diversificados (voz, vídeo, dados) com QoS granular.
 
-Nesse contexto, o MPLS desempenhou um papel fundamental na transição e integração de tecnologias legadas, usando diversas infraestruturas de rede WAN como camada física, mas conferindo mais flexibilidade e eficiência no transporte, rotulado segundo estratégias de priorização de tráfego. Dentre as principais tecnologias que o MPLS substituiu ou integrou destacam-se: 
+### Integração com Tecnologias Legadas
+
+| Tecnologia          | Antes do MPLS                            | Com MPLS                                            |
+|---------------------|------------------------------------------|-----------------------------------------------------|
+| **SDH/SONET**       | Circuitos comutados rígidos              | Infraestrutura reutilizada para túneis MPLS         |
+| **Frame Relay**     | Circuitos virtuais (PVCs/SVCs) limitados | Substituído por LSPs com QoS e escalabilidade       |
+| **ATM**             | Células de 53 bytes, complexo e caro     | Transporte unificado de voz/vídeo/dados             |
+| **Metro Ethernet**  | QoS limitado, baixa escalabilidade       | VPNs L2/L3 (VPLS, L3VPN) com serviços gerenciados   |
+| **IP over Ethernet**| Roteamento lento, QoS básico             | Encaminhamento acelerado por rótulos + QoS granular |
+
+>O MPLS atua como uma camada de abstração, permitindo a coexistência de redes legadas e modernas através de encapsulamento universal.
+
+---
+
+## 2. Como o MPLS Funciona?
+
+### Princípios de Operação
+
+1. **Classificação por Rótulos**:
+   - Pacotes recebem um **rótulo MPLS** no *ingress router* (LER - Label Edge Router).
+   - Bits **EXP (Experimental)** definem a **Classe de Serviço (CoS)** para QoS.
+
+2. **Encaminhamento em LSPs**:
+   - *Label Switch Routers (LSRs)* trocam rótulos (não consultam tabelas IP) via:
+     - **PUSH** (adicionar), **POP** (remover), **SWAP** (substituir rótulo).
+   - Túneis **LSP** priorizam tráfego crítico (VoIP, vídeo) sobre dados comuns.
+
+3. **Tabelas de Encaminhamento**:
+   | Tabela | Função                                | Populada por                     |
+   |--------|---------------------------------------|-----------------------------------|
+   | **FIB** (Forwarding Info Base) | Encaminha pacotes IP tradicionais | RIB (rotas OSPF/BGP)             |
+   | **LFIB** (Label FIB)          | Gerencia pacotes MPLS              | LDP, RSVP-TE, BGP (VPNs)         |
+
+### Classes de Serviço (CoS)
+
+| Classe | Bits EXP (Bin/Dec) | Prioridade       | Aplicação Típica                  |
+|--------|--------------------|------------------|----------------------------------|
+| CoS 0  | `000` (0)          | Baixa            | Web, e-mail                      |
+| CoS 1  | `001` (1)          | Média-Baixa      | FTP, apps corporativos           |
+| CoS 2  | `010` (2)          | Média            | Streaming (Vídeo sob Demanda)    |
+| CoS 3  | `011` (3)          | Média-Alta
+
+# Multiprotocol Label Switching (MPLS)
+
+## 1. Visão Geral
+
+O **Multiprotocol Label Switching (MPLS)** é uma tecnologia de comutação que permite endereçar dados com base em rótulos (labels) ao invés de atuar unicamente sobre cabeçalhos IP, células ou circuitos. Embora não substitua o roteamento IP (Layer 3, o MPLS otimiza o encaminhamento ao agregar rótulos aos pacotes, estabelecendo caminhos pré-definidos (Label Switched Paths - LSPs) com base em rotas descobertas por protocolos que atuam em camada 3, como OSPF e BGP. Ou seja, MPLS não é um protocolo de roteamento autônomo mas, convencionalmente, podemos dizer que ele atua entre as camadas 2 e 3 do modelo OSI (Layer 2.5). 
+
+Isso permite maior eficiência e flexibilidade em redes de ampla escala ou com serviços variados em operação, pois o MPLS é capaz de compatibilizar a transmissão de serviços de voz, vídeo e dados operando sobre diferentes infraestruturas e mecanimos de encapsulamento e endereçamento, uma vez que não está vinculado a um protocolo de camada de rede específico. Assim sendo, pode transportar IPv4 e IPv6 (pacotes IP tradicionais), Ethernet (frames L2, como em redes Metro Ethernet), Células ATM e Pacotes Frame Relay (tecnologias de redes legadas, com roteadores capazes de fazer a adaptação), assim como outros protocolos. Como MPLS pode encapsular praticamente qualquer payload, é usado até em redes ópticas – MPLS-TP. 
+
+Essa versatilidade é extremamente útil em ambientes de redes corporativas, operadoras de telecomunicações e datacenters. Nesse contexto, o MPLS desempenhou um papel fundamental na transição e integração de tecnologias legadas, usando diversas infraestruturas de rede WAN como camada física, mas conferindo mais flexibilidade e eficiência no transporte, rotulado segundo estratégias de priorização de tráfego. Dentre as principais tecnologias que o MPLS substituiu ou integrou destacam-se: 
 
 ### Frame Relay (FR):
 
@@ -38,46 +90,49 @@ Nesse contexto, o MPLS desempenhou um papel fundamental na transição e integra
 
 - Depois do MPLS: O MPLS permitiu que redes IP continuassem operando com maior eficiência, graças ao uso de rótulos (labels) que aceleram o encaminhamento de pacotes e permitem a aplicação de QoS granular.
 
-## 2. Como o MPLS Funciona? 
+>Em suma, o MPLS opera independentemente do protocolo de camada 3 (IPv4/IPv6) ou de camada 2 (Ethernet, ATM) escolhido, atuando como uma camada de abstração que encapsula qualquer payload. Isso permite integração com redes legadas (ATM/FR) e modernas (IPv6, Ethernet).
 
-O MPLS atua como uma camada de abstração entre L2 e L3:
+## 2. Como o MPLS Funciona?
 
-- Rótulos (Labels) são independentes do protocolo → Um pacote IPv4, IPv6 ou Ethernet recebe um rótulo MPLS, que é usado para comutação (não importa o conteúdo interno).
-- Flexibilidade de transporte → O mesmo backbone MPLS pode carregar tráfego IP, VPNs L2 (VPLS), VPNs L3 (L3VPN), etc., sem modificações profundas na infraestrutura.
-- Por sua vez, os protocolos de roteamento (OSPF, BGP) são responsáveis por descobrir os melhores caminhos na rede e preencher a tabela de roteamento **(RIB)** com essas rotas. O MPLS usa rótulos **(labels)** para identificar os pacotes e aplicar políticas de **QoS** (Qualidade de Serviço) de acordo com o tipo de tráfego e sua classificação de serviço (**CoS**). 
-- Parte do cabeçalho MPLS que permite definir a prioridade do pacote. Cada rótulo contém os bits **Exp** (Experimental bits), que definem a prioridade do pacote. 
-- Nos roteadores da rede MPLS **(Label Switch Routers - LSR)**, os pacotes são encaminhados de acordo com sua prioridade. 
-- **Túneis LSP (Label Switched Paths)**: Caminhos específicos criados para garantir que o tráfego crítico (voz e vídeo) siga rotas otimizadas.
-- **Voz (VoIP)**: O MPLS suporta o transporte de tráfego de voz em redes IP, implementando **Qualidade de Serviço (QoS)** por meio da priorização dos pacotes de voz. Isso é essencial para manter a qualidade da chamada, evitando atrasos (latência), perdas de pacotes e jitter (variação de atraso). A classe de serviço (CoS) do MPLS permite priorizar o tráfego de voz em relação ao tráfego de dados comum. Por exemplo, o tráfego recebe o rótutlo de **CoS 4 (Alta Prioridade)**. 
-- **Vídeo**: O MPLS também é amplamente utilizado para transmissão de vídeo em tempo real (videoconferências, streaming), garantindo baixa latência e alta qualidade. Por exemplo, o tráfego recebe o rótutlo de **CoS 3 (Média-Alta Prioridade)**. 
-- **Dados**: O MPLS permite transportar diferentes tipos de dados (tráfego web, arquivos, aplicativos) com roteamento eficiente e suporte a múltiplas classes de serviço. Ele pode segmentar o tráfego de acordo com a importância e garantir que o tráfego crítico (como voz e vídeo) tenha prioridade sobre o tráfego menos importante (como downloads). Por exemplo, o tráfego de acesso a conteúdo web e emails é configurado como **CoS 0 (Baixa Prioridade)**.
+O MPLS opera como uma camada intermediária entre o roteamento IP tradicional e o encaminhamento de pacotes, agregando eficiência e controle à rede. Enquanto protocolos como OSPF e BGP descobrem rotas e preenchem a tabela de roteamento (**RIB**), o MPLS utiliza rótulos para direcionar tráfego de forma ágil, suportando IPv4, IPv6, Ethernet, VPNs L2 (VPLS), VPNs L3 (L3VPN) e outros serviços, sem exigir alterações profundas na infraestrutura.
 
-| Classe de Serviço | Bits EXP (Decimal) | Prioridade         | Uso Comum                                    |
-|-------------------|---------------------|-------------------|----------------------------------------------|
-| CoS 0             | 000 (0)             | Baixa             | Tráfego de Dados Comum (Web, Email)          |
-| CoS 1             | 001 (1)             | Média-Baixa       | Tráfego Corporativo (FTP, Aplicativos)       |
-| CoS 2             | 010 (2)             | Média             | Vídeo sob Demanda (Streaming)                |
-| CoS 3             | 011 (3)             | Média-Alta        | Videoconferência                             |
-| CoS 4             | 100 (4)             | Alta              | Voz (VoIP), Tráfego Sensível a Latência      |
-| CoS 5             | 101 (5)             | Alta Prioridade   | Tráfego Crítico (Gerenciamento de Rede)      |
-| CoS 6             | 110 (6)             | Muito Alta        | Tráfego de Controle (Sinalização)            |
-| CoS 7             | 111 (7)             | Máxima            | Tráfego de Emergência (Aplicações de Resgate)|
+### Princípios de Operação:
 
-Para efetivar essas condições, os roteadores implementam a **FIB (Forwarding Information Base)**, uma tabela de encaminhamento que armazena as rotas ativas que o roteador usa para encaminhar pacotes. Ela é derivada da tabela de roteamento (**RIB - Routing Information Base**), que contém todas as rotas conhecidas pelo roteador. É usada principalmente para pacotes que não possuem rótulos MPLS, ou seja, pacotes IP tradicionais. Cada entrada na FIB contém o endereço de destino (IP) do pacote, a interface de saída (por onde o pacote será encaminhado) e o próximo salto (next-hop), que é o endereço do roteador seguinte. Por sua vez, a **LFIB (Label Forwarding Information Base)** é uma tabela de encaminhamento específica para pacotes MPLS, ou seja, para pacotes que possuem rótulos (labels). Ela contém as instruções de como tratar os pacotes com rótulos MPLS, tais como: 
+**Classificação e Rótulos**:
+   - Ao ingressar na rede MPLS, um pacote (seja tráfego web, VoIP ou vídeo) recebe um **rótulo MPLS**, que define seu caminho e prioridade.
+   - O rótulo inclui os bits **EXP (Experimental)**, que determinam a **Classe de Serviço (CoS)** e garantem **QoS** (Qualidade de Serviço).
 
-- Adicionar um novo rótulo (PUSH).
-- Remover um rótulo (POP).
-- Substituir um rótulo (SWAP).
+**Encaminhamento por Prioridade**:
+   - Os **LSRs (Label Switch Routers)** encaminham pacotes através de **Túneis LSP (Label Switched Paths)**, caminhos pré-definidos que priorizam tráfego crítico (ex.: voz, vídeo) sobre dados menos sensíveis (ex.: e-mails).
+   - Isso minimiza **latência**, **jitter** e **perda de pacotes**, essencial para aplicações em tempo real como VoIP e videoconferência.
 
-A FIB é usada para encaminhamento de pacotes IP tradicionais, enquanto a LFIB é uma extensão específica para pacotes com rótulos MPLS. A LFIB é populada automaticamente por protocolos de distribuição de rótulos, como:
+**Tabelas de Encaminhamento**:
+   - **FIB (Forwarding Information Base)**: Usada para pacotes IP tradicionais (sem rótulos), derivada da RIB. Contém destino, interface de saída e próximo salto (*next-hop*).
+   - **LFIB (Label Forwarding Information Base)**: Exclusiva para MPLS, define ações como:
+     - **PUSH** (adicionar rótulo), **POP** (remover rótulo), **SWAP** (substituir rótulo).
+   - Populada por protocolos como **LDP**, **RSVP-TE** (para engenharia de tráfego) e **BGP** (em L3VPNs).
 
-- LDP (Label Distribution Protocol): Protocolo padrão para distribuição de rótulos em redes MPLS.
-- RSVP-TE (Resource Reservation Protocol - Traffic Engineering): Para redes MPLS com engenharia de tráfego.
-- BGP (Border Gateway Protocol): Para VPNs MPLS L3 (L3VPN).
+### Classes de Serviço (CoS) no MPLS:
 
-Em suma, em uma rede corporativa com MPLS, o tráfego de voz (VoIP) recebe a maior prioridade (Classe de Serviço Alta). O tráfego de vídeo (videoconferência) é priorizado logo abaixo do tráfego de voz. O tráfego de dados comuns (acesso à web, e-mails) é configurado com prioridade menor.  Se o pacote não possui um rótulo (IP puro), ele é encaminhado com base na FIB. Se o pacote possui um rótulo (MPLS), ele é encaminhado com base na LFIB. 
+| Classe | Bits EXP (Bin/Dec) | Prioridade       | Aplicação Típica                          |
+|--------|--------------------|------------------|------------------------------------------|
+| CoS 0  | 000 (0)            | Baixa            | Web, e-mail                              |
+| CoS 1  | 001 (1)            | Média-Baixa      | FTP, aplicativos corporativos            |
+| CoS 2  | 010 (2)            | Média            | Streaming (Vídeo sob Demanda)            |
+| CoS 3  | 011 (3)            | Média-Alta       | Videoconferência                         |
+| CoS 4  | 100 (4)            | Alta             | VoIP (tráfego sensível a latência)       |
+| CoS 5  | 101 (5)            | Alta Prioridade  | Gerenciamento de rede                    |
+| CoS 6  | 110 (6)            | Muito Alta       | Sinalização (tráfego de controle)        |
+| CoS 7  | 111 (7)            | Máxima           | Emergências (aplicações de resgate)      |
 
-## 2. Objetivo
+### Cenário Prático:
+
+Em uma rede corporativa com MPLS:
+- **VoIP (CoS 4)** e **videoconferência (CoS 3)** trafegam em túneis LSP de alta prioridade.
+- **Dados comuns (CoS 0-1)** utilizam rotas secundárias, sem competir por recursos.
+- Pacotes não rotulados (IP puro) são processados pela **FIB**; pacotes MPLS, pela **LFIB**.
+
+## 3. Objetivo
 
 Este laboratório propõe a configuração de uma rede com MPLS, aplicando os conceitos de Label Switching, **LSR (Label Switch Router)**, **LER (Label Edge Router)** e as tabelas de encaminhamento (**FIB** e **LFIB**). 
 
