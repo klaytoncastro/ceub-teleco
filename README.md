@@ -114,12 +114,13 @@ Sempre que for utilizar o ambiente, você poderá inicializá-lo da seguinte for
 
 Os projetos práticos seguem uma sequência progressiva. Cada etapa depende de conceitos estabelecidos na etapa anterior, começando pela instalação do ambiente e avançando gradualmente para os desafios propostos nos laboratórios.
 
-| #  | Laboratório                             | Tipo de Aplicação       | Descrição                                                                |
-|----|-----------------------------------------|-------------------------|--------------------------------------------------------------------------|
-| 01 | [Instalação do Ambiente](/README.md)    | **WSL + Docker**        | Instalação do Windows Subsystem for Linux e Docker para containers.      |
-| 02 | [Introdução ao Simulador GNS3](/gns3/)  | **Simulador de Redes**  | Clonagem do repositório e configuração do ambiente GNS3 via Docker.      |
-| 03 | [Roteamento Dinâmico com OSPF](/ospf/)  | **Protocolo Intra-AS**  | Comunicação entre redes usando OSPF para estabelecer roteamento dinâmico.|
-| 04 | [Integração com BGP](/bgp/)             | **Protocolo Inter-AS**  | Integração com redes externas via BGP, redistribuindo rotas do OSPF.     |
+| #  | Laboratório                             | Tipo de Aplicação       | Descrição                                                                     |
+|----|-----------------------------------------|-------------------------|-------------------------------------------------------------------------------|
+| 01 | [Instalação do Ambiente](/README.md)    | **WSL + Docker**        | Instalação do Windows Subsystem for Linux e Docker para containers.           |
+| 02 | [Introdução ao Simulador GNS3](/gns3/)  | **Simulador de Redes**  | Clonagem do repositório e configuração do ambiente GNS3 via Docker.           |
+| 03 | [Roteamento Dinâmico com OSPF](/ospf/)  | **Protocolo Intra-AS**  | Comunicação entre redes usando OSPF para estabelecer roteamento dinâmico.     |
+| 04 | [Integração com BGP](/bgp/)             | **Protocolo Inter-AS**  | Integração com redes externas via BGP, redistribuindo rotas do OSPF.          |
+| 05 | [Integração com MPLS](/mpls/)           | **Redes Convergentes**  | Transporte otimizado de múltiplos serviços com QoS e priorização de tráfego.  |
 
 
 ## Conclusão
