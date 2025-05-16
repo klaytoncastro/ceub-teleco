@@ -2,26 +2,26 @@
 
 ## 1. Introdução 
 
-Redes convergentes são infraestruturas de comunicação que integram múltiplos serviços (voz, vídeo, dados) e tecnologias distintas (TDM, IP, Ethernet) em uma plataforma unificada. O objetivo é simplificar a operação, reduzir custos e permitir a entrega dinâmica de serviços sobre um mesmo meio físico. 
+Redes convergentes são infraestruturas de comunicação que integram múltiplos serviços (voz, vídeo, dados) e tecnologias distintas (como TDM e IP) em uma plataforma unificada, visando simplificar a operação, reduzir custos e permitir a entrega dinâmica de serviços sobre um mesmo meio físico. Nesse cenário, o **Multiprotocol Label Switching (MPLS)**, desenvolvido pela IETF (Internet Engineering Task Force) como um padrão tecnológico para viabilizar a comutação de pacotes baseada em rótulos (labels). Seu objetivo é otimizar o encaminhamento de dados, complementando (mas não substituindo) o roteamento IP tradicional. 
 
-Nesse cenário, o **Multiprotocol Label Switching (MPLS)** foi desenvolvido pela IETF como um padrão tecnológico para viabilizar a comutação de pacotes baseada em rótulos (*labels*). Seu objetivo é otimizar o encaminhamento de dados, complementando (mas não substituindo) o roteamento IP tradicional. O MPLS é frequentemente referido como uma tecnologia de **Camada 2,5** do modelo OSI, pois atua entre a comutação de quadros (Camada 2) e o roteamento IP (Camada 3).
-
->Em suma, o MPLS atua como uma camada de abstração, permitindo a coexistência de redes legadas e modernas através de encapsulamento universal para convergência de serviços. 
+O MPLS é frequentemente referido como uma tecnologia de Camada 2,5 do modelo OSI, pois atua como uma camada intermediária entre a comutação de quadros (Camada 2) e o roteamento IP (Camada 3). Essa característica permite que ele atue como um elemento de abstração para viabilizar a integração entre redes legadas e modernas, suportando diferentes tipos de encapsulamento e facilitando a convergência de serviços. Sua capacidade de oferecer qualidade de serviço (QoS), segmentação de redes (VPNs) e otimização de rotas (MPLS-TE) consolida seu papel como uma solução versátil e robusta para grandes organizações públicas e privadas, operadoras de telecomunicações, provedores de serviços de Internet e hospedagem em nuvem. 
 
 ## 2. Como o MPLS Funciona?
 
-Em suma, o MPLS opera independentemente do protocolo de camada 3 (IPv4/IPv6) ou de camada 2 (Ethernet, ATM) escolhido, atuando como uma camada de abstração que encapsula qualquer payload. Isso permite integração com redes legadas (ATM/FR) e modernas (IPv6, Ethernet).
+Por definição, o MPLS opera de maneira agnóstica aos protocolos de camada 3 (IPv4/IPv6) e camada 2 (Ethernet, ATM) encapsulando qualquer tipo de tráfego. Essa característica possibilita a integração harmoniosa entre redes legadas (como ATM e Frame Relay) e infraestruturas modernas (IPv6, Ethernet), tornando-o uma solução versátil para ambientes heterogêneos. 
 
-### Princípios de Operação do MPLS
+### Princípios de Operação  
+
+O funcionamento do MPLS baseia-se em quatro pilares:
 
 | Aspecto                | Descrição                                                                                     |
 |------------------------|-------------------------------------------------------------------------------------------------|
-| **Classificação por Rótulos** | Pacotes recebem um **rótulo MPLS** no *Ingress Router (LER)*. O rótulo inclui os bits **EXP (Experimental)**, que definem a **Classe de Serviço (CoS)** para QoS. |
-| **Encaminhamento em LSPs**   | *Label Switch Routers (LSRs)* trocam rótulos com operações de **PUSH (Adicionar)**, **POP (Remover)** e **SWAP (Substituir)**, permitindo encaminhamento eficiente sem consultar tabelas IP. |
-| **Túneis LSP (Label Switched Paths)** | São caminhos pré-definidos que permitem priorizar tráfego crítico (VoIP, vídeo) sobre dados comuns (web, e-mail). |
-| **Tabelas de Encaminhamento** | O MPLS utiliza duas tabelas distintas para gerenciamento de tráfego: **FIB (Forwarding Information Base)** e **LFIB (Label Forwarding Information Base)**. |
+| **Classificação por Rótulos**          | Pacotes recebem um rótulo MPLS no Ingress Router (LER). O rótulo inclui os bits EXP (Experimental), que definem a Classe de Serviço (CoS) para QoS. |
+| **Encaminhamento em LSPs**             | Label Switch Routers (LSRs) processam os pacotes por meio de operações de PUSH (Adicionar), POP (Remover) e SWAP (Substituir), garantindo comutação eficiente sem necessidade de consulta às tabelas IP |
+| **Túneis LSP (Label Switched Paths)**  | Caminhos pré-definidos que permitem priorizar tráfego crítico (VoIP, vídeo) sobre dados comuns (web, e-mail). |
+| **Tabelas de Encaminhamento**          | O MPLS utiliza duas tabelas: FIB (Forwarding Information Base) para pacotes IP e LFIB (Label Forwarding Information Base) para pacotes MPLS. |
 
-### Tabelas de Encaminhamento Detalhadas
+### Tabelas de Encaminhamento 
 
 | Tabela | Função                                | Populada por                              |
 |--------|----------------------------------------|--------------------------------------------|
