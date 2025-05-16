@@ -2,9 +2,13 @@
 
 ## 1. Introdução 
 
-Redes convergentes são infraestruturas de comunicação que integram múltiplos serviços (voz, vídeo, dados) e tecnologias distintas (como TDM e IP) em uma plataforma unificada, visando simplificar a operação, reduzir custos e permitir a entrega dinâmica de serviços sobre um mesmo meio físico. Nesse cenário, o **Multiprotocol Label Switching (MPLS)**, desenvolvido pela IETF (Internet Engineering Task Force) como um padrão tecnológico para viabilizar a comutação de pacotes baseada em rótulos (labels). Seu objetivo é otimizar o encaminhamento de dados, complementando (mas não substituindo) o roteamento IP tradicional. 
+Redes convergentes são infraestruturas de comunicação que integram múltiplos serviços (voz, vídeo, dados) e tecnologias distintas, como TDM, IP e Ethernet, em uma plataforma unificada. O objetivo é simplificar a operação, reduzir custos e viabilizar a entrega dinâmica de serviços sobre um único meio físico.
 
-O MPLS é frequentemente referido como uma tecnologia de Camada 2,5 do modelo OSI, pois atua como uma camada intermediária entre a comutação de quadros (Camada 2) e o roteamento IP (Camada 3). Essa característica permite que ele atue como um elemento de abstração para viabilizar a integração entre redes legadas e modernas, suportando diferentes tipos de encapsulamento e facilitando a convergência de serviços. Sua capacidade de oferecer qualidade de serviço (QoS), segmentação de redes (VPNs) e otimização de rotas (MPLS-TE) consolida seu papel como uma solução versátil e robusta para grandes organizações públicas e privadas, operadoras de telecomunicações, provedores de serviços de Internet e hospedagem em nuvem. 
+Nesse contexto, surge o Multiprotocol Label Switching (MPLS), desenvolvido pela IETF (Internet Engineering Task Force) como um padrão tecnológico que permite a comutação de pacotes com base em rótulos (labels), otimizando o encaminhamento de dados. O MPLS não substitui o roteamento IP tradicional, mas o complementa, atuando como uma camada intermediária (Camada 2,5 do modelo OSI), que abstrai as complexidades do roteamento e oferece maior flexibilidade na entrega de serviços.
+
+Essa tecnologia é amplamente adotada em grandes organizações públicas e privadas, operadoras de telecomunicações, provedores de serviços de Internet e ambientes de hospedagem em nuvem, garantindo alta eficiência e suporte a múltiplos protocolos de transporte.
+
+O MPLS também atua como uma camada de abstração que permite a interoperabilidade entre tecnologias legadas, como SDH/SONET, PSTN, E1/T1, Frame Relay e ATM, e tecnologias modernas, como Metro-Ethernet, redes IP (IPv4/IPv6) e SD-WAN. Ele garante recursos avançados, como Qualidade de Serviço (QoS), segmentação de redes (VPNs) e Otimização de Rotas (MPLS-TE). Dessa forma, as organizações podem manter investimentos em infraestruturas legadas enquanto adotam tecnologias modernas, assegurando uma transição suave e eficiente.
 
 ## 2. Como o MPLS Funciona?
 
